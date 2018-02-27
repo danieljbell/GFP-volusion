@@ -125,6 +125,7 @@
   color: $brand;
   font-size: 1rem;
   font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+
   &:after {
     content: url(/dist/img/accordian-toggle.svg);
     width: 20px;
@@ -169,6 +170,17 @@
   }
   > li:first-child {
     border-top: 1px solid $medium-gray;
+  }
+  .menu-item-has-children:hover & {
+    @include desktop {
+      display: block;
+    }
+  }
+}
+
+.sub-menu--level-one {
+  @include desktop {
+    position: absolute;
   }
 }
 
