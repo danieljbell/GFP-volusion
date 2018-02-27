@@ -1,0 +1,37 @@
+.search-bar-container {
+    position: absolute;
+    left: 0;
+    right: 0;
+    z-index: 2;
+    background-color: transparentize($brand, 0.1);
+}
+
+.search-bar-container-items {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.search-bar-container .btn-solid--brand-two {
+    margin-top: 0.7rem;
+    margin-bottom: 0.7rem;
+    font-size: 0.9rem;
+    padding: 0.5rem 1rem;
+    margin-right: 1rem;
+    &:last-of-type {
+        margin-right: 0;
+    }
+}
+
+.search-bar-container form {
+    flex-grow: 2;
+}
+
+.search-bar-container input {
+    font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+    border-radius: 5px;
+    padding: 0.5rem;
+    border: 0;
+    width: calc(100% - 1rem);
+    font-size: 0.75rem;
+}

@@ -1,0 +1,221 @@
+.site-header > .site-width {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.site-header-list {
+  list-style-type: none;
+  padding-left: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  @include desktop {
+    align-items: center;
+    flex-direction: row;
+  }
+}
+
+.site-navigation--header {
+  display: none;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 5.5rem;
+  z-index: 2;
+  background-color: #fff;
+  @include desktop {
+    position: static;
+    top: auto;
+    background-color: transparent;
+    display: block;
+  }
+
+  form {
+    @include desktop {
+      display: none;
+    }
+  }
+
+  input {
+    width: calc(100% + 2rem);
+    position: relative;
+    left: -1rem;
+    font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+    font-size: 1rem;
+    padding: 1rem 2rem;
+    background-color: $light-gray;
+    border: 0;
+  }
+
+  .menu-open & {
+    display: block;
+  }
+
+
+}
+
+.site-header .menu-item--logo-container img {
+  width: 100%;
+  max-width: 225px;
+  display: block;
+}
+
+.menu-item--logo-container a {
+  display: block;
+  padding: 1rem 0;
+}
+
+.site-header-list .menu-item--logo-container a:after {
+  display: none;
+}
+
+.site-header-list li {
+  border-bottom: 1px solid $medium-gray;
+  @include desktop {
+    padding-left: 0;
+    padding-right: 0;
+    border-bottom: 0;
+  }
+}
+
+.site-header-list a {
+  display: block;
+  color: $brand;
+  text-decoration: none;
+  padding: 1rem;
+  @include desktop {
+    margin: 0 0.5rem;
+    padding: 0;
+  }
+}
+
+.site-header-list > a:after {
+  content: url(/dist/img/accordian-toggle.svg);
+  float: right;
+  @include desktop {
+    content: '|';
+    display: inline-block;
+    margin-left: 0.5rem;
+    margin-right: -0.5rem;
+  }
+}
+
+.site-header-list li:last-child a:after {
+  display: none;
+}
+
+.shopping-cart-list-item img {
+  max-width: 35px;
+}
+
+.menu-item--menu-toggle {
+  @include desktop {
+    display: none;
+  }
+}
+
+.accordian-toggle--site-header {
+  display: block;
+  background-color: transparent;
+  border: 0;
+  padding: 1rem;
+  width: 100%;
+  text-align: left;
+  color: $brand;
+  font-size: 1rem;
+  font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+  &:after {
+    content: url(/dist/img/accordian-toggle.svg);
+    width: 20px;
+    float: right;
+    transform: rotateZ(-0deg);
+    transition: transform 250ms ease-in-out;
+    @include desktop {
+      width: auto;
+      content: '|';
+      display: inline-block;
+      margin-left: 0.5rem;
+      margin-right: -0.5rem;
+      transform: rotateZ(0);
+    }
+  }
+  &:focus {
+    outline: 0;
+  }
+  .sub-menu--level-one & {
+    padding-left: 2rem;
+  }
+}
+
+.accordian-toggle--site-header.active {
+  &:after {
+    transform: rotateZ(180deg);
+    @include desktop {
+      transform: rotateZ(0);
+    }
+  }
+}
+
+[class*="sub-menu"] {
+  display: none;
+  list-style-type: none;
+  padding-left: 0;
+  &.accordian-open {
+    display: block;
+    @include desktop {
+      display: none;
+    }
+  }
+  > li:first-child {
+    border-top: 1px solid $medium-gray;
+  }
+}
+
+.sub-menu--level-one.accordian-open > li:first-child {
+  border-top: 5px solid $brand-two;
+}
+
+.sub-menu--level-one.accordian-open > li:last-child {
+  border-bottom: 5px solid $brand-two;
+}
+
+.sub-menu--level-two {
+  background-color: $brand;
+  padding: 0 1rem;
+
+  > li {
+    padding: 2rem 0 1rem;
+
+    &:first-child {
+      border-top: 0;
+    }
+    &:last-child {
+      border-bottom: 0;
+    }
+  }
+
+}
+
+.sub-menu--level-two h6 {
+  color: #fff;
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.sub-menu--level-two.accordian-open .sub-menu--level-three {
+  display: flex;
+  flex-wrap: wrap;
+
+  li {
+    border: 0;
+    flex-basis: 50%;
+  }
+  
+  a {
+    color: $brand-two;
+    padding: 0 0 1em;
+    font-size: 0.9rem;
+  }
+
+}
