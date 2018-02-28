@@ -10,6 +10,10 @@
             toggleMenuAccordian(e);
         }
 
+        if (e.target.hash === '#chat') {
+            toggleChatWindow(e);
+        }
+
     });
 
     function toggleMenu() {
@@ -21,6 +25,15 @@
         if (!self.nextElementSibling) { return }
         self.classList.toggle('active');
         self.nextElementSibling.classList.toggle('accordian-open');
+    }
+
+    function toggleChatWindow(e) {
+        e.preventDefault();
+        if (window.fcWidget.isOpen() != true) {
+            window.fcWidget.open();
+        } else {
+            window.fcWidget.close();
+        }
     }
 
 })();

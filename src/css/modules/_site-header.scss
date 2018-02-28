@@ -79,6 +79,26 @@
   }
 }
 
+.site-header-list > li {
+  @include desktop {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    &:hover > .accordian-toggle--site-header:before {
+      content: url(../img/nav--active-brand-two.svg);
+      position: absolute;
+      width: 25px;
+      left: 50%;
+      top: calc(100% + 0.2rem);
+      transform: translateX(-50%);
+    }
+    .accordian-toggle--site-header {
+      @include desktop {
+        position: relative;
+      }
+    }
+  }
+}
+
 .site-header-list a {
   display: block;
   color: $brand;
@@ -125,6 +145,11 @@
   color: $brand;
   font-size: 1rem;
   font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+  transition: all 250ms ease-in-out;
+  @include desktop {
+    max-width: 200px;
+    padding: 0.5rem;
+  }
 
   &:after {
     content: url(/dist/img/accordian-toggle.svg);
@@ -150,6 +175,8 @@
 }
 
 .accordian-toggle--site-header.active {
+  background-color: $brand;
+  color: #fff;
   &:after {
     transform: rotateZ(180deg);
     @include desktop {
@@ -170,8 +197,11 @@
   }
   > li:first-child {
     border-top: 1px solid $medium-gray;
+    @include desktop {
+      border-top: 0;
+    }
   }
-  .menu-item-has-children:hover & {
+  .menu-item-has-children:hover > & {
     @include desktop {
       display: block;
     }
@@ -180,8 +210,63 @@
 
 .sub-menu--level-one {
   @include desktop {
+    background-color: $light-gray;
     position: absolute;
+    left: 0;
+    right: 0;
+    transform: translateY(1rem);
+    border-top: 5px solid $brand-two;
+    border-bottom: 5px solid $brand-two;
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
   }
+}
+
+.sub-menu--level-one > li {
+  @include desktop {
+    max-width: 1080px;
+    margin: 0 auto;
+  }
+
+  button {
+    @include desktop {
+      border-bottom: 1px solid $medium-gray;
+    }
+  }
+
+}
+
+.sub-menu--level-one .accordian-toggle--site-header {
+  &:after {
+    display: none;
+  }
+  &.active:after {
+    @include desktop {
+      display: block;
+      content: url(../img/nav--active.svg);
+      position: absolute;
+      top: 0;
+      left: calc(200px - 1.7rem);
+      width: 2.4rem;
+    }
+  }
+}
+
+.sub-menu--level-one .menu-item-has-children {
+  @include desktop {
+    position: relative;
+  }
+}
+
+.sub-menu--level-one > .initial--active button {
+  @include desktop {
+    background-color: $brand;
+    color: #fff;
+  }
+}
+
+.sub-menu--level-one .accordian-toggle--site-header.active {
+  border-bottom: 1px solid $light-gray;
 }
 
 .sub-menu--level-one.accordian-open > li:first-child {
@@ -193,11 +278,23 @@
 }
 
 .sub-menu--level-two {
-  background-color: $brand;
+  background-color: $light-gray;
   padding: 0 1rem;
+  @include desktop {
+    position: absolute;
+    top: 0;
+    left: calc(200px + 4rem);
+    right: 0;
+    padding: 0;
+    display: flex !important;
+  }
 
   > li {
     padding: 2rem 0 1rem;
+    @include desktop {
+      padding-top: 0;
+      flex-basis: calc(100% / 3);
+    }
 
     &:first-child {
       border-top: 0;
@@ -210,7 +307,7 @@
 }
 
 .sub-menu--level-two h6 {
-  color: #fff;
+  color: $brand;
   font-size: 1.25rem;
   margin-bottom: 0.5rem;
 }
@@ -218,6 +315,9 @@
 .sub-menu--level-two.accordian-open .sub-menu--level-three {
   display: flex;
   flex-wrap: wrap;
+  @include desktop {
+    display: list-item;
+  }
 
   li {
     border: 0;
@@ -225,9 +325,14 @@
   }
   
   a {
-    color: $brand-two;
+    color: $black;
     padding: 0 0 1em;
     font-size: 0.9rem;
+    @include desktop {
+      &:hover {
+        text-decoration: underline;
+      }
+    }
   }
 
 }
