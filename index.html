@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700" rel="stylesheet">
-    <link rel="stylesheet" href="/dist/css/style.css">
+    <link rel="stylesheet" href="/dist/css/style.css?ver=0.0.2">
 </head>
 <body>
     
@@ -14,10 +14,13 @@
     <section class="eyebrow">
         <div class="site-width">
             <ul class="eyebrow-links">
-                <li>Free Shipping Over $50 &amp; Hassle Free Returns <a href="#0">Details</a></li>
-                <li><a href="#0">Green Farm Parts Exclusives</a></li>
-                <li><a href="#chat"> Click to Chat </a></li>
-                <li><a href="#0">Why Green Farm Parts?</a></li>
+                <li><a href="#0">Free Shipping Over $50 &amp; Hassle Free Returns</a></li>
+                <li><a href="tel:877-620-6070">877-620-6070</a></li>
+                <li><a href="#chat">Click to Chat</a></li>
+                <li><a href="#0">Order Status</a></li>
+                <li>
+                    <a class="utility-link text-uppercase" href="/myaccount.asp">Account</a>
+                </li>
             </ul>
         </div>
     </section>
@@ -31,18 +34,23 @@
             <nav class="site-navigation--header">
 
                 <!-- SEARCH BAR -->
-                <form action="/searchresults.asp" method="get" name="SearchBoxForm">
+                <form action="/searchresults.asp" method="get" name="SearchBoxForm" class="mobile-search">
                     <input placeholder="Search..." type="search" name="Search">
                 </form>
 
                 <ul class="site-header-list">
                     <li><a href="#0">Parts Diagram</a></li>
-                    <li class="menu-item-has-children">
+                    <li class="menu-item-has-children menu-item--top-level menu-item--part">
                         <button class="accordian-toggle--site-header">Shop By Part</button>
                         <ul class="sub-menu--level-one">
-                            <li class="menu-item-has-children initial--active">
-                                <button class="accordian-toggle--site-header active">Accessories</button>
-                                <ul class="sub-menu--level-two accordian-open">
+                            <li>
+                                <form action="/searchresults.asp" method="get" name="SearchBoxForm" class="desktop-search">
+                                    <input placeholder="Search by Part Number" type="search" name="Search">
+                                </form>
+                            </li>
+                            <li class="menu-item-has-children">
+                                <button class="accordian-toggle--site-header">Accessories</button>
+                                <ul class="sub-menu--level-two">
                                     <li>
                                         <h6>Agriculture</h6>
                                         <ul class="sub-menu--level-three">
@@ -78,65 +86,521 @@
                                     </li>
                                 </ul>
                             </li>
-                            <li><button class="accordian-toggle--site-header">Belts</button></li>
-                            <li><button class="accordian-toggle--site-header">Blades</button></li>
-                            <li><button class="accordian-toggle--site-header">Electrical</button></li>
-                            <li><button class="accordian-toggle--site-header">Engine Parts</button></li>
-                            <li><button class="accordian-toggle--site-header">Filters</button></li>
-                            <li><button class="accordian-toggle--site-header">Fluids</button></li>
-                            <li><button class="accordian-toggle--site-header">Hardware</button></li>
-                            <li><button class="accordian-toggle--site-header">Maintenanace Kits</button></li>
-                            <li><button class="accordian-toggle--site-header">Mower Decks</button></li>
-                        </ul>
-                    </li>
-                    <li class="menu-item-has-children">
-                        <button class="accordian-toggle--site-header">Shop By Equipment</button>
-                        <ul class="sub-menu--level-one">
                             <li class="menu-item-has-children">
-                                <button class="accordian-toggle--site-header">Item 1</button>
+                                <button class="accordian-toggle--site-header">Belts</button>
+                                <ul class="sub-menu--level-two">
+                                    <li>
+                                        <h6>Agriculture</h6>
+                                        <ul class="sub-menu--level-three">
+                                            <li><a href="#0">Sprayers</a></li>
+                                            <li><a href="#0">Tractors</a></li>
+                                            <li><a href="#0">Combines</a></li>
+                                            <li><a href="#0">Balers</a></li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <h6>Lawn &amp; Garden</h6>
+                                        <ul class="sub-menu--level-three">
+                                            <li><a href="#0">Zero Turn Mowers</a></li>
+                                            <li><a href="#0">Walk-Behind Mowers</a></li>
+                                            <li><a href="#0">Gators</a></li>
+                                            <li><a href="#0">Riding Mowers</a></li>
+                                            <li><a href="#0">Snow Blowers</a></li>
+                                            <li><a href="#0">Compact Tractors</a></li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <h6>Landscape</h6>
+                                        <ul class="sub-menu--level-three">
+                                            <li><a href="#0">Commercial Mowers</a></li>
+                                            <li><a href="#0">Aerators</a></li>
+                                            <li><a href="#0">Bunker Rakes</a></li>
+                                            <li><a href="#0">Greens Mowers</a></li>
+                                            <li><a href="#0">Fairway Mowers</a></li>
+                                            <li><a href="#0">Mini Excavators</a></li>
+                                            <li><a href="#0">Skid Steers</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="menu-item-has-children">
+                                <button class="accordian-toggle--site-header">Blades</button>
+                                <ul class="sub-menu--level-two">
+                                    <li>
+                                        <h6>Agriculture</h6>
+                                        <ul class="sub-menu--level-three">
+                                            <li><a href="#0">Rotary Cutters</a></li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <h6>Lawn &amp; Garden</h6>
+                                        <ul class="sub-menu--level-three">
+                                            <li><a href="#0">Zero Turn Mowers</a></li>
+                                            <li><a href="#0">Walk-Behind Mowers</a></li>
+                                            <li><a href="#0">Riding Mowers</a></li>
+                                            <li><a href="#0">Compact Tractors</a></li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <h6>Landscape</h6>
+                                        <ul class="sub-menu--level-three">
+                                            <li><a href="#0">Commercial Mowers</a></li>
+                                            <li><a href="#0">Greens Mowers</a></li>
+                                            <li><a href="#0">Fairway Mowers</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="menu-item-has-children">
+                                <button class="accordian-toggle--site-header">Electrical</button>
+                                <ul class="sub-menu--level-two">
+                                    <li>
+                                        <h6>Agriculture</h6>
+                                        <ul class="sub-menu--level-three">
+                                            <li><a href="#0">Sprayers</a></li>
+                                            <li><a href="#0">Tractors</a></li>
+                                            <li><a href="#0">Combines</a></li>
+                                            <li><a href="#0">Planters</a></li>
+                                            <li><a href="#0">Balers</a></li>
+                                            <li><a href="#0">Rotary Cutters</a></li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <h6>Lawn &amp; Garden</h6>
+                                        <ul class="sub-menu--level-three">
+                                            <li><a href="#0">Zero Turn Mowers</a></li>
+                                            <li><a href="#0">Walk-Behind Mowers</a></li>
+                                            <li><a href="#0">Gators</a></li>
+                                            <li><a href="#0">Riding Mowers</a></li>
+                                            <li><a href="#0">Snow Blowers</a></li>
+                                            <li><a href="#0">Compact Tractors</a></li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <h6>Landscape</h6>
+                                        <ul class="sub-menu--level-three">
+                                            <li><a href="#0">Commercial Mowers</a></li>
+                                            <li><a href="#0">Aerators</a></li>
+                                            <li><a href="#0">Bunker Rakes</a></li>
+                                            <li><a href="#0">Greens Mowers</a></li>
+                                            <li><a href="#0">Fairway Mowers</a></li>
+                                            <li><a href="#0">Mini Excavators</a></li>
+                                            <li><a href="#0">Skid Steers</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="menu-item-has-children">
+                                <button class="accordian-toggle--site-header">Engine Parts</button>
+                                <ul class="sub-menu--level-two">
+                                    <li>
+                                        <h6>Agriculture</h6>
+                                        <ul class="sub-menu--level-three">
+                                            <li><a href="#0">Sprayers</a></li>
+                                            <li><a href="#0">Tractors</a></li>
+                                            <li><a href="#0">Combines</a></li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <h6>Lawn &amp; Garden</h6>
+                                        <ul class="sub-menu--level-three">
+                                            <li><a href="#0">Zero Turn Mowers</a></li>
+                                            <li><a href="#0">Walk-Behind Mowers</a></li>
+                                            <li><a href="#0">Gators</a></li>
+                                            <li><a href="#0">Riding Mowers</a></li>
+                                            <li><a href="#0">Snow Blowers</a></li>
+                                            <li><a href="#0">Compact Tractors</a></li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <h6>Landscape</h6>
+                                        <ul class="sub-menu--level-three">
+                                            <li><a href="#0">Commercial Mowers</a></li>
+                                            <li><a href="#0">Bunker Rakes</a></li>
+                                            <li><a href="#0">Greens Mowers</a></li>
+                                            <li><a href="#0">Fairway Mowers</a></li>
+                                            <li><a href="#0">Mini Excavators</a></li>
+                                            <li><a href="#0">Skid Steers</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="menu-item-has-children">
+                                <button class="accordian-toggle--site-header">Filters</button>
+                                <ul class="sub-menu--level-two">
+                                    <li>
+                                        <h6>Agriculture</h6>
+                                        <ul class="sub-menu--level-three">
+                                            <li><a href="#0">Sprayers</a></li>
+                                            <li><a href="#0">Tractors</a></li>
+                                            <li><a href="#0">Combines</a></li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <h6>Lawn &amp; Garden</h6>
+                                        <ul class="sub-menu--level-three">
+                                            <li><a href="#0">Zero Turn Mowers</a></li>
+                                            <li><a href="#0">Walk-Behind Mowers</a></li>
+                                            <li><a href="#0">Gators</a></li>
+                                            <li><a href="#0">Riding Mowers</a></li>
+                                            <li><a href="#0">Snow Blowers</a></li>
+                                            <li><a href="#0">Compact Tractors</a></li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <h6>Landscape</h6>
+                                        <ul class="sub-menu--level-three">
+                                            <li><a href="#0">Commercial Mowers</a></li>
+                                            <li><a href="#0">Greens Mowers</a></li>
+                                            <li><a href="#0">Fairway Mowers</a></li>
+                                            <li><a href="#0">Mini Excavators</a></li>
+                                            <li><a href="#0">Skid Steers</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="menu-item-has-children">
+                                <button class="accordian-toggle--site-header">Fluids</button>
+                                <ul class="sub-menu--level-two">
+                                    <li>
+                                        <h6>Agriculture</h6>
+                                        <ul class="sub-menu--level-three">
+                                            <li><a href="#0">Sprayers</a></li>
+                                            <li><a href="#0">Tractors</a></li>
+                                            <li><a href="#0">Combines</a></li>
+                                            <li><a href="#0">Planters</a></li>
+                                            <li><a href="#0">Balers</a></li>
+                                            <li><a href="#0">Rotary Cutters</a></li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <h6>Lawn &amp; Garden</h6>
+                                        <ul class="sub-menu--level-three">
+                                            <li><a href="#0">Zero Turn Mowers</a></li>
+                                            <li><a href="#0">Walk-Behind Mowers</a></li>
+                                            <li><a href="#0">Gators</a></li>
+                                            <li><a href="#0">Snow Blowers</a></li>
+                                            <li><a href="#0">Riding Mowers</a></li>
+                                            <li><a href="#0">Compact Tractors</a></li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <h6>Landscape</h6>
+                                        <ul class="sub-menu--level-three">
+                                            <li><a href="#0">Commercial Mowers</a></li>
+                                            <li><a href="#0">Aerators</a></li>
+                                            <li><a href="#0">Bunker Rakes</a></li>
+                                            <li><a href="#0">Greens Mowers</a></li>
+                                            <li><a href="#0">Fairway Mowers</a></li>
+                                            <li><a href="#0">Mini Excavators</a></li>
+                                            <li><a href="#0">Skid Steers</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="menu-item-has-children">
+                                <button class="accordian-toggle--site-header">Hardware</button>
+                                <ul class="sub-menu--level-two">
+                                    <li>
+                                        <h6>Agriculture</h6>
+                                        <ul class="sub-menu--level-three">
+                                            <li><a href="#0">Sprayers</a></li>
+                                            <li><a href="#0">Tractors</a></li>
+                                            <li><a href="#0">Combines</a></li>
+                                            <li><a href="#0">Planters</a></li>
+                                            <li><a href="#0">Balers</a></li>
+                                            <li><a href="#0">Rotary Cutters</a></li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <h6>Lawn &amp; Garden</h6>
+                                        <ul class="sub-menu--level-three">
+                                            <li><a href="#0">Zero Turn Mowers</a></li>
+                                            <li><a href="#0">Walk-Behind Mowers</a></li>
+                                            <li><a href="#0">Gators</a></li>
+                                            <li><a href="#0">Snow Blowers</a></li>
+                                            <li><a href="#0">Riding Mowers</a></li>
+                                            <li><a href="#0">Compact Tractors</a></li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <h6>Landscape</h6>
+                                        <ul class="sub-menu--level-three">
+                                            <li><a href="#0">Commercial Mowers</a></li>
+                                            <li><a href="#0">Aerators</a></li>
+                                            <li><a href="#0">Bunker Rakes</a></li>
+                                            <li><a href="#0">Greens Mowers</a></li>
+                                            <li><a href="#0">Fairway Mowers</a></li>
+                                            <li><a href="#0">Mini Excavators</a></li>
+                                            <li><a href="#0">Skid Steers</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="menu-item-has-children">
+                                <button class="accordian-toggle--site-header">Maintenanace Kits</button>
+                                <ul class="sub-menu--level-two">
+                                    <li>
+                                        <h6>Agriculture</h6>
+                                        <ul class="sub-menu--level-three">
+                                            <li><a href="#0">Sprayers</a></li>
+                                            <li><a href="#0">Tractors</a></li>
+                                            <li><a href="#0">Combines</a></li>
+                                            <li><a href="#0">Planters</a></li>
+                                            <li><a href="#0">Balers</a></li>
+                                            <li><a href="#0">Rotary Cutters</a></li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <h6>Lawn &amp; Garden</h6>
+                                        <ul class="sub-menu--level-three">
+                                            <li><a href="#0">Zero Turn Mowers</a></li>
+                                            <li><a href="#0">Walk-Behind Mowers</a></li>
+                                            <li><a href="#0">Gators</a></li>
+                                            <li><a href="#0">Riding Mowers</a></li>
+                                            <li><a href="#0">Snow Blowers</a></li>
+                                            <li><a href="#0">Compact Tractors</a></li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <h6>Landscape</h6>
+                                        <ul class="sub-menu--level-three">
+                                            <li><a href="#0">Commercial Mowers</a></li>
+                                            <li><a href="#0">Aerators</a></li>
+                                            <li><a href="#0">Bunker Rakes</a></li>
+                                            <li><a href="#0">Greens Mowers</a></li>
+                                            <li><a href="#0">Fairway Mowers</a></li>
+                                            <li><a href="#0">Mini Excavators</a></li>
+                                            <li><a href="#0">Skid Steers</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="menu-item-has-children">
+                                <button class="accordian-toggle--site-header">Mower Decks</button>
+                                <ul class="sub-menu--level-two">
+                                    <li>
+                                        <h6>Lawn &amp; Garden</h6>
+                                        <ul class="sub-menu--level-three">
+                                            <li><a href="#0">Zero Turn Mowers</a></li>
+                                            <li><a href="#0">Walk-Behind Mowers</a></li>
+                                            <li><a href="#0">Riding Mowers</a></li>
+                                            <li><a href="#0">Compact Tractors</a></li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <h6>Landscape</h6>
+                                        <ul class="sub-menu--level-three">
+                                            <li><a href="#0">Commercial Mowers</a></li>
+                                            <li><a href="#0">Fairway Mowers</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
                             </li>
                         </ul>
                     </li>
-                    <li>
-                        <button class="accordian-toggle--site-header">Shop By Brand</button>
+                    <li class="menu-item-has-children menu-item--top-level menu-item--equipment">
+                        <button class="accordian-toggle--site-header">Shop By Equipment</button>
+                        <ul class="sub-menu--level-one">
+                            <li>
+                                <form action="/searchresults.asp" method="get" name="SearchBoxForm" class="desktop-search">
+                                    <input placeholder="Search by Model Number" type="search" name="Search">
+                                </form>
+                            </li>
+                            <li class="menu-item-has-children">
+                                <button class="accordian-toggle--site-header">Lawn &amp; Garden</button>
+                                <ul class="sub-menu--level-two">
+                                    <li>
+                                        <a href="#0">
+                                            <img src="/dist/img/product--zero-turn.png" alt="Zero Turn Radius">
+                                            <h6>Zero Turn Radius</h6>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#0">
+                                            <img src="/dist/img/product--walk-behind.png" alt="Walk-Behind Mower">
+                                            <h6>Walk-Behind Mowers</h6>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#0">
+                                            <img src="/dist/img/product--gator.png" alt="Gator">
+                                            <h6>Gators</h6>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#0">
+                                            <img src="/dist/img/product--snow-blower.png" alt="Snow Blower">
+                                            <h6>Snow Blowers</h6>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#0">
+                                            <img src="/dist/img/product--lawn-tractor.png" alt="Lawn Tractor">
+                                            <h6>Lawn Tractor</h6>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#0">
+                                            <img src="/dist/img/product--compact-tractor.png" alt="Compact Tractor">
+                                            <h6>Compact Tractor</h6>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="menu-item-has-children">
+                                <button class="accordian-toggle--site-header">Agriculture</button>
+                                <ul class="sub-menu--level-two">
+                                    <li>
+                                        <a href="#0">
+                                            <img src="//fillmurray.com/100/100" alt="">
+                                            <h6>Sprayers</h6>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#0">
+                                            <img src="//fillmurray.com/100/100" alt="">
+                                            <h6>Tractors</h6>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#0">
+                                            <img src="//fillmurray.com/100/100" alt="">
+                                            <h6>Combines</h6>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#0">
+                                            <img src="//fillmurray.com/100/100" alt="">
+                                            <h6>Planters</h6>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#0">
+                                            <img src="//fillmurray.com/100/100" alt="">
+                                            <h6>Balers</h6>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#0">
+                                            <img src="//fillmurray.com/100/100" alt="">
+                                            <h6>Rotary Cutters</h6>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="menu-item-has-children">
+                                <button class="accordian-toggle--site-header">Landscapers</button>
+                                <ul class="sub-menu--level-two">
+                                    <li>
+                                        <a href="#0">
+                                            <img src="/dist/img/product--commercial-mower.png" alt="Commercial Mowers">
+                                            <h6>Commercial Mowers</h6>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#0">
+                                            <img src="//fillmurray.com/100/100" alt="">
+                                            <h6>Mini Excatvator</h6>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#0">
+                                            <img src="//fillmurray.com/100/100" alt="">
+                                            <h6>Skit Steers</h6>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="menu-item-has-children">
+                                <button class="accordian-toggle--site-header">Golf</button>
+                                <ul class="sub-menu--level-two">
+                                    <li>
+                                        <a href="#0">
+                                            <img src="/dist/img/product--aerators.png" alt="Aerator">
+                                            <h6>Aerators</h6>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#0">
+                                            <img src="/dist/img/product--bunker-rake.png" alt="Bunker Rakes">
+                                            <h6>Bunker Rakes</h6>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#0">
+                                            <img src="/dist/img/product--greens-mower.png" alt="Greens Mowers">
+                                            <h6>Greens Mowers</h6>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#0">
+                                            <img src="/dist/img/product--fairway-mower.png" alt="Fairway Mowers">
+                                            <h6>Fairway Mowers</h6>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="menu-item-has-children">
+                                <button class="accordian-toggle--site-header">Construction</button>
+                                <ul class="sub-menu--level-two">
+                                    <li>
+                                        <a href="#0">
+                                            <img src="//fillmurray.com/100/100" alt="">
+                                            <h6>Hydraulics Pumps</h6>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#0">
+                                            <img src="//fillmurray.com/100/100" alt="">
+                                            <h6>Undercarraige</h6>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
                     </li>
+                    <!-- <li>
+                        <button class="accordian-toggle--site-header">Shop By Brand</button>
+                    </li> -->
                     <li><a href="#0">Gifts</a></li>
+                    <li class="cart-container">
+                        <a href="/shoppingcart.asp">
+                            <strong data-v-observable="cart-count">0</strong>
+                            <img src="/dist/img/cart-icon.jpg" style="display: inline-block; vertical-align: middle; border-radius: 50%; max-width: 40px;">
+                        </a>
+                    </li>
                 </ul>
             </nav>
             <div class="menu-item--menu-toggle">
-                <button class="menu-toggle">Menu</button>
+                <button id="hamburger" class="hamburger hamburger--spin menu-toggle" type="button">
+                  <span class="hamburger-box">
+                    <span class="hamburger-inner"></span>
+                  </span>
+                </button>  
             </div>
         </div>
     </header>
 
     <!-- MAIN CONTAINER -->
     <main>
-        
-        <!-- SEARCH BAR -->
-        <!-- <section class="search-bar-container">
-            <div class="site-width search-bar-container-items">
-                <a href="#0" class="btn-solid--brand-two">Shop by Part Type</a>
-                <a href="#0" class="btn-solid--brand-two">Shop by Equipment</a>
-                <form action="/searchresults.asp" method="get" name="SearchBoxForm">
-                    <input placeholder="Search..." type="search" name="Search">
-                </form>
-                <a href="#0" class="btn-solid--brand-two">Parts Diagram</a>
-            </div>
-        </section> -->
 
         <!-- HERO BANNER -->
         <div id="if_homepage">
             <section class="hero">
                 <div class="site-width">
-                    <h1>If it's green, we've got it...</h1>
-                    <a href="" class="btn-outline--white">Shop Weekly Deals</a>
+                    <h1>Let Us Help You Find What You Are Looking For</h1>
+                    <!-- SEARCH BAR -->
+                    <form action="/searchresults.asp" method="get" name="SearchBoxForm">
+                        <input placeholder="Search by Keyword, Part # and More" type="search" name="Search">
+                    </form>
                 </div>
             </section>
         </div>
 
         <section>
             <div class="site-width">
-                <div id="content_area" style="min-height: 50vh;"></div>
+                <div id="content_area"></div>
             </div>
         </section>
 

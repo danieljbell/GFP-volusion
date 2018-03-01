@@ -1,3 +1,9 @@
+.site-header {
+  box-shadow: 0 15px 15px -5px rgba(0,0,0,0.1);
+  position: relative;
+  z-index: 4;
+}
+
 .site-header > .site-width {
   display: flex;
   justify-content: space-between;
@@ -32,20 +38,35 @@
   }
 
   form {
-    @include desktop {
+    &.mobile-search {
+      @include desktop {
+        display: none;
+      }
+    }
+    &.desktop-search {
       display: none;
+      @include desktop {
+        display: block;
+      }
+      input {
+        background-color: #fff;
+        font-size: 0.8rem;
+        border-radius: 5px;
+        width: 200px;
+      }
     }
   }
 
   input {
     width: calc(100% + 2rem);
+    width: 100%;
     position: relative;
-    left: -1rem;
     font-family: 'Open Sans', Helvetica, Arial, sans-serif;
     font-size: 1rem;
-    padding: 1rem 2rem;
+    padding: 1rem;
     background-color: $light-gray;
     border: 0;
+    -webkit-appearance: none;
   }
 
   .menu-open & {
@@ -64,6 +85,9 @@
 .menu-item--logo-container a {
   display: block;
   padding: 1rem 0;
+  @include desktop {
+    padding: 0;
+  }
 }
 
 .site-header-list .menu-item--logo-container a:after {
@@ -81,22 +105,32 @@
 
 .site-header-list > li {
   @include desktop {
-    padding-top: 1rem;
-    padding-bottom: 1rem;
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+
+    > a:after {
+      content: '|';
+      display: inline-block;
+      margin-left: 0.5rem;
+    }
+    
     &:hover > .accordian-toggle--site-header:before {
       content: url(../img/nav--active-brand-two.svg);
       position: absolute;
       width: 25px;
       left: 50%;
-      top: calc(100% + 0.2rem);
+      top: calc(100% + 9px);
       transform: translateX(-50%);
     }
+    
     .accordian-toggle--site-header {
       @include desktop {
         position: relative;
       }
     }
+
   }
+
 }
 
 .site-header-list a {
@@ -111,7 +145,7 @@
 }
 
 .site-header-list > a:after {
-  content: url(/dist/img/accordian-toggle.svg);
+  content: url(../img/accordian-toggle.svg);
   float: right;
   @include desktop {
     content: '|';
@@ -123,10 +157,6 @@
 
 .site-header-list li:last-child a:after {
   display: none;
-}
-
-.shopping-cart-list-item img {
-  max-width: 35px;
 }
 
 .menu-item--menu-toggle {
@@ -152,7 +182,7 @@
   }
 
   &:after {
-    content: url(/dist/img/accordian-toggle.svg);
+    content: url(../img/accordian-toggle.svg);
     width: 20px;
     float: right;
     transform: rotateZ(-0deg);
@@ -177,12 +207,18 @@
 .accordian-toggle--site-header.active {
   background-color: $brand;
   color: #fff;
+  @include desktop {
+    background-color: transparent;
+    color: $brand;
+  }
+  
   &:after {
     transform: rotateZ(180deg);
     @include desktop {
       transform: rotateZ(0);
     }
   }
+
 }
 
 [class*="sub-menu"] {
@@ -214,11 +250,12 @@
     position: absolute;
     left: 0;
     right: 0;
-    transform: translateY(1rem);
+    transform: translateY(calc(1rem + 5px));
     border-top: 5px solid $brand-two;
     border-bottom: 5px solid $brand-two;
     padding-top: 1.5rem;
     padding-bottom: 1.5rem;
+    box-shadow: 0 10px 25px 0px rgba(black, 0.3);
   }
 }
 
@@ -238,7 +275,9 @@
 
 .sub-menu--level-one .accordian-toggle--site-header {
   &:after {
-    display: none;
+    @include desktop {
+      display: none;
+    }
   }
   &.active:after {
     @include desktop {
@@ -252,29 +291,22 @@
   }
 }
 
-.sub-menu--level-one .menu-item-has-children {
-  @include desktop {
-    position: relative;
-  }
-}
-
-.sub-menu--level-one > .initial--active button {
-  @include desktop {
-    background-color: $brand;
-    color: #fff;
-  }
-}
-
 .sub-menu--level-one .accordian-toggle--site-header.active {
   border-bottom: 1px solid $light-gray;
 }
 
 .sub-menu--level-one.accordian-open > li:first-child {
   border-top: 5px solid $brand-two;
+  @include desktop {
+    border-top: 0;
+  }
 }
 
 .sub-menu--level-one.accordian-open > li:last-child {
   border-bottom: 5px solid $brand-two;
+  @include desktop {
+    border-bottom: 0;
+  }
 }
 
 .sub-menu--level-two {
@@ -282,10 +314,14 @@
   padding: 0 1rem;
   @include desktop {
     position: absolute;
-    top: 0;
-    left: calc(200px + 4rem);
-    right: 0;
+    z-index: 2;
+    width: 100%;
+    max-width: calc(1080px - 200px);
+    top: 5rem;
+    bottom: 1.5rem;
+    transform: translateX(200px);
     padding: 0;
+    padding-left: 4rem;
     display: flex !important;
   }
 
@@ -301,6 +337,13 @@
     }
     &:last-child {
       border-bottom: 0;
+    }
+  }
+
+  .menu-item--equipment & {
+    text-align: center;
+    @include desktop {
+      flex-wrap: wrap;
     }
   }
 
@@ -333,6 +376,123 @@
         text-decoration: underline;
       }
     }
+  }
+
+}
+
+// .menu-item--equipment .sub-menu--level-two {
+//   align-items: flex-end;
+// }
+
+.menu-item--equipment .sub-menu--level-two > li {
+  padding: 0;
+}
+
+.menu-item--equipment .sub-menu--level-two > li > a {
+  border: 1px solid $medium-gray;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 2px 2px 6px rgba(black, 0.05);
+  padding: 1rem;
+  transition: all 250ms ease-in-out;
+  min-height: 150px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  &:hover {
+    background-color: #fff;
+    text-decoration: none !important;
+    box-shadow: 5px 5px 6px rgba(black, 0.15);
+    transform: scale(1.02) translate(-3px, -3px);
+  }
+}
+
+.menu-item--equipment .sub-menu--level-two img {
+  max-height: 75px;
+  max-width: 100px;
+}
+
+.menu-item--equipment .sub-menu--level-two h6 {
+  margin-bottom: 0;
+}
+
+
+/*
+=========================
+DESKTOP INTERACTIVITY
+=========================
+*/
+@include desktop {
+
+.menu-item--top-level:hover {
+  
+  .sub-menu--level-one {
+    display: block;
+    min-height: 50vh;
+    
+    li button {
+      transition: unset;
+    }
+    
+    li:hover {
+      button {
+        background-color: $brand;
+        color: #fff;
+        &:after {
+          content: url(../img/nav--active.svg);
+          display: block;
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          left: calc(100% - 27px);
+          z-index: 3;
+          width: 38px;
+        }
+      }
+      .sub-menu--level-two {
+        display: flex !important;
+      }
+      .sub-menu--level-three {
+        display: list-item;
+        z-index: 3;
+      }
+    }
+
+  }
+
+  .sub-menu--level-two {
+    display: none !important;
+    a:hover {
+      text-decoration: underline;
+    }
+  }
+
+}
+
+}
+
+
+/*
+=========================
+CART CONTAINER
+=========================
+*/
+.cart-container {
+  display: none;
+  @include desktop {
+    display: block;
+  }
+
+  a {
+    position: relative;
+  }
+  
+  strong {
+    position: absolute;
+    top: -10px;
+    right: 0px;
+    font-size: 1.25rem;
   }
 
 }

@@ -4,16 +4,17 @@
     'base/typography',
     'base/buttons';
 
-// @import 
-//     '../../node_modules/hamburgers/_sass/_base',
-//     '../../node_modules/hamburgers/_sass/hamburgers/types/_spin',
-//     'modules/hamburger';
+@import 
+    'modules/hamburger',
+    '../../node_modules/hamburgers/_sass/hamburgers/base',
+    '../../node_modules/hamburgers/_sass/hamburgers/types/spin';
 
 @import 
     'modules/eyebrow',
     'modules/site-header',
     'modules/hero-searchbar',
     'modules/hero',
+    'modules/popular-category-list',
     'modules/site-footer';
 
 @import 'base/utilities';
