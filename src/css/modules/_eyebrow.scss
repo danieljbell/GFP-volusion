@@ -29,9 +29,9 @@
   &:last-child:after {
       display: none;
     }
-  &:after {
-    content: '|';
-  }
+  // &:after {
+  //   content: '|';
+  // }
 }
 
 .eyebrow a {

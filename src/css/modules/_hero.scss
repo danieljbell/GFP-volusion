@@ -1,18 +1,18 @@
 .hero {
-    background-image: url(http://kyrep.fccmz.servertrust.com/v/vspfiles/templates/gfp-test/img/homepage-hero.jpg);
     background-size: cover;
-    background-position: top center;
+    background-position: center;
     position: relative;
     z-index: 1;
     text-align: center;
     padding: 4rem 0 3rem;
+    color: #fff;
+    border-bottom: 7px solid $brand-two;
+    box-shadow: inset 0 0 100px rgba(0, 0, 0, 0.5);
     @include tablet {
         padding: 10rem 0 8rem;
         overflow: hidden;
     }
-    color: #fff;
-    border-bottom: 7px solid $brand-two;
-    box-shadow: inset 0 0 100px rgba(0, 0, 0, 0.5);
+    
     &:after {
         content: '';
         position: absolute;
@@ -27,6 +27,7 @@
         z-index: -1;
         padding-bottom: 5rem;
     }
+
 }
 
 .hero h1 {
@@ -41,13 +42,17 @@
 .hero input {
     display: inline-block;
     font-family: 'Open Sans', Helvetica, Arial, sans-serif;
-    font-size: 1rem;
     padding: 0.5rem;
     border: 1px solid $medium-gray;
     border-radius: 6px;
     box-shadow: 3px 3px 5px rgba(black, 0.4);
     position: relative;
     width: 100%;
+    -webkit-appearance: none;
+    font-size: 0.8rem;
+    @include tablet {
+        font-size: 1rem;
+    }
 }
 
 .hero form {
@@ -79,6 +84,25 @@
         border-radius: 0 6px 6px 0;
         width: 50px;
     }
+}
+
+.hero.hero--not-home {
+    background-image: linear-gradient(#fff, #fff);
+    background-position: center right;
+    box-shadow: inset 0 0 100px rgba(0, 0, 0, 0.2);
+    padding: 7rem 0 3rem;
+    @include tablet {
+        padding: 10rem 0 4.5rem;
+    }
+
+    h1 {
+        opacity: 0;
+    }
+
+    &:after {
+        display: none;
+    }
+
 }
 
 

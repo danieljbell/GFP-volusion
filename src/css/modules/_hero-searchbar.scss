@@ -1,37 +1,33 @@
 .search-bar-container {
-    position: absolute;
+    top: 0;
     left: 0;
     right: 0;
-    z-index: 2;
-    background-color: transparentize($brand, 0.1);
+    z-index: 4;
+    background-color: $brand-two;
 }
 
-.search-bar-container-items {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.hero .search-bar-container form:before {
+    max-width: 20px;
+    max-height: 20px;
 }
 
-.search-bar-container .btn-solid--brand-two {
-    margin-top: 0.7rem;
-    margin-bottom: 0.7rem;
-    font-size: 0.9rem;
-    padding: 0.5rem 1rem;
-    margin-right: 1rem;
-    &:last-of-type {
-        margin-right: 0;
-    }
+.hero .search-bar-container form:after {
+    border-radius: 0;
 }
 
-.search-bar-container form {
-    flex-grow: 2;
-}
-
-.search-bar-container input {
+.search-bar-container form input {
     font-family: 'Open Sans', Helvetica, Arial, sans-serif;
-    border-radius: 5px;
     padding: 0.5rem;
     border: 0;
-    width: calc(100% - 1rem);
     font-size: 0.75rem;
+    border-radius: 0;
+}
+
+/*
+=========================
+FIXED STYLES
+=========================
+*/
+.search-bar-fixed .search-bar-container {
+    position: fixed;
 }

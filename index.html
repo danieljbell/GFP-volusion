@@ -29,7 +29,7 @@
     <header class="site-header">
         <div class="site-width">
             <div class="menu-item--logo-container">
-                <a href="/"><img src="http://kyrep.fccmz.servertrust.com/v/vspfiles/templates/gfp-test/img/GFP-logo.png" alt=""></a>
+                <a href="/"><img src="/dist/img/GFP-logo.svg" alt=""></a>
             </div>
             <nav class="site-navigation--header">
 
@@ -453,37 +453,37 @@
                                 <ul class="sub-menu--level-two">
                                     <li>
                                         <a href="#0">
-                                            <img src="//fillmurray.com/100/100" alt="">
+                                            <img src="/dist/img/product--sprayer.png" alt="Sprayer">
                                             <h6>Sprayers</h6>
                                         </a>
                                     </li>
                                     <li>
                                         <a href="#0">
-                                            <img src="//fillmurray.com/100/100" alt="">
+                                            <img src="/dist/img/product--tractor.png" alt="Tractor">
                                             <h6>Tractors</h6>
                                         </a>
                                     </li>
                                     <li>
                                         <a href="#0">
-                                            <img src="//fillmurray.com/100/100" alt="">
+                                            <img src="/dist/img/product--combine.png" alt="Combine">
                                             <h6>Combines</h6>
                                         </a>
                                     </li>
                                     <li>
                                         <a href="#0">
-                                            <img src="//fillmurray.com/100/100" alt="">
+                                            <img src="/dist/img/product--planter.png" alt="Planter">
                                             <h6>Planters</h6>
                                         </a>
                                     </li>
                                     <li>
                                         <a href="#0">
-                                            <img src="//fillmurray.com/100/100" alt="">
+                                            <img src="/dist/img/product--baler.png" alt="Baler">
                                             <h6>Balers</h6>
                                         </a>
                                     </li>
                                     <li>
                                         <a href="#0">
-                                            <img src="//fillmurray.com/100/100" alt="">
+                                            <img src="/dist/img/product--rotary-cutter.png" alt="Rotary Cutter">
                                             <h6>Rotary Cutters</h6>
                                         </a>
                                     </li>
@@ -500,14 +500,14 @@
                                     </li>
                                     <li>
                                         <a href="#0">
-                                            <img src="//fillmurray.com/100/100" alt="">
-                                            <h6>Mini Excatvator</h6>
+                                            <img src="/dist/img/product--excavator.png" alt="Mini Excavator">
+                                            <h6>Mini Excavator</h6>
                                         </a>
                                     </li>
                                     <li>
                                         <a href="#0">
-                                            <img src="//fillmurray.com/100/100" alt="">
-                                            <h6>Skit Steers</h6>
+                                            <img src="/dist/img/product--skid-steer.png" alt="Skid Steer">
+                                            <h6>Skid Steers</h6>
                                         </a>
                                     </li>
                                 </ul>
@@ -546,7 +546,7 @@
                                 <ul class="sub-menu--level-two">
                                     <li>
                                         <a href="#0">
-                                            <img src="//fillmurray.com/100/100" alt="">
+                                            <img src="/dist/img/product--hydraulic-pump.png" alt="Hydraulic Pump">
                                             <h6>Hydraulics Pumps</h6>
                                         </a>
                                     </li>
@@ -587,20 +587,32 @@
 
         <!-- HERO BANNER -->
         <div id="if_homepage">
-            <section class="hero">
+            <section class="hero" style="background-image: url(/dist/img/hero--homepage.jpg);">
                 <div class="site-width">
                     <h1>Let Us Help You Find What You Are Looking For</h1>
                     <!-- SEARCH BAR -->
                     <form action="/searchresults.asp" method="get" name="SearchBoxForm">
-                        <input placeholder="Search by Keyword, Part # and More" type="search" name="Search">
+                        <input placeholder="Search by Keyword, Part or Model" type="search" name="Search">
                     </form>
+                </div>
+            </section>
+        </div>
+        <div class="search-bar-container">
+            <form action="/searchresults.asp" method="get" name="SearchBoxForm" class="search--with-button">
+                <input placeholder="Search by Keyword, Part or Model" type="search" name="Search">
+            </form>
+        </div>
+        <div id="if_not_homepage">
+            <section class="hero hero--not-home">   
+                <div class="site-width">
+                    <h1>Green Farm Parts</h1>
                 </div>
             </section>
         </div>
 
         <section>
             <div class="site-width">
-                <div id="content_area"></div>
+                <div id="content_area" style="min-height: 1000px;"></div>
             </div>
         </section>
 
@@ -616,7 +628,7 @@
                         <li><a href="#0">About Us</a></li>
                         <li><a href="#0">Products</a></li>
                         <li><a href="#0">Contact Us</a></li>
-                        <li><a href="#0">Order Statue</a></li>
+                        <li><a href="#0">Order Status</a></li>
                         <li><a href="#0">Help/FAQ</a></li>
                         <li><a href="#0">Site Map</a></li>
                         <li><a href="#0">Privacy Policy</a></li>

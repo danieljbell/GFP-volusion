@@ -1,0 +1,24 @@
+/*
+=========================
+CATEGORY PRODUCT LISTING
+=========================
+*/
+.PageText_L517n {
+    display: none;
+
+    ~ a {
+        text-decoration: none;
+        margin-left: 0.5rem;
+        margin-right: 0.5rem;
+        
+        &:first-of-type {
+            margin-left: 0;
+        }
+        
+        &:last-of-type {
+            margin-right: 0;
+        }
+        
+    }
+
+}
