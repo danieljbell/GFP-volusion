@@ -18,7 +18,17 @@ if (pagePath.match(/Toys/i)) {
     heroText = 'Toys';
 }
 
-updateHero(heroImg, heroText);
+if (pagePath === '/searchresults.asp') {
+    searchString = window.location.search;
+    searchStringTerm = searchString.substring(8);
+    searchStringArray = searchStringTerm.split('+');
+    searchStringTerm = searchStringArray.join(' ');
+    heroText = 'Search for: ' + searchStringTerm;
+}
+
+if (pagePath != '/') {
+    updateHero(heroImg, heroText);
+}
 
 var breadcrumbs = document.querySelector('.matching_results_text');
 
@@ -26,12 +36,25 @@ if (breadcrumbs) {
     breadcrumbs.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.classList.add('breadcrumbs');
 }
 
-var searchBarContainer = document.querySelector('.search-bar-container');
-var searchBarContainerOffset = searchBarContainer.offsetTop;
+var siteHeader = document.querySelector('.site-header');
+var siteHeaderOffset = siteHeader.offsetTop;
 
-if (searchBarContainer) {
-    window.addEventListener('scroll', fixSearch);
+if (siteHeader) {
+    window.addEventListener('scroll', fixHeader);
 }
+
+setTimeout(function() {
+    if (document.body.classList.contains('vcb-active')) {
+        if (SearchParams) {
+            var catID = SearchParams.split('&')[2].split('=')[1];
+            var editLink = document.querySelector('.editSearchLink');
+            editLink.href = editLink.href + catID;
+            editLink.style.display = 'block';
+        }
+        return;
+    }
+}, 1000);
+
 
 document.addEventListener('click', function(e) {
 
@@ -86,12 +109,110 @@ function updateHero(heroImg, heroText) {
     heroHeading.style.opacity = 1;
 }
 
-function fixSearch() {
-    if (window.scrollY >= searchBarContainerOffset) {
-        document.body.style.paddingTop = searchBarContainer.offsetHeight + 'px';
-        document.body.classList.add('search-bar-fixed');
+function fixHeader() {
+    if (window.scrollY >= siteHeaderOffset) {
+        document.body.style.paddingTop = siteHeader.offsetHeight + 'px';
+        document.body.classList.add('site-header-fixed');
     } else {
         document.body.style.paddingTop = 0;
-        document.body.classList.remove('search-bar-fixed');
+        document.body.classList.remove('site-header-fixed');
     }
 }
+
+
+/*
+=========================
+KILLSHEET
+=========================
+*/
+$('img[src="/v/vspfiles/templates/gfp-test/images/clear1x1.gif"]').remove();
+$('.colors_pricebox img[src="/v/vspfiles/templates/gfp-test/images/PBox_Border_Left_Top.gif"]').parent('tr').remove();
+
+
+
+
+/*
+=========================
+BOOST STUFF
+=========================
+*/
+// (function(V, $) {
+
+//     var relatedPrdWrap = document.querySelector(".v65-product-related-details-row .v65-productDisplay");
+//     var accessoriesPrds = document.querySelector(".colors_lines_light:not([id='v65-product-related'])");
+//     // Create Sub Module
+//     V.productdetails.reformatRelatedPrds = {};
+
+//     function reformatRelatedPrds(relatedPrdWrap) {
+//         var relatedPrdImg = relatedPrdWrap.querySelectorAll(".v65-productDisplay-cell.v65-productPhoto a");
+//         var relatedPrdTitle = relatedPrdWrap.querySelectorAll(".v65-productName a");
+//         var relatedPrdprice = relatedPrdWrap.querySelectorAll(".product_productprice");
+//         var relatedSaleprice = relatedPrdWrap.querySelectorAll(".product_saleprice");
+
+//         var vProductGrid = V.productdetails.createElement("section","v-product-grid");
+//         // Loop through the longest list
+
+//         // Make array to get largest length of nodelist
+//         var imgLength = relatedPrdImg.length;
+//         var titleLength = relatedPrdTitle.length;
+//         var priceLength = relatedPrdprice.length;
+//         var saleLength = relatedSaleprice.length;
+
+//         var nodeList = [imgLength, titleLength, priceLength, saleLength];
+
+//         var maxLength = Math.max.apply(Math,nodeList);
+
+//         for (var i = 0, maxLength; i < maxLength; i ++) {
+//             var vProduct = V.productdetails.createElement("div","v-product");
+
+//             // Check if elements in array exist
+//             if (relatedPrdImg[i]) {
+//                 relatedPrdImg[i].classList.add("v-product__img");
+//                 var newRelatedPrdImg = chngRelatedSrcAttr(relatedPrdImg[i]);
+//                 vProduct.appendChild(newRelatedPrdImg);
+//             }
+//             if (relatedPrdTitle[i]) {
+//                 relatedPrdTitle[i].classList.add("v-product__title");
+//                 vProduct.appendChild(relatedPrdTitle[i]);
+//             }
+//             if (relatedPrdprice[i]) {
+//                 vProduct.appendChild(relatedPrdprice[i]);
+//             }
+//             if (relatedSaleprice[i]) {
+//                 vProduct.appendChild(relatedSaleprice[i]);
+//             }
+
+//             vProductGrid.appendChild(vProduct);
+//         }
+
+//         return vProductGrid;
+//     }
+
+//     function chngRelatedSrcAttr (relatedPrdImg) {
+//         var oldSrcAttr = relatedPrdImg.querySelector('img').getAttribute("src");
+//         var newSrcAttr = oldSrcAttr.replace("-0.jpg","-1.jpg");
+
+//         relatedPrdImg.querySelector("img")
+//             .setAttribute("src",newSrcAttr);
+
+//         return relatedPrdImg
+//     }
+
+
+//     V.productdetails.reformatRelatedPrds.init = function() {
+//         if ( document.documentElement.classList.contains("productdetails") ) {
+//             if (V.productdetails.relatedPrds) {
+//                 var vProductGrid = reformatRelatedPrds(relatedPrdWrap);
+//                 relatedPrdWrap.insertBefore(vProductGrid, relatedPrdWrap.firstChild);
+//             }
+
+//             if (V.productdetails.accessoryPrds) {
+//                 var vProductGrid = reformatRelatedPrds(accessoriesPrds);
+//                 var accessoriesInsertPoint = accessoriesPrds.querySelector("table[cellpadding='2'] tbody tr:first-child");
+//                 accessoriesInsertPoint.parentNode.insertBefore(vProductGrid,accessoriesInsertPoint.nextSibling);
+//             }
+//         }
+//     }
+//     return V;
+
+// }(VOLUSION || {}, $jQueryModern));

@@ -174,3 +174,11 @@ TYPOGRAPHY
 .has-text-center {
     text-align: center;
 }
+
+.editSearchLink,
+.editProductLink {
+    position: fixed;
+    bottom: 1rem;
+    left: 1rem;
+    display: none;
+}

@@ -2,6 +2,10 @@
   box-shadow: 0 15px 15px -5px rgba(0,0,0,0.1);
   position: relative;
   z-index: 4;
+  background-color: #fff;
+  top: 0;
+  left: 0;
+  right: 0;
 }
 
 .site-header > .site-width {
@@ -507,4 +511,15 @@ CART CONTAINER
     font-size: 1.25rem;
   }
 
+}
+
+
+
+/*
+=========================
+FIXED STYLES
+=========================
+*/
+.site-header-fixed .site-header {
+    position: fixed;
 }

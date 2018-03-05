@@ -1,0 +1,12 @@
+.panel-body {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-gap: 2rem;
+}
+
+.panel-body > div {
+    background-color: $light-gray;
+    border: 1px solid $medium-gray;
+    border-radius: 5px;
+    padding: 1rem;
+}

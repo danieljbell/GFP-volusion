@@ -1,5 +1,5 @@
 .breadcrumbs {
-    border: 1px solid red;
+    margin-bottom: 2rem;
     display: none;
     @include desktop {
         display: block;
@@ -10,4 +10,43 @@
             display: block;
         }
     }
+}
+
+/*
+=========================
+SEARCH FILTERS
+=========================
+*/
+.breadcrumbs tr:nth-child(2) td {
+    display: flex;
+
+    select {
+        border: 1px solid $medium-gray;
+    }
+
+}
+
+/*
+=========================
+SORTING FILTERS
+=========================
+*/
+.breadcrumbs + table {
+    select {
+        border: 1px solid $medium-gray;
+    }
+}
+
+.search_results_section {
+    table:first-child {
+        margin-bottom: 1rem;
+    }
+}
+
+
+td[background="/v/vspfiles/templates/gfp-test/images/Grid_Single_Divider_Horiz.gif"] {
+    padding-bottom: 1rem;
+    padding-top: 1rem;
+    background-repeat: no-repeat;
+    background-position: center;
 }
