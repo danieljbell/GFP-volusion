@@ -3,34 +3,44 @@ var pagePath = window.location.pathname;
 var heroImg = 'url(/v/vspfiles/templates/gfp-test/img/hero--generic-' + getRandomInt(1, 5) + '.jpg)';
 var heroText = 'Green Farm Parts';
 
-if (pagePath.match(/Filters/i)) {
-    heroImg = 'url(/v/vspfiles/templates/gfp-test/img/hero--filters.jpg)';
-    heroText = 'Oil Filters';
+var breadcrumbs = document.querySelector('.matching_results_text');
+
+if (breadcrumbs) {
+    var breadcrumbArray = breadcrumbs.previousElementSibling.textContent.split('>');
+    heroText = breadcrumbArray[breadcrumbArray.length - 1];    
 }
 
-if (pagePath.match(/Maintenance-Kits/i)) {
-    heroImg = 'url(/v/vspfiles/templates/gfp-test/img/hero--maintenance-kits.jpg)';
-    heroText = 'Maintenance Kits';
-}
 
-if (pagePath.match(/Toys/i)) {
-    heroImg = 'url(/v/vspfiles/templates/gfp-test/img/hero--toys.jpg)';
-    heroText = 'Toys';
-}
+// if (pagePath.match(/Filters/i)) {
+//     heroImg = 'url(/v/vspfiles/templates/gfp-test/img/hero--filters.jpg)';
+//     heroText = 'Oil Filters';
+// }
 
-if (pagePath === '/searchresults.asp') {
-    searchString = window.location.search;
-    searchStringTerm = searchString.substring(8);
-    searchStringArray = searchStringTerm.split('+');
-    searchStringTerm = searchStringArray.join(' ');
-    heroText = 'Search for: ' + searchStringTerm;
-}
+// if (pagePath.match(/Maintenance-Kits/i)) {
+//     heroImg = 'url(/v/vspfiles/templates/gfp-test/img/hero--maintenance-kits.jpg)';
+//     heroText = 'Maintenance Kits';
+// }
+
+// if (pagePath.match(/Toys/i)) {
+//     heroImg = 'url(/v/vspfiles/templates/gfp-test/img/hero--toys.jpg)';
+//     heroText = 'Toys';
+// }
+
+// if (pagePath === '/searchresults.asp') {
+//     searchString = window.location.search;
+//     searchStringTerm = searchString.substring(8);
+//     searchStringArray = searchStringTerm.split('+');
+//     searchStringTerm = searchStringArray.join(' ');
+//     heroText = 'Search for: ' + searchStringTerm;
+// }
 
 if (pagePath != '/') {
     updateHero(heroImg, heroText);
 }
 
-var breadcrumbs = document.querySelector('.matching_results_text');
+
+
+
 
 if (breadcrumbs) {
     breadcrumbs.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.classList.add('breadcrumbs');
