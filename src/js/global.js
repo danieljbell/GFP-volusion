@@ -11,28 +11,32 @@ if (breadcrumbs) {
 }
 
 
-// if (pagePath.match(/Filters/i)) {
-//     heroImg = 'url(/v/vspfiles/templates/gfp-test/img/hero--filters.jpg)';
-//     heroText = 'Oil Filters';
-// }
+if (pagePath.match(/Filters/i)) {
+    heroImg = 'url(/v/vspfiles/templates/gfp-test/img/hero--filters.jpg)';
+    // heroText = 'Oil Filters';
+}
 
-// if (pagePath.match(/Maintenance-Kits/i)) {
-//     heroImg = 'url(/v/vspfiles/templates/gfp-test/img/hero--maintenance-kits.jpg)';
-//     heroText = 'Maintenance Kits';
-// }
+if (pagePath.match(/Maintenance-Kits/i)) {
+    heroImg = 'url(/v/vspfiles/templates/gfp-test/img/hero--maintenance-kits.jpg)';
+    // heroText = 'Maintenance Kits';
+}
 
-// if (pagePath.match(/Toys/i)) {
-//     heroImg = 'url(/v/vspfiles/templates/gfp-test/img/hero--toys.jpg)';
-//     heroText = 'Toys';
-// }
+if (pagePath.match(/Toys/i)) {
+    heroImg = 'url(/v/vspfiles/templates/gfp-test/img/hero--toys.jpg)';
+    // heroText = 'Toys';
+}
 
-// if (pagePath === '/searchresults.asp') {
-//     searchString = window.location.search;
-//     searchStringTerm = searchString.substring(8);
-//     searchStringArray = searchStringTerm.split('+');
-//     searchStringTerm = searchStringArray.join(' ');
-//     heroText = 'Search for: ' + searchStringTerm;
-// }
+if (pagePath === '/searchresults.asp') {
+    searchString = window.location.search;
+    searchStringTerm = searchString.substring(8);
+    searchStringArray = searchStringTerm.split('+');
+    searchStringTerm = searchStringArray.join(' ');
+    heroText = 'Search for: ' + searchStringTerm;
+}
+
+if (pagePath === '/shoppingcart.asp') {
+    heroText = 'Shopping Cart';
+}
 
 if (pagePath != '/') {
     updateHero(heroImg, heroText);
