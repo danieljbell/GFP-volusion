@@ -34,8 +34,35 @@ if (pagePath === '/searchresults.asp') {
     heroText = 'Search for: ' + searchStringTerm;
 }
 
-if (pagePath === '/shoppingcart.asp') {
+if ((pagePath === '/ShoppingCart.asp') || pagePath === '/shoppingcart.asp') {
     heroText = 'Shopping Cart';
+    var itemDescription = document.querySelector('.PageText_L533n');
+    var itemDescriptionArray = itemDescription.innerHTML.split('&nbsp;');
+    itemDescription.innerHTML = itemDescriptionArray[0] + ' ' + itemDescriptionArray[2];
+
+    var cartRow = document.querySelectorAll('.v65-cart-details-row');
+    for (var i = 0; i < cartRow.length; i++) {
+        console.dir(cartRow[i].querySelector('td[align="center"]'));
+    }
+}
+
+if (pagePath === '/myaccount.asp') {
+    heroText = 'My Account Details';
+}
+
+if (pagePath === '/one-page-checkout.asp') {
+    heroText = 'Checkout';
+
+    document.addEventListener('keyup', function(e) {
+        if (e.target.id === "v65-onepage-billaddr1") {
+            var self = e.target;
+            console.log(self.value);
+        } 
+    });
+
+    // var billingAddressOneElem = document.querySelector('#v65-onepage-billaddr1');
+    // var billingAddressOneVal = billingAddressOneElem.value;
+    // console.log(billingAddressOneVal);
 }
 
 if (pagePath != '/') {
@@ -57,17 +84,15 @@ if (siteHeader) {
     window.addEventListener('scroll', fixHeader);
 }
 
-setTimeout(function() {
-    if (document.body.classList.contains('vcb-active')) {
-        if (SearchParams) {
-            var catID = SearchParams.split('&')[2].split('=')[1];
-            var editLink = document.querySelector('.editSearchLink');
-            editLink.href = editLink.href + catID;
-            editLink.style.display = 'block';
-        }
-        return;
-    }
-}, 1000);
+// setTimeout(function() {
+//     if (document.body.classList.contains('vcb-active')) {
+//             var catID = SearchParams.split('&')[2].split('=')[1];
+//             var editLink = document.querySelector('.editSearchLink');
+//             editLink.href = editLink.href + catID;
+//             editLink.style.display = 'block';
+//         return;
+//     }
+// }, 1000);
 
 
 document.addEventListener('click', function(e) {
@@ -141,6 +166,9 @@ KILLSHEET
 */
 $('img[src="/v/vspfiles/templates/gfp-test/images/clear1x1.gif"]').remove();
 $('.colors_pricebox img[src="/v/vspfiles/templates/gfp-test/images/PBox_Border_Left_Top.gif"]').parent('tr').remove();
+if ($('#v65-onepage-breadcrumb')) {
+    $('#v65-onepage-breadcrumb').remove();
+}
 
 
 

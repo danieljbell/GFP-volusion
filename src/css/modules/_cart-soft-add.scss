@@ -1,0 +1,19 @@
+.cartDiv .soft_add_header {
+    background-color: $brand;
+    height: auto;
+    color: #ccc;
+}
+
+.cartDiv .close_btn {
+    background: url(/v/vspfiles/templates/gfp-test/images/buttons/soft-cart-close.gif) top right no-repeat;
+    border-radius: 50%;
+}
+
+.cartDiv .soft_add_content_wrapper {
+    background-color: #f0f0f0;
+}
+
+.cartDiv .soft_add_action_area {
+    height: auto;
+    min-height: 1rem;
+}

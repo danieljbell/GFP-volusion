@@ -66,3 +66,36 @@
     text-align: center;
     font-size: 0.75rem;
 }
+
+.footer-newsletter {
+
+    .input-group {
+        position: relative;
+    }
+
+    input {
+        width: calc(100% - 4.5rem);
+        padding: 0.5rem;
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+    }
+
+    .input-group-btn {
+        position: absolute;
+        right: 0;
+        top: 0;
+        bottom: 0;
+    }
+
+    .btn-solid--brand-two {
+        border-color: $brand-two;
+        border-bottom-color: transparent;
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+        padding: 0.64rem 0.75rem;
+        font-size: 0.8rem;
+        font-weight: bold;
+        color: $brand;
+    }
+
+}

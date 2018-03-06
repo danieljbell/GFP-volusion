@@ -21,3 +21,9 @@ RESPONSIVE MIXINS
         @content;
     }
 }
+
+@mixin hd {
+    @media screen and (min-width: 1281px) {
+        @content;
+    }
+}

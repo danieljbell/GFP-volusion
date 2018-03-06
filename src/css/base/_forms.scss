@@ -1,0 +1,44 @@
+input,
+select,
+textarea {
+    font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+    font-size: 1rem;
+    color: $black;
+    border: 1px solid $medium-gray;
+    border-radius: 5px;
+}
+
+form[name="loginform"] {
+    
+    td[align=right],
+    td[align=right] + td {
+        padding-top: 1rem;
+        // padding-bottom: 1rem;
+    }
+    
+    input {
+        display: block;
+        width: 100%;
+    }
+    
+    input[name="imageField2"] {
+        width: initial;
+        max-width: 100px;
+        margin-top: 1rem;
+    }
+
+    img[src*="btn_Continue.gif"] {
+        max-width: 100px;
+        border-radius: 4px;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+}
+
+
+
+#v65-onepage-CheckoutForm select {
+    width: 100%;
+}

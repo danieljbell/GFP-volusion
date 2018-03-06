@@ -384,15 +384,15 @@
 
 }
 
-// .menu-item--equipment .sub-menu--level-two {
-//   align-items: flex-end;
-// }
+.menu-item--equipment .sub-menu--level-two {
+  bottom: auto;
+}
 
 .menu-item--equipment .sub-menu--level-two > li {
   padding: 1.5rem 1rem 0;
   border-bottom: 0;
   @include desktop {
-    padding: 0;
+    padding: 0 0 1rem;
   }
 
   &:last-child {
@@ -441,52 +441,54 @@ DESKTOP INTERACTIVITY
 */
 @include desktop {
 
-.menu-item--top-level:hover {
-  
-  .sub-menu--level-one {
-    display: block;
-    min-height: 50vh;
+  .menu-item--top-level:hover {
     
-    li button {
-      transition: unset;
-    }
-    
-    li:hover {
-      button {
-        background-color: $brand;
-        color: #fff;
-        &:after {
-          content: url(../img/nav--active.svg);
-          display: block;
-          position: absolute;
-          top: 0;
-          bottom: 0;
-          left: calc(100% - 27px);
+    .sub-menu--level-one {
+      display: block;
+      min-height: 450px;
+      
+      li button {
+        transition: unset;
+      }
+      
+      li:hover {
+        button {
+          background-color: $brand;
+          color: #fff;
+          &:after {
+            content: url(../img/nav--active.svg);
+            display: block;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: calc(100% - 27px);
+            z-index: 3;
+            width: 38px;
+          }
+        }
+        .sub-menu--level-two {
+          display: flex !important;
+        }
+        .sub-menu--level-three {
+          display: list-item;
           z-index: 3;
-          width: 38px;
         }
       }
-      .sub-menu--level-two {
-        display: flex !important;
-      }
-      .sub-menu--level-three {
-        display: list-item;
-        z-index: 3;
+
+    }
+
+    .sub-menu--level-two {
+      display: none !important;
+      a:hover {
+        text-decoration: underline;
       }
     }
 
   }
 
-  .sub-menu--level-two {
-    display: none !important;
-    a:hover {
-      text-decoration: underline;
-    }
-  }
-
 }
 
-}
+
 
 
 /*

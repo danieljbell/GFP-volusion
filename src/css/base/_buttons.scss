@@ -4,6 +4,7 @@
     text-decoration: none;
     display: inline-block;
     transition: all 250ms ease-in-out;
+    font-family: 'Open Sans', Helvetica, Arial, sans-serif;
 }
 
 @mixin solidButton($bgc, $c: #fff) {

@@ -1,0 +1,144 @@
+.v65-post-breadcrumb-br {
+    display: none;
+}
+
+#v65-cart-coupon-entry-table {
+    width: 100%;
+}
+
+#v65-cart-coupon-entry-details-div {
+    display: flex;
+    align-items: center;
+    text-align: left;
+
+    img[src*="/a/i/blank.gif"] {
+        display: none;
+    }
+
+    > * {
+        flex: 1;
+    }
+
+    #v65-cart-coupon-entry-details-input {
+        flex: 2;
+        margin-right: 2rem;
+    }
+
+}
+
+#v65-cart-coupon-entry-details-button,
+#btnRecalculate {
+    width: 100%;
+    max-width: 75px;
+    margin-top: 0.5rem;
+}
+
+#btnRecalculate {
+    max-width: 105px;
+}
+
+
+#v65-cart-shipping-details select {
+    border: 1px solid #ccc;
+    width: 100%;
+    display: block;
+    font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+    font-size: 0.9rem;
+}
+
+#cart-header > .v65-cart-header-cell {
+    // border-top: 1px solid $medium-gray;
+    // border-bottom: 1px solid $medium-gray;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    font-weight: bold;
+    background-color: $brand-two;
+    color: #fff;
+}
+
+#v65-cart-table .v65-cart-details-row:nth-child(4n-2) {
+    background-color: #f0f0f0;
+}
+
+.v65-cart-item-remove-image {
+    max-width: 20px;
+}
+
+.v65-cart-details-row,
+.v65-cart-details-separator {
+    > td:first-child {
+        border-left: 1px solid $medium-gray;
+    }
+    > td:last-child {
+        border-right: 1px solid $medium-gray;
+    }
+}
+
+.v65-cart-details-cell a {
+    text-decoration: none;
+    color: $brand;
+    &:hover {
+        text-decoration: underline;
+    }
+}
+
+.v65-cart-shipping-details-row {
+    border-top: 1px solid $medium-gray;
+    > td {
+        padding-top: 1rem;
+    }
+}
+
+#v65-cart-checkout-header-row {
+    display: none;
+}
+
+#v65-cart-checkout-parent {
+    .v65-checkout-spacer-row,
+    .v65-checkout-details-row {
+        display: none;
+    }
+}
+
+#v65-checkout-guest-cell {
+    text-align: right;
+}
+
+#v65-checkout-login-button-cell {
+    display: none;
+}
+
+#v65-onepage-ContentTable {
+    width: 100%;
+}
+
+#vcb-editable-116 {
+    margin-bottom: 3rem;
+    padding: 1.5rem;
+    border: 1px solid $medium-gray;
+    border-radius: 5px;
+    background-color: $light-gray;
+}
+
+#vcb-editable-116 ul {
+    list-style-type: none;
+
+    br {
+        display: none;
+    }
+}
+
+#v65-onepage-Billing td,
+#v65-onepage-Shipping td {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+}
+
+.PageText_L532n {
+    font-size: 1.5rem;
+    font-weight: bold;
+    border-bottom: 1px solid #ccc;
+    width: 100%;
+    display: block;
+    margin-top: 2rem;   
+}

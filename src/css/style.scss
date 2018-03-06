@@ -3,7 +3,8 @@
     'base/reset',
     'base/typography',
     'base/buttons',
-    'base/breadcrumbs';
+    'base/breadcrumbs',
+    'base/forms';
 
 @import 
     'modules/hamburger',
@@ -17,11 +18,13 @@
     'modules/search',
     'modules/hero',
     'modules/popular-category-list',
+    'modules/cart-soft-add',
     'modules/site-footer';
 
 @import 
     'pages/single-product',
-    'pages/category-listing';
+    'pages/category-listing',
+    'pages/checkout';
 
 @import 
     'base/utilities',
