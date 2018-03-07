@@ -36,13 +36,15 @@ if (pagePath === '/searchresults.asp') {
 
 if ((pagePath === '/ShoppingCart.asp') || pagePath === '/shoppingcart.asp') {
     heroText = 'Shopping Cart';
-    var itemDescription = document.querySelector('.PageText_L533n');
-    var itemDescriptionArray = itemDescription.innerHTML.split('&nbsp;');
-    itemDescription.innerHTML = itemDescriptionArray[0] + ' ' + itemDescriptionArray[2];
-
-    var cartRow = document.querySelectorAll('.v65-cart-details-row');
-    for (var i = 0; i < cartRow.length; i++) {
-        console.dir(cartRow[i].querySelector('td[align="center"]'));
+    var itemDescription = document.querySelector('#v65-cart-header-itemdescription font');
+    if (itemDescription != null) {
+        var itemDescriptionArray = itemDescription.innerHTML.split('&nbsp;');
+        itemDescription.innerHTML = itemDescriptionArray[0] + ' ' + itemDescriptionArray[2];
+    }
+    var emptyCartRow = $('.v65-cart-shipping-details-row').children().first();
+    if (emptyCartRow) {
+        emptyCartRow.siblings().remove();
+        emptyCartRow[0].colSpan = 12;    
     }
 }
 
@@ -50,19 +52,38 @@ if (pagePath === '/myaccount.asp') {
     heroText = 'My Account Details';
 }
 
+if (pagePath === '/login.asp') {
+    heroText = 'Login';
+}
+
+if (pagePath === '/terms.asp') {
+    heroText = 'Terms and Conditions';
+}
+
 if (pagePath === '/one-page-checkout.asp') {
     heroText = 'Checkout';
 
+    var billInputs = [
+        "v65-onepage-billfirstname",
+        "v65-onepage-billlastname",
+        "v65-onepage-billcompanyname",
+        "v65-onepage-billaddr1",
+        "v65-onepage-billaddr2",
+        "v65-onepage-billcity",
+        "v65-onepage-billpostalcode",
+        "v65-onepage-billphone",
+        "v65-onepage-billfax",
+        "v65-cart-billemail"
+    ];
+
     document.addEventListener('keyup', function(e) {
-        if (e.target.id === "v65-onepage-billaddr1") {
+        if (billInputs.includes(e.target.id)) {
             var self = e.target;
-            console.log(self.value);
+            var val = self.value;
+            matchCheckoutInput(self, val);
         } 
     });
 
-    // var billingAddressOneElem = document.querySelector('#v65-onepage-billaddr1');
-    // var billingAddressOneVal = billingAddressOneElem.value;
-    // console.log(billingAddressOneVal);
 }
 
 if (pagePath != '/') {
@@ -158,6 +179,55 @@ function fixHeader() {
     }
 }
 
+function matchCheckoutInput(elem, val) {
+    var input = elem.id.split('-')[2].substring(4);
+    var shipElem = document.querySelector('#v65-onepage-ship' + input);
+    if (!shipElem) { return; }
+    shipElem.value = val;
+}
+
+
+/*
+=========================
+RESPONSIVE SHOPPING CART
+=========================
+*/
+$('#v65-cart-shipping-details-wrapper').remove();
+
+
+
+
+
+
+/*
+=========================
+RESPONSIVE CHECKOUT
+=========================
+*/
+var checkoutContainer = $('#v65-onepage-Detail');
+var billingHeader = $('#billing-header').html();
+var billingContent = $('#v65-onepage-BillingParent').html();
+var shippingHeader = $('#shipping-header').html();
+var shippingContent = $('#v65-onepage-ShippingParent').html();
+var additionalInfoHeader = $('.v65-onepage-custom-header-row').html();
+var additionalInfoContent = $('.v65-onepage-custom-details-row').html();
+var shippingCostHeader = $('#v65-onepage-ShippingCostHeader').html();
+var shippingCostContent = $('#v65-onepage-ShippingCostTotals').html();
+var shippingTotals = $('#v65-onepage-ShippingCostParent').parent().html();
+
+
+checkoutContainer.remove();
+
+
+
+$('#FormatListofErrorsDiv').after('<div id="gfp-responsive-checkout"></div>');
+var respCheckout = $('#gfp-responsive-checkout');
+
+respCheckout.html('<div class="gfp-half"><div>' + billingHeader + billingContent + '</div>' + '<div>' + shippingHeader + shippingContent + '</div></div>');
+respCheckout.append('<table id="v65-onepage-additional-info"><tbody><tr>' + additionalInfoHeader + '</tr><tr>' + additionalInfoContent + '</tr></tbody></table>');
+respCheckout.append(shippingTotals);
+
+
 
 /*
 =========================
@@ -169,92 +239,12 @@ $('.colors_pricebox img[src="/v/vspfiles/templates/gfp-test/images/PBox_Border_L
 if ($('#v65-onepage-breadcrumb')) {
     $('#v65-onepage-breadcrumb').remove();
 }
+$('#v65-onepage-CopyBillingToShippingLink').remove();
 
+if (window.global_Current_ProductCode) {
+    document.body.classList.add('single-product');
 
-
-
-/*
-=========================
-BOOST STUFF
-=========================
-*/
-// (function(V, $) {
-
-//     var relatedPrdWrap = document.querySelector(".v65-product-related-details-row .v65-productDisplay");
-//     var accessoriesPrds = document.querySelector(".colors_lines_light:not([id='v65-product-related'])");
-//     // Create Sub Module
-//     V.productdetails.reformatRelatedPrds = {};
-
-//     function reformatRelatedPrds(relatedPrdWrap) {
-//         var relatedPrdImg = relatedPrdWrap.querySelectorAll(".v65-productDisplay-cell.v65-productPhoto a");
-//         var relatedPrdTitle = relatedPrdWrap.querySelectorAll(".v65-productName a");
-//         var relatedPrdprice = relatedPrdWrap.querySelectorAll(".product_productprice");
-//         var relatedSaleprice = relatedPrdWrap.querySelectorAll(".product_saleprice");
-
-//         var vProductGrid = V.productdetails.createElement("section","v-product-grid");
-//         // Loop through the longest list
-
-//         // Make array to get largest length of nodelist
-//         var imgLength = relatedPrdImg.length;
-//         var titleLength = relatedPrdTitle.length;
-//         var priceLength = relatedPrdprice.length;
-//         var saleLength = relatedSaleprice.length;
-
-//         var nodeList = [imgLength, titleLength, priceLength, saleLength];
-
-//         var maxLength = Math.max.apply(Math,nodeList);
-
-//         for (var i = 0, maxLength; i < maxLength; i ++) {
-//             var vProduct = V.productdetails.createElement("div","v-product");
-
-//             // Check if elements in array exist
-//             if (relatedPrdImg[i]) {
-//                 relatedPrdImg[i].classList.add("v-product__img");
-//                 var newRelatedPrdImg = chngRelatedSrcAttr(relatedPrdImg[i]);
-//                 vProduct.appendChild(newRelatedPrdImg);
-//             }
-//             if (relatedPrdTitle[i]) {
-//                 relatedPrdTitle[i].classList.add("v-product__title");
-//                 vProduct.appendChild(relatedPrdTitle[i]);
-//             }
-//             if (relatedPrdprice[i]) {
-//                 vProduct.appendChild(relatedPrdprice[i]);
-//             }
-//             if (relatedSaleprice[i]) {
-//                 vProduct.appendChild(relatedSaleprice[i]);
-//             }
-
-//             vProductGrid.appendChild(vProduct);
-//         }
-
-//         return vProductGrid;
-//     }
-
-//     function chngRelatedSrcAttr (relatedPrdImg) {
-//         var oldSrcAttr = relatedPrdImg.querySelector('img').getAttribute("src");
-//         var newSrcAttr = oldSrcAttr.replace("-0.jpg","-1.jpg");
-
-//         relatedPrdImg.querySelector("img")
-//             .setAttribute("src",newSrcAttr);
-
-//         return relatedPrdImg
-//     }
-
-
-//     V.productdetails.reformatRelatedPrds.init = function() {
-//         if ( document.documentElement.classList.contains("productdetails") ) {
-//             if (V.productdetails.relatedPrds) {
-//                 var vProductGrid = reformatRelatedPrds(relatedPrdWrap);
-//                 relatedPrdWrap.insertBefore(vProductGrid, relatedPrdWrap.firstChild);
-//             }
-
-//             if (V.productdetails.accessoryPrds) {
-//                 var vProductGrid = reformatRelatedPrds(accessoriesPrds);
-//                 var accessoriesInsertPoint = accessoriesPrds.querySelector("table[cellpadding='2'] tbody tr:first-child");
-//                 accessoriesInsertPoint.parentNode.insertBefore(vProductGrid,accessoriesInsertPoint.nextSibling);
-//             }
-//         }
-//     }
-//     return V;
-
-// }(VOLUSION || {}, $jQueryModern));
+    var productDescriptionWrap = $('#v65-productdetail-action-wrapper');
+    productDescriptionWrap.css("display", "block").attr('align', 'left');
+    productDescriptionWrap.siblings().css("display", "block");
+}

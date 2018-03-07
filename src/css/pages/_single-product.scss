@@ -2,3 +2,14 @@
     max-width: 30px;
     max-height: 30px;
 }
+
+#ProductDetail_TechSpecs_div,
+#ProductDetail_ExtInfo_div {
+    display: block !important;
+}
+
+.single-product #v65-productdetail-action-wrapper,
+.single-product #v65-productdetail-action-wrapper ~ td {
+    display: block;
+}
+
