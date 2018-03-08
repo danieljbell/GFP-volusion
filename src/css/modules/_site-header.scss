@@ -135,15 +135,20 @@
       display: inline-block;
       margin-left: 0.5rem;
     }
+
+    > .accordian-toggle--site-header:before {
+      content: url(../img/nav--active-brand-two.svg);
+      opacity: 0;
+      position: absolute;
+      width: 25px;
+      left: 50%;
+      top: calc(100% + 9px);
+      transform: translateX(-50%);
+    }
     
-    // &:hover > .accordian-toggle--site-header:before {
-    //   content: url(../img/nav--active-brand-two.svg);
-    //   position: absolute;
-    //   width: 25px;
-    //   left: 50%;
-    //   top: calc(100% + 9px);
-    //   transform: translateX(-50%);
-    // }
+    &:hover > .accordian-toggle--site-header:before {
+      opacity: 1;
+    }
     
     .accordian-toggle--site-header {
       @include desktop {
@@ -249,6 +254,9 @@
   padding-left: 0;
   &.accordian-open {
     display: block;
+    @include desktop {
+      display: none;
+    }
   }
   > li:first-child {
     border-top: 1px solid $medium-gray;
