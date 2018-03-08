@@ -13,3 +13,28 @@
     display: block;
 }
 
+#product_reviews_description_box img[src*="/v/vspfiles/templates/gfp-test/images/buttons/btn_reviews"] {
+    max-height: 30px;
+}
+
+#product_reviews_description_box {
+    background-color: $light-gray !important;
+    border: 1px solid $medium-gray !important;
+    td {
+        padding: 0.5rem;
+    }
+    > tbody > tr:first-child > td,
+    > tbody > tr:last-child > td {
+        display: none;
+    }
+    > tbody > tr:nth-child(2) > td {
+        padding-top: 1rem;
+    }
+    > tbody > tr:nth-child(2) > td {
+        padding-bottom: 1rem;   
+    }
+    > tbody > tr:nth-child(2) > td {
+        border-top: 1px solid $medium-gray;
+        border-bottom: 1px solid $medium-gray;
+    }
+}

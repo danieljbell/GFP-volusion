@@ -1,3 +1,21 @@
+.menu-open {
+  overflow: hidden;
+  @include desktop {
+    overflow: auto;
+  }
+}
+
+.menu-open .site-header {
+  overflow: scroll;
+  position: absolute;
+  bottom: 0;
+  @include desktop {
+    overflow: auto;
+    position: relative;
+    bottom: auto;
+  }
+}
+
 .site-header {
   box-shadow: 0 15px 15px -5px rgba(0,0,0,0.1);
   position: relative;
@@ -118,14 +136,14 @@
       margin-left: 0.5rem;
     }
     
-    &:hover > .accordian-toggle--site-header:before {
-      content: url(../img/nav--active-brand-two.svg);
-      position: absolute;
-      width: 25px;
-      left: 50%;
-      top: calc(100% + 9px);
-      transform: translateX(-50%);
-    }
+    // &:hover > .accordian-toggle--site-header:before {
+    //   content: url(../img/nav--active-brand-two.svg);
+    //   position: absolute;
+    //   width: 25px;
+    //   left: 50%;
+    //   top: calc(100% + 9px);
+    //   transform: translateX(-50%);
+    // }
     
     .accordian-toggle--site-header {
       @include desktop {
@@ -231,9 +249,6 @@
   padding-left: 0;
   &.accordian-open {
     display: block;
-    @include desktop {
-      display: none;
-    }
   }
   > li:first-child {
     border-top: 1px solid $medium-gray;
@@ -241,10 +256,11 @@
       border-top: 0;
     }
   }
-  .menu-item-has-children:hover > & {
-    @include desktop {
-      display: block;
-    }
+}
+
+.menu-item-has-children:hover > .sub-menu--level-one {
+  @include desktop {
+    display: block;
   }
 }
 
@@ -326,7 +342,6 @@
     transform: translateX(200px);
     padding: 0;
     padding-left: 4rem;
-    display: flex !important;
   }
 
   > li {
@@ -363,7 +378,7 @@
   display: flex;
   flex-wrap: wrap;
   @include desktop {
-    display: list-item;
+    display: none;
   }
 
   li {
@@ -376,6 +391,9 @@
     padding: 0 0 1em;
     font-size: 0.9rem;
     @include desktop {
+      padding: 0;
+      font-size: 1rem;
+      color: $brand;
       &:hover {
         text-decoration: underline;
       }
@@ -433,6 +451,23 @@
   margin-bottom: 0;
 }
 
+.site-header-list li.active > button {
+  background-color: $brand;
+  color: #fff;
+  @include desktop {
+    background-color: #fff;
+    color: $brand;
+  }
+
+  &:after {
+    transform: rotate(180deg);
+    @include desktop {
+      transform: none;
+    }
+  }
+
+}
+
 
 /*
 =========================
@@ -440,50 +475,47 @@ DESKTOP INTERACTIVITY
 =========================
 */
 @include desktop {
+  
+  .sub-menu--level-one {
+    min-height: 450px;
 
-  .menu-item--top-level:hover {
+    > li button {
+      transition: none;
+    }
     
-    .sub-menu--level-one {
+    > li.active button {
+      background-color: $brand;
+      color: #fff;
+      &:after {
+        content: url(../img/nav--active.svg);
+        display: block;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: calc(100% - 27px);
+        z-index: 3;
+        width: 38px;
+      }
+    }
+
+    > li.active .sub-menu--level-two .accordian-open {
+      display: flex !important;
+      @include desktop {
+        display: none;
+      }
+    }
+
+    > li.active .sub-menu--level-three {
       display: block;
-      min-height: 450px;
-      
-      li button {
-        transition: unset;
-      }
-      
-      li:hover {
-        button {
-          background-color: $brand;
-          color: #fff;
-          &:after {
-            content: url(../img/nav--active.svg);
-            display: block;
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            left: calc(100% - 27px);
-            z-index: 3;
-            width: 38px;
-          }
-        }
-        .sub-menu--level-two {
-          display: flex !important;
-        }
-        .sub-menu--level-three {
-          display: list-item;
-          z-index: 3;
-        }
-      }
-
     }
 
-    .sub-menu--level-two {
-      display: none !important;
-      a:hover {
-        text-decoration: underline;
-      }
-    }
+  }
 
+  .sub-menu--level-two {
+    display: none;
+    &.accordian-open {
+      display: flex;
+    }
   }
 
 }
@@ -497,8 +529,9 @@ CART CONTAINER
 =========================
 */
 .cart-container {
-  display: none;
+  order: -1;
   @include desktop {
+    order: 0;
     display: block;
   }
 

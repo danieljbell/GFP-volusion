@@ -10,6 +10,17 @@
             display: block;
         }
     }
+    a {
+        color: $brand;
+        text-decoration: none;
+        margin: 0 0.5rem;
+        &:hover {
+            text-decoration: underline;
+        }
+        &:first-of-type {
+            margin-left: -0.75rem;
+        }
+    }
 }
 
 .breadcrumbs .colors_backgroundneutral {
@@ -82,4 +93,27 @@ SORTING FILTERS
     table:first-child {
         margin-bottom: 1rem;
     }
+}
+
+.vCSS_breadcrumb_td {
+    border: 1px solid red;
+
+    a {
+        margin-left: 0.5rem;
+        margin-right: 0.5rem;
+        color: $brand;
+        text-decoration: none;
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+
+    a:first-of-type {
+        margin-left: -0.5rem;
+    }
+    
+    br {
+        display: none;
+    }
+
 }
