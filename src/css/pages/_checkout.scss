@@ -108,8 +108,12 @@
     }
 }
 
-#v65-checkout-guest-cell {
-    text-align: right;
+#v65-checkout-guest-cell,
+#PayPalButton {
+    text-align: center;
+    @include tablet {
+        text-align: right;
+    }
 }
 
 #v65-checkout-login-button-cell {
@@ -289,10 +293,12 @@
 
 #gfp-responsive-cart table {
     width: 100%;
-    border: 1px solid red;
+    border: 1px solid $medium-gray;
+    box-shadow: 4px 4px 8px -4px rgba(black, 0.1);
 
     tr {
-        display: flex;
+        // display: flex;
+        // align-items: center;
         th,
         td {
             flex: 1;
@@ -301,29 +307,30 @@
     
     th {
         display: none;
-        padding: 0.5rem;
+        padding: 1rem 0.5rem;
         background-color: $brand-two;
         color: #fff;
-        @include tablet {
+        text-transform: uppercase;
+        @include desktop {
             display: table-cell;
         }
     }
     
     tbody tr:nth-child(2n) td {
-        @include tablet {
+        @include desktop {
             background-color: #f0f0f0;
         }
         
         &:first-child {
             border-top: 1px solid $medium-gray;
-            @include tablet {
+            @include desktop {
                 border-top: 0;
             }
         }
         
         &:last-child {
             border-bottom: 1px solid $medium-gray;
-            @include tablet {
+            @include desktop {
                 border-bottom: 0;
             }
         }
@@ -334,17 +341,36 @@
         display: block;
         text-align: center;
         padding: 0.5rem;
-        @include tablet {
+        @include desktop {
             display: table-cell;
         }
     }
 
+    input {
+        text-align: center;
+    }
+
     .gfp-responsive-cart--product-description {
-        flex-grow: 3;
+        @include desktop {
+            text-align: left;
+            width: 50%;
+        }
     }
 
-    .gfp-responsive-cart--remove-item {
-        flex-grow: 0 !important;
-    }
+}
 
+#v65-cart-checkout-table {
+    width: 100% !important;
+}
+
+.alternate-payment.paypal {
+    max-width: unset !important;
+}
+
+.alternate-payment.paypal + table {
+    width: 100% !important;
+}
+
+.v65-error-list-wrapper {
+    display: none;
 }

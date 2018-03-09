@@ -174,7 +174,7 @@ function updateHero(heroImg, heroText) {
 }
 
 function fixHeader() {
-    if (window.scrollY >= siteHeaderOffset) {
+    if (window.scrollY > siteHeaderOffset) {
         document.body.style.paddingTop = siteHeader.offsetHeight + 'px';
         document.body.classList.add('site-header-fixed');
     } else {
@@ -196,21 +196,41 @@ function matchCheckoutInput(elem, val) {
 RESPONSIVE SHOPPING CART
 =========================
 */
-$('#v65-cart-shipping-details-wrapper').remove();
-var shoppingCartForm = $('#v65-cart-table').parent('form');
-var cartRows = document.querySelectorAll('#v65-cart-table .v65-cart-details-row');
+if ((pagePath === '/ShoppingCart.asp') || pagePath === '/shoppingcart.asp') {
+    var reCalcButton = $('#btnRecalculate');
+    // console.log(reCalcButton);
+    $('#v65-cart-shipping-details-wrapper').remove();
+    var shoppingCartForm = $('#v65-cart-table').parent('form');
+    var cartRows = document.querySelectorAll('#v65-cart-table .v65-cart-details-row');
+    var cleanCartRows = [];
 
-for (var i = 0; i < cartRows.length; i++) {
-    var removeLink = cartRows[i].querySelector('.v65-cart-item-remove-link');
-    var productImage = cartRows[i].querySelector('.v65-cart-detail-productimage').innerHTML;
-    var productName = cartRows[i].querySelector('.v65-cart-details-text .cart-item-name');
-    var quantityInput = cartRows[i].querySelector('input[name*="Quantity"]');
-    var productPrice = cartRows[i].querySelector('td:nth-child(9) .carttext').innerText;
-    var sumPrice = cartRows[i].querySelector('td:nth-child(11) .carttext').innerText;
-    console.log(i, sumPrice);
+    for (var i = 0; i < cartRows.length; i++) {
+        var removeLink = cartRows[i].querySelector('.v65-cart-item-remove-link');
+        var productImage = cartRows[i].querySelector('.v65-cart-detail-productimage').innerHTML;
+        var productName = cartRows[i].querySelector('.v65-cart-details-text .cart-item-name');
+        var quantityInput = cartRows[i].querySelector('input[name*="Quantity"]');
+        var productPrice = cartRows[i].querySelector('td:nth-child(9) .carttext').innerText;
+        var sumPrice = cartRows[i].querySelector('td:nth-child(11) .carttext').innerText;
+        cleanCartRows.push({
+            removeLink: removeLink,
+            productImage: productImage,
+            productName: productName,
+            quantityInput: quantityInput,
+            productPrice: productPrice,
+            sumPrice: sumPrice
+        });
+    }
+
+    shoppingCartForm.prepend('<div id="gfp-responsive-cart"><table><thead><tr><th class="gfp-responsive-cart--product-image"></th><th class="gfp-responsive-cart--product-description">Item</th><th class="gfp-responsive-cart--unit-price">Unit Price</th><th class="gfp-responsive-cart--quantity">Quantity</th><th class="gfp-responsive-cart--unit-total">Total</th><th class="gfp-responsive-cart--remove-item"></th></tr></thead><tbody></tbody></table>' + reCalcButton[0].outerHTML + '</div>');
+
+    $('#v65-cart-table').remove();
+
+    for (var i = 0; i < cleanCartRows.length; i++) {
+        var cartTable = $('#gfp-responsive-cart tbody');
+        cartTable.append('<tr><td class="gfp-responsive-cart--product-image">' + cleanCartRows[i].productImage + '</td><td class="gfp-responsive-cart--product-description">' + cleanCartRows[i].productName.innerText + '</td><td class="gfp-responsive-cart--unit-price">' + cleanCartRows[i].productPrice + '</td><td class="gfp-responsive-cart--quantity">' + cleanCartRows[i].quantityInput.outerHTML + '</td><td class="gfp-responsive-cart--unit-total">' + cleanCartRows[i].sumPrice + '</td><td class="gfp-responsive-cart--remove-item">' + cleanCartRows[i].removeLink.outerHTML + '</td></tr>');
+        // console.log(cleanCartRows[i].removeLink);
+    }
 }
-
-shoppingCartForm.prepend('<div id="gfp-responsive-cart">asdfasdf</div>');
 
 
 
@@ -275,4 +295,9 @@ if (window.global_Current_ProductCode) {
     productDescriptionWrap.siblings().css("display", "block");
 
     updateHero(heroImg, pageTitle);
+
+    // SELECTING PAGE CONTENTS
+    
+
+
 }

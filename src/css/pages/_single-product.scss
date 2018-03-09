@@ -38,3 +38,22 @@
         border-bottom: 1px solid $medium-gray;
     }
 }
+
+#sb-wrapper-inner {
+    height: auto !important;
+}
+
+#sb-body {
+    border-color: $medium-gray !important;
+    box-shadow: 6px 6px 8px -4px rgba(black, 0.1);
+    margin-top: 1rem;
+}
+
+#sb-body-inner,
+#sb-player {
+    position: static !important;
+}
+
+#sb-body-inner img {
+    display: block !important;
+}

@@ -102,6 +102,7 @@
   width: 100%;
   max-width: 225px;
   display: block;
+  transition: all 150ms ease-in-out;
 }
 
 .menu-item--logo-container a {
@@ -565,4 +566,15 @@ FIXED STYLES
 */
 .site-header-fixed .site-header {
     position: fixed;
+}
+
+.site-header-fixed .site-header .menu-item--logo-container img {
+  max-width: 125px;
+  @include desktop {
+    max-width: 225px;
+  }
+}
+
+.site-header-fixed .menu-item--logo-container a {
+  padding: 0.75rem 0;
 }
