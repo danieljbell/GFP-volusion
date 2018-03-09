@@ -197,6 +197,20 @@ RESPONSIVE SHOPPING CART
 =========================
 */
 $('#v65-cart-shipping-details-wrapper').remove();
+var shoppingCartForm = $('#v65-cart-table').parent('form');
+var cartRows = document.querySelectorAll('#v65-cart-table .v65-cart-details-row');
+
+for (var i = 0; i < cartRows.length; i++) {
+    var removeLink = cartRows[i].querySelector('.v65-cart-item-remove-link');
+    var productImage = cartRows[i].querySelector('.v65-cart-detail-productimage').innerHTML;
+    var productName = cartRows[i].querySelector('.v65-cart-details-text .cart-item-name');
+    var quantityInput = cartRows[i].querySelector('input[name*="Quantity"]');
+    var productPrice = cartRows[i].querySelector('td:nth-child(9) .carttext').innerText;
+    var sumPrice = cartRows[i].querySelector('td:nth-child(11) .carttext').innerText;
+    console.log(i, sumPrice);
+}
+
+shoppingCartForm.prepend('<div id="gfp-responsive-cart">asdfasdf</div>');
 
 
 

@@ -2,6 +2,14 @@
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     grid-gap: 2rem;
+    text-align: center;
+    img {
+        max-width: 100px;
+        margin-bottom: 0.5rem
+    }
+    p:last-child {
+        font-size: 0.85rem;
+    }
 }
 
 .panel-body > div {

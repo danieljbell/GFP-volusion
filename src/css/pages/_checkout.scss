@@ -286,3 +286,65 @@
 #div_articleid_101 .checkout ul li:first-child {
     display: none;
 }
+
+#gfp-responsive-cart table {
+    width: 100%;
+    border: 1px solid red;
+
+    tr {
+        display: flex;
+        th,
+        td {
+            flex: 1;
+        }
+    }
+    
+    th {
+        display: none;
+        padding: 0.5rem;
+        background-color: $brand-two;
+        color: #fff;
+        @include tablet {
+            display: table-cell;
+        }
+    }
+    
+    tbody tr:nth-child(2n) td {
+        @include tablet {
+            background-color: #f0f0f0;
+        }
+        
+        &:first-child {
+            border-top: 1px solid $medium-gray;
+            @include tablet {
+                border-top: 0;
+            }
+        }
+        
+        &:last-child {
+            border-bottom: 1px solid $medium-gray;
+            @include tablet {
+                border-bottom: 0;
+            }
+        }
+
+    }
+    
+    td {
+        display: block;
+        text-align: center;
+        padding: 0.5rem;
+        @include tablet {
+            display: table-cell;
+        }
+    }
+
+    .gfp-responsive-cart--product-description {
+        flex-grow: 3;
+    }
+
+    .gfp-responsive-cart--remove-item {
+        flex-grow: 0 !important;
+    }
+
+}
