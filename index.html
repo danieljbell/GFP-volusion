@@ -4,10 +4,14 @@
     <meta charset="UTF-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,400i,700" rel="stylesheet">
     <link rel="stylesheet" href="/dist/css/style.css?ver=0.0.2">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+    <script>
+        if (document.scripts[0].src.match(/product_details/i)) {
+            document.body.classList.add('single-product');
+        }
+    </script>
 </head>
 <body>
 
@@ -44,7 +48,6 @@
                 </form>
 
                 <ul class="site-header-list">
-                    <li><a href="/articles.asp?ID=287">Parts Diagram</a></li>
                     <li class="menu-item-has-children menu-item--top-level menu-item--part">
                         <button class="accordian-toggle--site-header">Shop By Part</button>
                         <ul class="sub-menu--level-one">
@@ -547,10 +550,7 @@
                             </li>
                         </ul>
                     </li>
-                    <!-- <li>
-                        <button class="accordian-toggle--site-header">Shop By Brand</button>
-                    </li> -->
-                    <li><a href="/John-Deere-Gifts-s/615.htm">Gifts</a></li>
+                    <li><a href="/articles.asp?ID=287">Parts Diagram</a></li>
                     <li class="cart-container">
                         <a href="/shoppingcart.asp">
                             <strong data-v-observable="cart-count">0</strong>
@@ -567,12 +567,10 @@
                 </button>  
             </div>
         </div>
-        <div id="if_not_homepage">
-            <div class="search-bar-container">
-                <form action="/searchresults.asp" method="get" name="SearchBoxForm" class="search--with-button">
-                    <input placeholder="Search by Keyword, Part or Model" type="search" name="Search">
-                </form>
-            </div>
+        <div class="search-bar-container">
+            <form action="/searchresults.asp" method="get" name="SearchBoxForm" class="search--with-button">
+                <input autofocus placeholder="Search by Keyword, Part or Model" type="search" name="Search">
+            </form>
         </div>
     </header>
 
@@ -602,45 +600,31 @@
         <section>
             <div class="site-width">
                 <div id="content_area">
-                    <div id="gfp-responsive-cart">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th class="gfp-responsive-cart--product-image"></th>
-                                    <th class="gfp-responsive-cart--product-description">Item</th>
-                                    <th class="gfp-responsive-cart--unit-price">Unit Price</th>
-                                    <th class="gfp-responsive-cart--quantity">Quantity</th>
-                                    <th class="gfp-responsive-cart--unit-total">Total</th>
-                                    <th class="gfp-responsive-cart--remove-item"></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td class="gfp-responsive-cart--product-image"><img src="//fillmurray.com/100/100" alt=""></td>
-                                    <td class="gfp-responsive-cart--product-description">2</td>
-                                    <td class="gfp-responsive-cart--unit-price">3</td>
-                                    <td class="gfp-responsive-cart--quantity">4</td>
-                                    <td class="gfp-responsive-cart--unit-total">5</td>
-                                    <td class="gfp-responsive-cart--remove-item">6</td>
-                                </tr>
-                                <tr>
-                                    <td class="gfp-responsive-cart--product-image"><img src="//fillmurray.com/100/100" alt=""></td>
-                                    <td class="gfp-responsive-cart--product-description">2</td>
-                                    <td class="gfp-responsive-cart--unit-price">3</td>
-                                    <td class="gfp-responsive-cart--quantity">4</td>
-                                    <td class="gfp-responsive-cart--unit-total">5</td>
-                                    <td class="gfp-responsive-cart--remove-item">6</td>
-                                </tr>
-                                <tr>
-                                    <td class="gfp-responsive-cart--product-image"><img src="//fillmurray.com/100/100" alt=""></td>
-                                    <td class="gfp-responsive-cart--product-description">2</td>
-                                    <td class="gfp-responsive-cart--unit-price">3</td>
-                                    <td class="gfp-responsive-cart--quantity">4</td>
-                                    <td class="gfp-responsive-cart--unit-total">5</td>
-                                    <td class="gfp-responsive-cart--remove-item">6</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                    <div id="gfp-related-products">
+                        <h3>Cost Alternatives to John Deere Home Maintenance Kit LG264: D LA Z Series Mowers</h3>
+                        <ul class="popular-category-list">
+                            <li>
+                                <a href="#0">
+                                    <img src="//fillmurray.com/200/200" alt="">
+                                    <p><strong>Product Name</strong></p>
+                                    <p>$9.99</p>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#0">
+                                    <img src="//fillmurray.com/200/200" alt="">
+                                    <p><strong>Product Name</strong></p>
+                                    <p>$9.99</p>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#0">
+                                    <img src="//fillmurray.com/200/200" alt="">
+                                    <p><strong>Product Name</strong></p>
+                                    <p>$9.99</p>
+                                </a>
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </div>

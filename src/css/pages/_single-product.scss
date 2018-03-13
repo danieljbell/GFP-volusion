@@ -1,3 +1,15 @@
+.single-product #content_area {
+    padding-top: 1rem;
+    padding-bottom: 3rem;
+}
+
+.single-product .hero {
+    position: absolute;
+    padding: 0 !important;
+    opacity: 0;
+    display: none;
+}
+
 .vCSS_img_larger_photo {
     max-width: 30px;
     max-height: 30px;
@@ -56,4 +68,88 @@
 
 #sb-body-inner img {
     display: block !important;
+}
+
+#gfp-related-products {
+    background-color: $light-gray;
+    border: 1px solid $medium-gray;
+    border-radius: 5px;
+    padding: 2rem;
+    box-shadow: 4px 4px 8px -4px rgba(black, 0.1);
+}
+
+#gfp-related-products h3 {
+    text-align: center;
+    color: $brand;
+    margin-bottom: 1.5rem;
+    @include tablet {
+        padding-left: 4rem;
+        padding-right: 4rem;
+    }
+}
+
+.single-product #v65-product-parent tr table table table td:first-child table {
+    margin-top: 1rem;
+}
+
+.single-product #Header_ProductDetail_ProductDetails {
+    display: none;
+}
+
+.vp-product-title {
+    font-size: 1rem;
+    font-weight: normal;
+    display: inline;
+    margin-left: 0.5rem;
+}
+
+#product_photo_zoom_url img {
+    max-width: 100%;
+    @include desktop {
+        max-width: unset;
+    }
+}
+
+#v65-product-parent > tbody > tr:nth-child(2) > td {
+    display: block;
+    @include tablet {
+        display: table-cell;
+        padding-top: 1rem;
+    }
+}
+
+#v65-productdetail-action-wrapper {
+    @include tablet {
+        display: table-cell !important;
+        padding-left: 2rem;
+    }
+}
+
+#v65-productdetail-action-wrapper table {
+    width: 100%;
+}
+
+#v65-productdetail-action-wrapper table:first-child td {
+    display: block;
+}
+
+#v65-productdetail-action-wrapper .v65-productdetail-cartqty {
+    text-align: center;
+    width: 70%;
+    padding: 0.25em;
+    margin-bottom: 1em;
+}
+
+#gfp-fitment {
+    padding-left: 1rem;
+    padding-top: 0.5rem;
+    
+    li {
+        margin-bottom: 0.5rem;
+    }
+
+}
+
+#v65-product-reviews {
+    margin-top: 3rem;
 }

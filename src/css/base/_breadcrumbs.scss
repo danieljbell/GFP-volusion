@@ -91,12 +91,18 @@ SORTING FILTERS
 
 .search_results_section {
     table:first-child {
+        width: 100%;
         margin-bottom: 1rem;
     }
 }
 
 .vCSS_breadcrumb_td {
-    border: 1px solid red;
+    display: none;
+    border-bottom: 1px solid $medium-gray;
+    padding-bottom: 0.5rem;
+    @include tablet {
+        display: table-cell;
+    }
 
     a {
         margin-left: 0.5rem;

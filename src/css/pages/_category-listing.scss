@@ -1,3 +1,12 @@
+.search_results_section table:first-child td {
+    width: 100%;
+    display: block;
+    @include tablet {
+        width: auto;
+        display: table-cell;
+    }
+}
+
 .panel-body {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -19,18 +28,18 @@
     padding: 1rem;
 }
 
-.v65-productDisplay tr:nth-child(6n-3) {
+// .v65-productDisplay tr:nth-child(6n-3) {
     
-    table {
-        position: relative;
-    }
+//     table {
+//         position: relative;
+//     }
     
-    a {
-        position: absolute;
-        right: 0;
-    }
+//     a {
+//         position: absolute;
+//         right: 0;
+//     }
 
-}
+// }
 
 
 .v65-productDisplay tr:nth-child(6n) td {
