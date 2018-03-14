@@ -232,7 +232,7 @@ $('#v65-onepage-CopyBillingToShippingLink').remove();
 SINGLE PRODUCT
 =========================
 */
-if (window.global_Current_ProductCode) {
+if (document.body.classList.contains('single-product')) {
     var pageTitle = $('.vp-product-title')[0].innerText;
 
     var productDescriptionWrap = $('#v65-productdetail-action-wrapper');
@@ -264,6 +264,12 @@ if (window.global_Current_ProductCode) {
 
     if ($('#related_products_content').length > 0) {
         formatRelatedProducts();
+        var productFeatureImage = $('#product_photo_zoom_url').parent('td');
+        productFeatureImage.addClass('featured-image-container');
+        $('#v65-product-parent > tbody > tr:nth-child(2) > td:first-child').addClass('featured-image-parent').siblings().addClass('featured-content-container');
+        if (productFeatureImage.length > 0) {
+            window.addEventListener('scroll', fixProductFeatureImage);
+        }
     }
 
 
@@ -379,8 +385,7 @@ function formatRelatedProducts() {
     var productPrice = $('#related_products_content .v65-productAvailability .product_productprice');
     var productImg = $('#related_products_content .v65-productPhoto');
     
-    $('#v65-product-related').before('<div class="slider--related-products"><div class="site-width"></div></div>');
-    $('#v65-product-related').remove();
+    $('#v65-product-related').before('<div class="slider--related-products"><h3 class="has-text-center mar-b">Products related to ' + pageTitle + '</h3><div class="site-width"><div class="slider"></div></div></div>');
 
     for (var i = 0; i < productTitles.length; i++) {
         cleanRelatedProducts.push({
@@ -391,10 +396,48 @@ function formatRelatedProducts() {
         });
     }
 
-    var sliderRelatedProducts = $('.slider--related-products .site-width');
+    $('#v65-product-related').remove();
+
+    var sliderRelatedProducts = $('.slider--related-products .site-width > div');
 
     for (var i = 0; i < cleanRelatedProducts.length; i++) {
-        sliderRelatedProducts.append('<div class="slide"><a href="' + cleanRelatedProducts[i].relatedProductLink + '">' + cleanRelatedProducts[i].relatedProductTitle + '</a></div>');
-    }
+        sliderRelatedProducts.append('<div><a href="' + cleanRelatedProducts[i].relatedProductLink + '"><img src="' + cleanRelatedProducts[i].relatedProductImg + '" />' + cleanRelatedProducts[i].relatedProductTitle + '</a></div>');
+    }   
 
+}
+
+function fixProductFeatureImage() {
+    // IF SMALLER SCREENS GET OUTTA HERE
+    if (window.innerWidth < 1080) { return; }
+    
+    // GRABBING ELEMENTS AND DIMENSIONS
+    var siteHeaderHeight = $('.site-header').height();
+    var featuredImageParent = document.querySelector('.featured-image-parent');
+    var featuredContentContainer = document.querySelector('.featured-content-container');
+    var elemWidth = featuredImageParent.offsetWidth;
+    var productOffset = productFeatureImage.offset().top;
+    var featuredContentHeight = featuredContentContainer.offsetHeight;
+    var featuredImageHeight = document.querySelector('.featured-image-container').offsetHeight;
+
+
+    // LET'S SCROOL
+    if ((window.scrollY > (productOffset - siteHeaderHeight)) && (window.scrollY < (siteHeaderHeight + (featuredContentHeight - featuredImageHeight)))) {
+        document.body.classList.add('featured-image-fixed');
+        featuredImageParent.style.transform = 'translateY(calc(' + siteHeaderHeight + 'px' + ' - 1rem)';
+        featuredImageParent.style.maxWidth = elemWidth + 'px';
+        featuredContentContainer.style.paddingLeft = elemWidth + 'px';
+
+        console.log(featuredContentHeight, featuredImageHeight);
+    } else if (window.scrollY < siteHeaderHeight) {
+        document.body.classList.remove('featured-image-fixed');
+        featuredImageParent.style.transform = '';
+        featuredImageParent.style.maxWidth = 'auto';
+        featuredContentContainer.style.paddingLeft = 0;
+    } else if (window.scrollY > (siteHeaderHeight + (featuredContentHeight - featuredImageHeight))) {
+        var negScroll = (window.scrollY - (featuredContentHeight - featuredImageHeight) - siteHeaderHeight);
+        console.log(negScroll);
+        featuredImageParent.style.transform = 'translateY(calc(-' + negScroll + 'px + 121px))';
+        // featuredImageParent.style.transform = 'translateY(calc(-' + negScroll + 'px -' + siteHeaderHeight + 'px))';
+
+    }
 }

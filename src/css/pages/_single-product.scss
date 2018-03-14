@@ -153,3 +153,16 @@
 #v65-product-reviews {
     margin-top: 3rem;
 }
+
+.featured-image-fixed .featured-image-parent {
+    @include desktop {
+        position: fixed;
+        top: 0;
+    }
+}
+
+// .featured-image-fixed .featured-content-container {
+//     @include desktop {
+//         padding-left: 400px;
+//     }
+// }

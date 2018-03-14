@@ -29,7 +29,9 @@ gulp.task('css', () => {
 });
 
 gulp.task('js', () => {
-  return gulp.src('./src/js/global.js')
+  return gulp.src([
+      './src/js/global.js',
+    ])
     .pipe(sourcemaps.init())
     .pipe(uglify())
     .pipe(sourcemaps.write())
