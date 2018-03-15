@@ -5,6 +5,7 @@
     display: inline-block;
     transition: all 250ms ease-in-out;
     font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+    cursor: pointer
 }
 
 @mixin solidButton($bgc, $c: #fff) {

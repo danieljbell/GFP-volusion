@@ -142,10 +142,6 @@
     }
 }
 
-#v65-onepage-Billing tr:first-child td {
-    padding-top: 1.5rem;
-}
-
 #v65-onepage-Billing td,
 #v65-onepage-Shipping td {
     padding: 0.5rem 1.5rem;
@@ -177,9 +173,60 @@
 }
 
 #gfp-responsive-checkout {
+    display: flex;
+    flex-direction: column;
+    @include tablet {
+        flex-direction: row;
+    }
 
-    > * {
-        margin: 0 auto;
+    .order-details, 
+    .order-totals {
+        flex: 1;
+    }
+
+    .order-details {
+        @include tablet {
+            padding-right: 1.5rem;
+        }
+    }
+
+    .order-totals {
+        @include tablet {
+            padding-left: 1.5rem;
+        }
+    }
+
+    section {
+        border: 1px solid $medium-gray;
+        border-radius: 5px;
+        background-color: $light-gray;
+        box-shadow: 6px 6px 12px -6px rgba(black, 0.1);
+        margin-bottom: 3rem;
+        padding: 0.5rem;
+        @include desktop {
+            padding: 1.5rem;
+        }
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+
+    h2 {
+        background-color: $brand;
+        color: #fff;
+        text-align: center;
+        padding: 0.5em;
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+        position: relative;
+        left: -0.5rem;
+        top: -0.5rem;
+        width: calc(100% + 1rem);
+        @include desktop {
+            left: -1.5rem;
+            top: -1.5rem;
+            width: calc(100% + 3rem);
+        }
     }
 
     img {
@@ -196,12 +243,6 @@
 }
 
 #ShipToSelectTable {
-    padding: 1.5rem;
-    border: 1px solid $medium-gray;
-    background-color: $light-gray;
-    border-bottom-right-radius: 5px;
-    border-bottom-left-radius: 5px;
-    box-shadow: 8px 8px 10px -5px rgba(0,0,0,0.15);
     #ship-to-options-table {
         margin: 0 auto;
     }
@@ -212,24 +253,7 @@
 #v65-onepage-additional-info,
 #v65-onepage-ShippingCostParent {
     width: 100%;
-    max-width: 540px;
-    border: 1px solid $medium-gray;
-    background-color: #f0f0f0;
-    margin-bottom: 2rem;
-    display: block;
-    box-shadow: 8px 8px 10px -5px rgba(0,0,0,0.15);
     font-size: 0.85rem;
-    tr:last-child {
-        border-bottom-right-radius: 5px;
-        border-bottom-left-radius: 5px;
-        td {
-            border-bottom-right-radius: 5px;
-            border-bottom-left-radius: 5px;
-        }
-    }
-    border-bottom-right-radius: 5px;
-    border-bottom-left-radius: 5px;
-
     input[type="text"] {
         width: 100%;
     }
@@ -373,4 +397,43 @@
 
 .v65-error-list-wrapper {
     display: none;
+}
+
+p.cart-subtotal {
+    text-align: center;
+    padding-top: 2rem;
+    @include desktop {
+        text-align: right;
+        padding-right: 5rem;
+    }
+}
+
+.cart-totals-fixed .order-totals-container {
+    position: fixed;
+    width: 100%;
+    top: 0;
+}
+
+.order-totals-container {
+    .v65-onepage-ordersummary-itemprice {
+        display: none;
+    }
+}
+
+#CalcShippingDiv input {
+    font-size: 0.9rem !important;
+    border: 0;
+    @include solidButton($brand-two, $c: $brand);
+}
+
+#v65-onepage-ShippingCostHeader {
+    display: none;
+}
+
+#v65-onepage-ordersummary-items {
+    margin-bottom: 1rem;
+    border-bottom: 1px solid $medium-gray;
+    tr:last-child td {
+        padding-bottom: 1rem;
+    }
 }

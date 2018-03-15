@@ -1,5 +1,7 @@
 $('.search-bar-container input').focus();
 
+var siteHeaderHeight = $('.site-header').height();
+
 if (window.innerWidth > 1080) {
     $('.menu-item--top-level .sub-menu--level-one > li:nth-child(2)').addClass('active').find('.sub-menu--level-two').addClass('accordian-open');
 }
@@ -145,7 +147,9 @@ RESPONSIVE SHOPPING CART
 */
 if ((pagePath === '/ShoppingCart.asp') || pagePath === '/shoppingcart.asp') {
     var reCalcButton = $('#btnRecalculate');
-    // console.log(reCalcButton);
+    var cartTotalContainer = $('#v65-cart-total-estimate td:first-child');
+    var cartTotalValue = cartTotalContainer.text().trim();
+
     $('#v65-cart-shipping-details-wrapper').remove();
     var shoppingCartForm = $('#v65-cart-table').parent('form');
     var cartRows = document.querySelectorAll('#v65-cart-table .v65-cart-details-row');
@@ -168,7 +172,7 @@ if ((pagePath === '/ShoppingCart.asp') || pagePath === '/shoppingcart.asp') {
         });
     }
 
-    shoppingCartForm.prepend('<div id="gfp-responsive-cart"><table><thead><tr><th class="gfp-responsive-cart--product-image"></th><th class="gfp-responsive-cart--product-description">Item</th><th class="gfp-responsive-cart--unit-price">Unit Price</th><th class="gfp-responsive-cart--quantity">Quantity</th><th class="gfp-responsive-cart--unit-total">Total</th><th class="gfp-responsive-cart--remove-item"></th></tr></thead><tbody></tbody></table>' + reCalcButton[0].outerHTML + '</div>');
+    shoppingCartForm.prepend('<div id="gfp-responsive-cart"><table><thead><tr><th class="gfp-responsive-cart--product-image"></th><th class="gfp-responsive-cart--product-description">Item</th><th class="gfp-responsive-cart--unit-price">Unit Price</th><th class="gfp-responsive-cart--quantity">Quantity</th><th class="gfp-responsive-cart--unit-total">Total</th><th class="gfp-responsive-cart--remove-item"></th></tr></thead><tbody></tbody></table>' + '<p class="cart-subtotal"><strong>Order Subtotal: ' + cartTotalValue + '</strong></p>' + reCalcButton[0].outerHTML + '</div>');
 
     $('#v65-cart-table').remove();
 
@@ -189,27 +193,50 @@ RESPONSIVE CHECKOUT
 =========================
 */
 var checkoutContainer = $('#v65-onepage-Detail');
-var billingHeader = $('#billing-header').html();
-var billingContent = $('#v65-onepage-BillingParent').html();
-var shippingHeader = $('#shipping-header').html();
-var shippingContent = $('#v65-onepage-ShippingParent').html();
-var additionalInfoHeader = $('.v65-onepage-custom-header-row').html();
-var additionalInfoContent = $('.v65-onepage-custom-details-row').html();
-var shippingCostHeader = $('#v65-onepage-ShippingCostHeader').html();
-var shippingCostContent = $('#v65-onepage-ShippingCostTotals').html();
-var shippingTotals = $('#v65-onepage-ShippingCostParent').parent().html();
+if (checkoutContainer.length > 0) {
+    var billingHeader = $('#billing-header').html();
+    var billingContent = $('#v65-onepage-BillingParent').html();
+    var shippingHeader = $('#shipping-header').html();
+    var shippingContent = $('#v65-onepage-ShippingParent').html();
+    var additionalInfoHeader = $('.v65-onepage-custom-header-row').html();
+    var additionalInfoContent = $('.v65-onepage-custom-details-row').html();
+    var shippingCostHeader = $('#v65-onepage-ShippingCostHeader').html();
+    var shippingCostContent = $('#v65-onepage-ShippingCost')[0].outerHTML;
+    var shippingTotals = $('#v65-onepage-ShippingCostParent').parent().html();
+    var orderSummaryItems = $('#v65-onepage-ordersummary-items').parent().html();
+    var registrationPassword = $('#v65-onepage-RegistrationFormFields input[name="password"]')[0].outerHTML;
+    var registrationPasswordConfirm = $('#v65-onepage-RegistrationFormFields input[name="passwordagain"]')[0].outerHTML;
+
+    checkoutContainer.remove();
+    $('#table_checkout_cart0').remove();
+
+    $('#FormatListofErrorsDiv').after('<div id="gfp-responsive-checkout"></div>');
+    
+    var respCheckout = $('#gfp-responsive-checkout');
+    var checkoutWrap = document.querySelector('#gfp-responsive-checkout');
+    
+    setUpResponsiveCheckout();
+
+    var termsLink = $('#articleBody_112').siblings('table').find('tr:first-child td:last-child a');
+
+    var termsStatement = $('#articleBody_112').siblings('table').find('tr:first-child td:first-child').html('I agree to the <a href="' + termsLink.attr('href') + '">Terms and Conditions</a>');
+
+    termsLink.remove();
+    
+    var orderTotalsContainer = document.querySelector('.order-totals-container');
+    var checkoutWrapTop = $('#v65-onepage-ContentTable').offset().top + checkoutWrap.offsetTop;
+    var checkoutContainerWidth = checkoutWrap.querySelector('.order-totals-container').offsetWidth;
+
+    window.addEventListener('resize', function() {
+        checkoutContainerWidth = checkoutWrap.querySelector('.order-totals-container').offsetWidth;
+    });
+    
+    document.addEventListener('scroll', stickyCheckout);
+}
 
 
-checkoutContainer.remove();
 
 
-
-$('#FormatListofErrorsDiv').after('<div id="gfp-responsive-checkout"></div>');
-var respCheckout = $('#gfp-responsive-checkout');
-
-respCheckout.html('<div class="gfp-half"><div>' + billingHeader + billingContent + '</div>' + '<div>' + shippingHeader + shippingContent + '</div></div>');
-respCheckout.append('<table id="v65-onepage-additional-info"><tbody><tr>' + additionalInfoHeader + '</tr><tr>' + additionalInfoContent + '</tr></tbody></table>');
-respCheckout.append(shippingTotals);
 
 
 
@@ -384,8 +411,6 @@ function formatRelatedProducts() {
     var productTitles = $('#related_products_content .v65-productName');
     var productPrice = $('#related_products_content .v65-productAvailability .product_productprice');
     var productImg = $('#related_products_content .v65-productPhoto');
-    
-    $('#v65-product-related').before('<div class="slider--related-products"><h3 class="has-text-center mar-b">Products related to ' + pageTitle + '</h3><div class="site-width"><div class="slider"></div></div></div>');
 
     for (var i = 0; i < productTitles.length; i++) {
         cleanRelatedProducts.push({
@@ -396,6 +421,7 @@ function formatRelatedProducts() {
         });
     }
 
+    $('#v65-product-related').before('<div class="slider--related-products"><h3 class="has-text-center mar-b">Products related to ' + pageTitle + '</h3><div class="site-width"><div class="slider"></div></div></div>');
     $('#v65-product-related').remove();
 
     var sliderRelatedProducts = $('.slider--related-products .site-width > div');
@@ -411,7 +437,6 @@ function fixProductFeatureImage() {
     if (window.innerWidth < 1080) { return; }
     
     // GRABBING ELEMENTS AND DIMENSIONS
-    var siteHeaderHeight = $('.site-header').height();
     var featuredImageParent = document.querySelector('.featured-image-parent');
     var featuredContentContainer = document.querySelector('.featured-content-container');
     var elemWidth = featuredImageParent.offsetWidth;
@@ -426,8 +451,6 @@ function fixProductFeatureImage() {
         featuredImageParent.style.transform = 'translateY(calc(' + siteHeaderHeight + 'px' + ' - 1rem)';
         featuredImageParent.style.maxWidth = elemWidth + 'px';
         featuredContentContainer.style.paddingLeft = elemWidth + 'px';
-
-        console.log(featuredContentHeight, featuredImageHeight);
     } else if (window.scrollY < siteHeaderHeight) {
         document.body.classList.remove('featured-image-fixed');
         featuredImageParent.style.transform = '';
@@ -435,9 +458,35 @@ function fixProductFeatureImage() {
         featuredContentContainer.style.paddingLeft = 0;
     } else if (window.scrollY > (siteHeaderHeight + (featuredContentHeight - featuredImageHeight))) {
         var negScroll = (window.scrollY - (featuredContentHeight - featuredImageHeight) - siteHeaderHeight);
-        console.log(negScroll);
         featuredImageParent.style.transform = 'translateY(calc(-' + negScroll + 'px + 121px))';
-        // featuredImageParent.style.transform = 'translateY(calc(-' + negScroll + 'px -' + siteHeaderHeight + 'px))';
-
     }
+}
+
+function stickyCheckout() {
+    // IF SMALLER SCREENS GET OUTTA HERE
+    if (window.innerWidth < 600) { return; }
+
+    if (window.scrollY > (checkoutWrapTop - (siteHeaderHeight + (18 * 3)))) {
+        document.body.classList.add('cart-totals-fixed');
+        orderTotalsContainer.style.maxWidth = checkoutContainerWidth + 'px';
+        orderTotalsContainer.style.transform = 'translateY(' + (siteHeaderHeight + (18 + 11)) + 'px)';
+    } else {
+       document.body.classList.remove('cart-totals-fixed'); 
+       orderTotalsContainer.style.maxWidth = 'auto';
+       orderTotalsContainer.style.transform = '';
+    }
+}
+
+function setUpResponsiveCheckout() {
+    respCheckout.html('<div class="order-details"><section><h2>Billing Information</h2>' + billingContent + '</section></div>');
+
+    var respCheckoutDetails = $('.order-details');
+    respCheckoutDetails.append('<section><h2>Shipping Information</h2>' + shippingContent + '</section>');
+    respCheckoutDetails.append('<section><h2>Create A Green Farm Parts Account</h2>' + registrationPassword + registrationPasswordConfirm + '</section>');
+
+    respCheckout.append('<div class="order-totals"><section class="order-totals-container"><h2>Your Order</h2></section></div>');
+
+    var respOrderTotalsContainer = $('.order-totals-container');
+
+    respOrderTotalsContainer.append(orderSummaryItems, shippingCostContent, additionalInfoContent);
 }
