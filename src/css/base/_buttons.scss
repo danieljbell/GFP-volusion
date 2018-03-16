@@ -5,15 +5,21 @@
     display: inline-block;
     transition: all 250ms ease-in-out;
     font-family: 'Open Sans', Helvetica, Arial, sans-serif;
-    cursor: pointer
+    cursor: pointer;
+    font-size: 1rem;
 }
 
-@mixin solidButton($bgc, $c: #fff) {
+@mixin solidButton($bgc, $c: #fff, $hover: 'lighten') {
     @include button();
     background-color: $bgc;
     color: $c;
     &:hover {
-        background-color: lighten($bgc, 15%);
+        @if $hover == lighten {
+            background-color: lighten($bgc, 15%);
+        } @else {
+            color: lighten($c, 75%);
+            background-color: darken($bgc, 15%);
+        }
     }
 }
 
@@ -38,7 +44,7 @@ SOLID BUTTONS
 }
 
 .btn-solid--brand-two {
-    @include solidButton($brand-two);
+    @include solidButton($brand-two, $brand, 'darken');
 }
 
 .btn-solid--white {

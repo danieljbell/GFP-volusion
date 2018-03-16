@@ -42,3 +42,29 @@ form[name="loginform"] {
 #v65-onepage-CheckoutForm select {
     width: 100%;
 }
+
+#gfp-responsive-checkout .form-group label {
+    display: inline-block;
+    width: calc(50% - 1.5rem);
+    text-align: right;
+    padding-right: 1rem;
+    font-size: 0.85rem;
+}
+
+#gfp-responsive-checkout .form-group input {
+    font-size: 0.85rem;
+    padding: 0.25em;
+    margin-right: 0.5rem;
+}
+
+#gfp-responsive-checkout button.show-password {
+    padding: 0.25rem;
+    text-transform: uppercase;
+    border: 0;
+    background-color: transparent;
+    color: #777;
+}
+
+#gfp-responsive-checkout .agreements input {
+    margin-right: 0.5rem;
+}

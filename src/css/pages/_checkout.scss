@@ -437,3 +437,36 @@ p.cart-subtotal {
         padding-bottom: 1rem;
     }
 }
+
+.order-totals-container .agreements td[align="right"] {
+    text-align: left !important;
+    font-size: 0.85em;
+}
+
+input[name="btncalc_shipping"] {
+    display: none !important;
+}
+
+.order-totals-container #btnSubmitOrder {
+    display: block;
+    margin: 0.5rem auto 0;
+}
+
+.v65-onepage-ordersummary-itemname,
+.v65-onepage-ordersummary-itemqty,
+.v65-onepage-ordersummary-itemtotal {
+    font-size: 0.85rem;
+}
+
+#v65-onepage-ordercomments-row,
+#v65-onepage-ordercomments-label {
+    display: block;
+}
+
+#v65-onepage-ordercomments-label font {
+    font-style: italic;
+}
+
+#v65-onepage-ordercomments-label br {
+    display: none;
+}

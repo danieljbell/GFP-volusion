@@ -135,6 +135,18 @@ document.addEventListener('click', function(e) {
         toggleChatWindow(e);
     }
 
+    if (e.target.classList.contains('show-password')) {
+        e.preventDefault();
+        var self = e.target;
+        var passwordField = self.parentElement.querySelector('input');
+        var passwordFieldType = passwordField.type;
+        if (passwordField.type === 'password') {
+            passwordField.type = 'text';
+        } else {
+            passwordField.type = 'password';
+        }
+    }
+
 });
 
 
@@ -204,13 +216,27 @@ if (checkoutContainer.length > 0) {
     var shippingCostContent = $('#v65-onepage-ShippingCost')[0].outerHTML;
     var shippingTotals = $('#v65-onepage-ShippingCostParent').parent().html();
     var orderSummaryItems = $('#v65-onepage-ordersummary-items').parent().html();
-    var registrationPassword = $('#v65-onepage-RegistrationFormFields input[name="password"]')[0].outerHTML;
-    var registrationPasswordConfirm = $('#v65-onepage-RegistrationFormFields input[name="passwordagain"]')[0].outerHTML;
+    var registrationPassword = $('#v65-onepage-RegistrationFormFields input[name="password"]').first().attr('id', 'password');
+    registrationPassword = $('#v65-onepage-RegistrationFormFields input[name="password"]')[0].outerHTML;
+    var registrationPasswordConfirm = $('#v65-onepage-RegistrationFormFields input[name="passwordagain"]').first().attr('id', 'password-confirm');
+    registrationPasswordConfirm = $('#v65-onepage-RegistrationFormFields input[name="passwordagain"]')[0].outerHTML;
+    
+    $('#v65-checkout-payment-header').parent().remove();
+    var submitOrder = $('#btnSubmitOrder');
+    submitOrder.remove();
+    submitOrder.find('img').remove();
+    submitOrder.addClass('btn-solid--brand-two').html('Place Order');
+
+
+    var paymentContent = $('#v65-onepage-payment-details-parent-table')[0].outerHTML;
+    
 
     checkoutContainer.remove();
     $('#table_checkout_cart0').remove();
 
     $('#FormatListofErrorsDiv').after('<div id="gfp-responsive-checkout"></div>');
+
+
     
     var respCheckout = $('#gfp-responsive-checkout');
     var checkoutWrap = document.querySelector('#gfp-responsive-checkout');
@@ -218,10 +244,18 @@ if (checkoutContainer.length > 0) {
     setUpResponsiveCheckout();
 
     var termsLink = $('#articleBody_112').siblings('table').find('tr:first-child td:last-child a');
-
-    var termsStatement = $('#articleBody_112').siblings('table').find('tr:first-child td:first-child').html('I agree to the <a href="' + termsLink.attr('href') + '">Terms and Conditions</a>');
+    var termsInput = $('input[name="Orders.Custom_Field_TermsofUse"]');
+    termsInput.parent().remove();
+    
+    var termsStatement = $('#articleBody_112').siblings('table').find('tr:first-child td:first-child').html(termsInput[0].outerHTML + 'I agree to the <a href="' + termsLink.attr('href') + '" target="_blank" rel="noopener noreferrer">Terms and Conditions</a>');
 
     termsLink.remove();
+
+    var returnsLink = $('#articleBody_112').siblings('table').find('tr:last-child td:last-child a');
+    var returnsInput = $('input[name="Orders.Custom_Field_AgreeReturns"]');
+    returnsInput.parent().remove();
+
+    var returnsStatement = $('#articleBody_112').siblings('table').find('tr:last-child td:first-child').html(returnsInput[0].outerHTML + 'I accept the <a href="' + returnsLink.attr('href') + '" target="_blank" rel="noopener noreferrer">Returns and Shipping Policies</a>');
     
     var orderTotalsContainer = document.querySelector('.order-totals-container');
     var checkoutWrapTop = $('#v65-onepage-ContentTable').offset().top + checkoutWrap.offsetTop;
@@ -458,7 +492,7 @@ function fixProductFeatureImage() {
         featuredContentContainer.style.paddingLeft = 0;
     } else if (window.scrollY > (siteHeaderHeight + (featuredContentHeight - featuredImageHeight))) {
         var negScroll = (window.scrollY - (featuredContentHeight - featuredImageHeight) - siteHeaderHeight);
-        featuredImageParent.style.transform = 'translateY(calc(-' + negScroll + 'px + 121px))';
+        featuredImageParent.style.transform = 'translateY(calc(-' + negScroll + 'px + ' + siteHeaderHeight + 'px))';
     }
 }
 
@@ -482,11 +516,11 @@ function setUpResponsiveCheckout() {
 
     var respCheckoutDetails = $('.order-details');
     respCheckoutDetails.append('<section><h2>Shipping Information</h2>' + shippingContent + '</section>');
-    respCheckoutDetails.append('<section><h2>Create A Green Farm Parts Account</h2>' + registrationPassword + registrationPasswordConfirm + '</section>');
+    respCheckoutDetails.append('<section><h2>Create A Green Farm Parts Account</h2><p class="has-text-center mar-b font-shrink">Create an account today for quicker checkout on future orders, checking order status & tracking, and special offers sent via email</p><div class="form-group"><label for="password">Password</label>' + registrationPassword + '<button class="show-password">Show</button></div><div class="form-group"><label for="password-confirm">Confirm Password</label>' + registrationPasswordConfirm + '<button class="show-password">Show</button></div></section>');
 
     respCheckout.append('<div class="order-totals"><section class="order-totals-container"><h2>Your Order</h2></section></div>');
 
     var respOrderTotalsContainer = $('.order-totals-container');
 
-    respOrderTotalsContainer.append(orderSummaryItems, shippingCostContent, additionalInfoContent);
+    respOrderTotalsContainer.append(orderSummaryItems, shippingCostContent, paymentContent, '<table width="100%" class="agreements"><tbody><tr>' + additionalInfoContent + '</tr></tbody></table>', submitOrder);
 }
