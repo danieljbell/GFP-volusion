@@ -60,8 +60,34 @@ if (pagePath === '/searchresults.asp') {
     }
 
     var searchStringTerm = filterItems('search=').toString().split('=')[1];
-    searchStringTerm = searchStringTerm.split('+').join(' ');
+    searchStringTerm = searchStringTerm.split('+').join(' ').split('%20').join(' ');
     heroText = 'Search for: ' + searchStringTerm;
+
+    /* SET UP RESPONSIVE SEARCH RESULTS*/
+    var productRows = $('#MainForm .v65-productDisplay .v65-productDisplay tr');
+    var productsArray = [];
+    for (var i = 0; i < productRows.length; i += 5) {
+        productsArray.push({
+            productLink: productRows[i].querySelector('a').href,
+            productImage: productRows[i].querySelector('img').src,
+            productName: productRows[i].nextElementSibling.querySelector('a span').innerText,
+            productPrice: productRows[i].nextElementSibling.querySelector('.product_productprice').innerText.split(' ')[1],
+            // productRating: productRows[i].nextElementSibling.querySelector('.vCSS_img_star_avg_rating').src || '',
+            productDescription: productRows[i].nextElementSibling.nextElementSibling.nextElementSibling.innerText
+        });
+    }
+
+    productRows.remove();
+    
+    var firstProductRow = $('#MainForm .v65-productDisplay .v65-productDisplay').find('tbody');
+
+    firstProductRow.prepend('<tr><td id="gfp-responsive-listing"></td></tr>');
+    var gfpResponsiveListing = $('#gfp-responsive-listing');
+
+    for (var i = 0; i < productsArray.length; i++) {
+        gfpResponsiveListing.append('<div class="card"><a href="' + productsArray[i].productLink + '"><img src="' + productsArray[i].productImage + '" alt="' + productsArray[i].productName + '"><h6>' + productsArray[i].productName + '</h6><p>' + productsArray[i].productPrice + '</p></a></div>');
+    }
+
 }
 
 if ((pagePath === '/ShoppingCart.asp') || pagePath === '/shoppingcart.asp') {
@@ -76,10 +102,6 @@ if ((pagePath === '/ShoppingCart.asp') || pagePath === '/shoppingcart.asp') {
         emptyCartRow.siblings().remove();
         emptyCartRow[0].colSpan = 12;    
     }
-}
-
-if (pagePath === '/myaccount.asp') {
-    heroText = 'My Account Details';
 }
 
 if (pagePath === '/login.asp') {
@@ -145,17 +167,16 @@ if (pagePath === '/myaccount.asp') {
     var accountWelcomeMessageOpener = accountPageContent[0].querySelector('span b').innerHTML;
     updateHero(heroImg, accountWelcomeMessageOpener);
 
-    var accountMyOrders = [{
-
-    }];
-
     $('.hero').next().find('.site-width').prepend('<div id="gfp-account-details"></div>');
     var gfpAccountDetails = $('#gfp-account-details');
 
-    gfpAccountDetails.append('<section><div class="box--heading-brand"><h2 class="box-headline">My Orders</h2><ul><li><a href="/orders.asp">Review Orders</a></li><li><a href="/orders.asp">Change/Cancel Order</a></li><li><a href="/orders.asp">Change Shipping Address</a></li><li><a href="/orders.asp">Print Invoices</a></li><li><a href="/orders.asp">Change Billing Address</a></li><li><a href="/returns.asp">Return Items</a></li></ul></div></section>');
-    gfpAccountDetails.append('<section><div class="box--heading-brand"><h2 class="box-headline">Personal Information</h2><ul><li><a href="/AccountSettings.asp?modwhat=change_a">Change e-mail address, or password</a></li><li><a href="/AccountSettings.asp?modwhat=change_b">Manage your billing addresses</a></li><li><a href="/MailingList_unsubscribe.asp">Change my e-mail preferences</a></li><li><a href="/AccountSettings.asp?modwhat=change_s">Manage your shipping addresses</a></li></ul></div></section>');
-    gfpAccountDetails.append('<section><div class="box--heading-brand"><h2 class="box-headline">Payment Settings</h2></div></section>');
-    gfpAccountDetails.append('<section><div class="box--heading-brand"><h2 class="box-headline">Other Features</h2></div></section>');
+    $('#content_area').remove();
+
+    gfpAccountDetails.append('<section class="box--heading-brand"><h2 class="box-headline">My Orders</h2><ul><li><a href="/orders.asp">Review Orders</a></li><li><a href="/orders.asp">Change/Cancel Order</a></li><li><a href="/orders.asp">Change Shipping Address</a></li><li><a href="/orders.asp">Print Invoices</a></li><li><a href="/orders.asp">Change Billing Address</a></li><li><a href="/returns.asp">Return Items</a></li></ul></section>');
+    gfpAccountDetails.append('<section class="box--heading-brand"><h2 class="box-headline">Personal Information</h2><ul><li><a href="/AccountSettings.asp?modwhat=change_a">Change e-mail address, or password</a></li><li><a href="/AccountSettings.asp?modwhat=change_b">Manage your billing addresses</a></li><li><a href="/MailingList_unsubscribe.asp">Change my e-mail preferences</a></li><li><a href="/AccountSettings.asp?modwhat=change_s">Manage your shipping addresses</a></li></ul></section>');
+    gfpAccountDetails.append('<section class="box--heading-brand"><h2 class="box-headline">Payment Settings</h2><ul><li><a href="/AccountSettings.asp?modwhat=change_c&myaccount=Y">Edit or delete a credit/debit card</a></li><li><a href="/MyAccount_GiftBalance.asp">View gift certificate balance</a></li><li><a href="/MyAccount_ApplyGift.asp">Apply a gift certificate to your account</a></li></ul></section>');
+    gfpAccountDetails.append('<section class="box--heading-brand"><h2 class="box-headline">Other Features</h2><ul><li><a href="/myaccount_myreviews.asp">Edit a review that I wrote</a></li><li><a href="/WishList.asp">View my Wish List</a></li><li><a href="/MyRewards.asp">My Rewards</a></li></ul></section>');
+    gfpAccountDetails.parent().append('<div class="has-text-center mar-t--more"><a href="/login.asp?logout=yes" class="btn-outline--brand-two">Logout</a></div>');
 }
 
 
@@ -525,7 +546,7 @@ function getRelatedProducts() {
             productTitle: relatedProductTitle[i].querySelector('a').innerHTML.trim(),
             productLink: relatedProductTitle[i].querySelector('a').href,
             productImg: relatedProductImg[i].querySelector('img').outerHTML,
-            productPrice: relatedProductPrice[i].textContent.trim()
+            productPrice: relatedProductPrice[i].innerText.trim()
         });
     }
 

@@ -66,3 +66,18 @@
 .v65-productDisplay img[src*="/v/vspfiles/templates/gfp-test/images/Bullet_MoreInfo.gif"] {
     display: none;
 }
+
+#MainForm .v65-productDisplay .v65-productDisplay tr {
+    // display: none;
+    // &:first-child {
+    //     display: table-row;
+    // }
+}
+
+#gfp-responsive-listing {
+    display: grid;
+    @include tablet {
+        grid-template-columns: repeat(3, 1fr);
+        grid-gap: 2rem;
+    }
+}

@@ -1,0 +1,11 @@
+.card {
+    border: 1px solid $medium-gray;
+    border-radius: 5px;
+    box-shadow: 2px 2px 6px rgba(black, 0.05);
+    text-align: center;
+} 
+
+.card a {
+    display: block;
+    padding: 1rem;
+}

@@ -1,7 +1,7 @@
-// .account-page #content_area {
-//     position: absolute;
-//     display: none;
-// }
+.account-page #content_area {
+    position: absolute;
+    display: none;
+}
 
 .account-page .hero + section {
     padding: 3rem 0;
@@ -12,7 +12,7 @@
     flex-wrap: wrap;
     > * {
         flex: 1;
-        flex-basis: calc((100%/2));
+        flex-basis: calc((100%/3));
         padding-right: 2rem;
         margin-bottom: 2rem;
         
@@ -24,9 +24,10 @@
 
     @supports (display: grid) {
         display: grid;
+        justify-content: center;
         grid-gap: 2rem;
         @include tablet {
-            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            grid-template-columns: repeat(2, 400px);
         }
 
         > * {
@@ -34,6 +35,10 @@
             margin-bottom: 0;
         }
 
+    }
+
+    .btn-outline--brand-two {
+        text-align: center;
     }
 
 }
