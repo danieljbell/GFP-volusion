@@ -19,3 +19,11 @@ address {
     line-height: 1.2;
     margin-bottom: 0.5em;
 }
+
+a {
+  color: $brand;
+  text-decoration: none;
+  &:hover {
+    text-decoration: underline;
+  }
+}

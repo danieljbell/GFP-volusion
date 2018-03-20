@@ -126,12 +126,15 @@
 
 #vcb-editable-116 {
     margin-bottom: 3rem;
-    padding: 1.5rem 3rem;
+    padding: 1.5rem;
     border-radius: 5px;
     background-color: $brand-two;
     color: $brand;
     text-align: center;
-    font-size: 1.3rem;
+    @include desktop {
+        font-size: 1.3rem;
+        padding: 1.5rem 7rem;
+    }
 }
 
 #vcb-editable-116 ul {
@@ -395,9 +398,9 @@
     width: 100% !important;
 }
 
-.v65-error-list-wrapper {
-    display: none;
-}
+// .v65-error-list-wrapper {
+//     display: none;
+// }
 
 p.cart-subtotal {
     text-align: center;
@@ -420,6 +423,10 @@ p.cart-subtotal {
     }
 }
 
+.order-totals-container textarea {
+    width: 100%;
+}
+
 #CalcShippingDiv input {
     font-size: 0.9rem !important;
     border: 0;
@@ -436,6 +443,11 @@ p.cart-subtotal {
     tr:last-child td {
         padding-bottom: 1rem;
     }
+}
+
+.order-totals-container .agreements td {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
 }
 
 .order-totals-container .agreements td[align="right"] {
@@ -469,4 +481,60 @@ input[name="btncalc_shipping"] {
 
 #v65-onepage-ordercomments-label br {
     display: none;
+}
+
+#v65-onepage-payment-details-parent-table {
+    font-size: 0.85rem;
+}
+
+#v65-onepage-payment-details-parent-table input {
+    width: 100%;
+}
+
+#span_paymentfields_purchase_order_number,
+#span_paymentfields_credit_card {
+    padding: 1.5rem 1.5rem 1.5rem 0;
+    background-color: rgba(black,.1);
+    margin-top: 1rem;
+    border-radius: 0 0 5px 5px;
+    position: relative;
+    left: -1.5rem;
+    width: calc(100% + 3rem);
+    margin-bottom: -1.5rem;
+}
+
+#span_paymentfields_credit_card td {
+    width: 50% !important;
+    white-space: normal;
+    padding-top: 0.5em;
+}
+
+#span_paymentfields_credit_card > table > tbody > tr:first-child td {
+    padding-top: 0;
+}
+
+.v65-payment-details-label-cell a {
+    display: none;
+}
+
+#span_paymentfields_credit_card > table > tbody > tr:nth-child(6) td:first-child {
+    display: none;
+}
+
+#span_paymentfields_credit_card > table > tbody > tr:nth-child(6) td:last-child {
+    width: 100% !important;
+}
+
+#v65-onepage-ordercomments-row {
+    display: none;
+}
+
+#v65-onepage-ordercomments-input {
+    padding: 0.25rem;
+}
+
+#CC_ExpDate select {
+    width: auto;
+    display: inline-block;
+    max-width: calc(50% - 0.5rem);
 }

@@ -2,8 +2,23 @@ $('.search-bar-container input').focus();
 
 var siteHeaderHeight = $('.site-header').height();
 
+if ((typeof $('#content_area').find('.vcb-article')[0] !== 'undefined')) {
+    setTimeout(function() {
+        if (document.body.classList.contains('vcb-active')) {
+            // http://kyrep.fccmz.servertrust.com/admin/AdminDetails_Generic.asp?Table=Articles&ID=110
+            var pageID = $('#content_area').find('.vcb-article')[0].id.split('_')[2];
+            var adminLinkURL = window.location.origin + '/admin/AdminDetails_Generic.asp?Table=Articles&ID=' + pageID;
+            var adminLink = document.createElement('a');
+            adminLink.href = adminLinkURL;
+            adminLink.innerText = 'Edit Page';
+            adminLink.classList.add('editSearchLink','btn-solid--brand-two');
+            $('body').prepend(adminLink);
+        }
+    }, 3000);
+}
+
 if (window.innerWidth > 1080) {
-    $('.menu-item--top-level .sub-menu--level-one > li:nth-child(2)').addClass('active').find('.sub-menu--level-two').addClass('accordian-open');
+    $('.menu-item--top-level .sub-menu--level-one > li:first-child').addClass('active').find('.sub-menu--level-two').addClass('accordian-open');
 }
 
 var pagePath = window.location.pathname;
@@ -103,8 +118,45 @@ if (pagePath === '/one-page-checkout.asp') {
 
 if (pagePath != '/') {
     updateHero(heroImg, heroText);
+} else {
+    setTimeout(function() {
+        if (document.body.classList.contains('vcb-active')) {
+            // http://kyrep.fccmz.servertrust.com/admin/AdminDetails_Generic.asp?Table=Articles&ID=
+            var adminLinkURL = window.location.origin + '/admin/AdminDetails_Generic.asp?Table=Articles&ID=2';
+            var adminLink = document.createElement('a');
+            adminLink.href = adminLinkURL;
+            adminLink.innerText = 'Edit Page';
+            adminLink.classList.add('editSearchLink','btn-solid--brand-two');
+            $('body').prepend(adminLink);
+        }
+    }, 3000);
 }
 
+
+/*
+=========================
+ACCOUNT LINKS PAGE
+=========================
+*/
+if (pagePath === '/myaccount.asp') {
+
+    var accountPageContent = $('#content_area td');
+    var accountWelcomeMessage = accountPageContent[0].querySelector('span').innerHTML;
+    var accountWelcomeMessageOpener = accountPageContent[0].querySelector('span b').innerHTML;
+    updateHero(heroImg, accountWelcomeMessageOpener);
+
+    var accountMyOrders = [{
+
+    }];
+
+    $('.hero').next().find('.site-width').prepend('<div id="gfp-account-details"></div>');
+    var gfpAccountDetails = $('#gfp-account-details');
+
+    gfpAccountDetails.append('<section><div class="box--heading-brand"><h2 class="box-headline">My Orders</h2><ul><li><a href="/orders.asp">Review Orders</a></li><li><a href="/orders.asp">Change/Cancel Order</a></li><li><a href="/orders.asp">Change Shipping Address</a></li><li><a href="/orders.asp">Print Invoices</a></li><li><a href="/orders.asp">Change Billing Address</a></li><li><a href="/returns.asp">Return Items</a></li></ul></div></section>');
+    gfpAccountDetails.append('<section><div class="box--heading-brand"><h2 class="box-headline">Personal Information</h2><ul><li><a href="/AccountSettings.asp?modwhat=change_a">Change e-mail address, or password</a></li><li><a href="/AccountSettings.asp?modwhat=change_b">Manage your billing addresses</a></li><li><a href="/MailingList_unsubscribe.asp">Change my e-mail preferences</a></li><li><a href="/AccountSettings.asp?modwhat=change_s">Manage your shipping addresses</a></li></ul></div></section>');
+    gfpAccountDetails.append('<section><div class="box--heading-brand"><h2 class="box-headline">Payment Settings</h2></div></section>');
+    gfpAccountDetails.append('<section><div class="box--heading-brand"><h2 class="box-headline">Other Features</h2></div></section>');
+}
 
 
 
@@ -148,6 +200,28 @@ document.addEventListener('click', function(e) {
     }
 
 });
+
+
+/*
+=========================
+CATEGORY LISTING
+=========================
+*/
+if ((typeof SearchParams !== 'undefined') && (pagePath != '/searchresults.asp')) {
+    // http://kyrep.fccmz.servertrust.com/admin/AdminDetails_Generic.asp?table=Categories&Page=1&ID=
+    var catID = SearchParams.split('&')[2].substring(4);
+    setTimeout(function() {
+        if (document.body.classList.contains('vcb-active')) {
+            var adminLinkURL = window.location.origin + '/admin/AdminDetails_Generic.asp?table=Categories&Page=1&ID=' + catID;
+            var adminLink = document.createElement('a');
+            adminLink.href = adminLinkURL;
+            adminLink.innerText = 'Edit Category';
+            adminLink.classList.add('editSearchLink','btn-solid--brand-two');
+            $('body').prepend(adminLink);
+        }
+    }, 3000);
+}
+
 
 
 
@@ -216,17 +290,26 @@ if (checkoutContainer.length > 0) {
     var shippingCostContent = $('#v65-onepage-ShippingCost')[0].outerHTML;
     var shippingTotals = $('#v65-onepage-ShippingCostParent').parent().html();
     var orderSummaryItems = $('#v65-onepage-ordersummary-items').parent().html();
-    var registrationPassword = $('#v65-onepage-RegistrationFormFields input[name="password"]').first().attr('id', 'password');
-    registrationPassword = $('#v65-onepage-RegistrationFormFields input[name="password"]')[0].outerHTML;
-    var registrationPasswordConfirm = $('#v65-onepage-RegistrationFormFields input[name="passwordagain"]').first().attr('id', 'password-confirm');
-    registrationPasswordConfirm = $('#v65-onepage-RegistrationFormFields input[name="passwordagain"]')[0].outerHTML;
+    if ($('#v65-onepage-RegistrationFormFields').length > 0) {
+        var registrationPassword = $('#v65-onepage-RegistrationFormFields input[name="password"]').first().attr('id', 'password');
+        registrationPassword = $('#v65-onepage-RegistrationFormFields input[name="password"]')[0].outerHTML;
+        var registrationPasswordConfirm = $('#v65-onepage-RegistrationFormFields input[name="passwordagain"]').first().attr('id', 'password-confirm');
+        registrationPasswordConfirm = $('#v65-onepage-RegistrationFormFields input[name="passwordagain"]')[0].outerHTML;
+    }
+    $('#span_paymentfields_credit_card > table > tbody > tr:nth-child(6) td:first-child').remove();
+    $('#span_paymentfields_credit_card > table > tbody > tr:nth-child(6) td:last-child').attr('colspan', '1');
     
     $('#v65-checkout-payment-header').parent().remove();
-    var submitOrder = $('#btnSubmitOrder');
-    submitOrder.remove();
+    var submitOrder = $('#divbtnSubmitOrder');
     submitOrder.find('img').remove();
-    submitOrder.addClass('btn-solid--brand-two').html('Place Order');
+    submitOrder.find('button').text('Place Order').addClass('btn-solid--brand-two');
+    var placeOrder = submitOrder.html();
+    submitOrder.remove();
+    
 
+    var orderCommentsElem = $('#v65-onepage-ordercomments-input');
+    orderCommentsElem.remove();
+    $('#v65-onepage-ordercomments-row').parent().parent().remove();
 
     var paymentContent = $('#v65-onepage-payment-details-parent-table')[0].outerHTML;
     
@@ -240,6 +323,8 @@ if (checkoutContainer.length > 0) {
     
     var respCheckout = $('#gfp-responsive-checkout');
     var checkoutWrap = document.querySelector('#gfp-responsive-checkout');
+
+
     
     setUpResponsiveCheckout();
 
@@ -258,11 +343,13 @@ if (checkoutContainer.length > 0) {
     var returnsStatement = $('#articleBody_112').siblings('table').find('tr:last-child td:first-child').html(returnsInput[0].outerHTML + 'I accept the <a href="' + returnsLink.attr('href') + '" target="_blank" rel="noopener noreferrer">Returns and Shipping Policies</a>');
     
     var orderTotalsContainer = document.querySelector('.order-totals-container');
+    var orderOffsetTop = orderTotalsContainer.offsetTop;
     var checkoutWrapTop = $('#v65-onepage-ContentTable').offset().top + checkoutWrap.offsetTop;
     var checkoutContainerWidth = checkoutWrap.querySelector('.order-totals-container').offsetWidth;
 
     window.addEventListener('resize', function() {
         checkoutContainerWidth = checkoutWrap.querySelector('.order-totals-container').offsetWidth;
+        checkoutWrapTop = $('#v65-onepage-ContentTable').offset().top + checkoutWrap.offsetTop;
     });
     
     document.addEventListener('scroll', stickyCheckout);
@@ -294,6 +381,19 @@ SINGLE PRODUCT
 =========================
 */
 if (document.body.classList.contains('single-product')) {
+    // SETUP ADMIN LINK
+    // http://kyrep.fccmz.servertrust.com/admin/AdminDetails_Generic.asp?table=Categories&Page=1&ID=
+    setTimeout(function() {
+        if (document.body.classList.contains('vcb-active')) {
+            var adminLinkURL = window.location.origin + '/admin/AdminDetails_Generic.asp?table=Products_Joined&Page=1&ID=' + global_Current_ProductCode.toLowerCase();
+            var adminLink = document.createElement('a');
+            adminLink.href = adminLinkURL;
+            adminLink.innerText = 'Edit Product';
+            adminLink.classList.add('editProductLink','btn-solid--brand-two');
+            $('body').prepend(adminLink);
+        }
+    }, 3000);
+
     var pageTitle = $('.vp-product-title')[0].innerText;
 
     var productDescriptionWrap = $('#v65-productdetail-action-wrapper');
@@ -500,15 +600,24 @@ function stickyCheckout() {
     // IF SMALLER SCREENS GET OUTTA HERE
     if (window.innerWidth < 600) { return; }
 
-    if (window.scrollY > (checkoutWrapTop - (siteHeaderHeight + (18 * 3)))) {
+    var orderDetails = $('.order-details');
+    var orderDetailsHeight = orderDetails[0].offsetHeight;
+    
+    var orderTotals =  $('.order-totals-container');
+    var orderTotalsHeight =  orderTotals[0].offsetHeight;
+
+    if ((window.scrollY > (checkoutWrapTop - (siteHeaderHeight + (18 * 3)))) && (window.scrollY < (orderDetailsHeight + orderOffsetTop - orderTotalsHeight - siteHeaderHeight - (18 * 3)))) {
         document.body.classList.add('cart-totals-fixed');
         orderTotalsContainer.style.maxWidth = checkoutContainerWidth + 'px';
         orderTotalsContainer.style.transform = 'translateY(' + (siteHeaderHeight + (18 + 11)) + 'px)';
+    } else if (window.scrollY > ((orderDetailsHeight + orderOffsetTop) - orderTotalsHeight - siteHeaderHeight - (18 * 3))) {
+        var negScroll = (window.scrollY - orderTotalsHeight - orderTotalsHeight - siteHeaderHeight - (18 * 3));
+        orderTotals[0].style.transform = 'translateY(calc(-' + negScroll + 'px + ' + orderOffsetTop + 'px))';
     } else {
        document.body.classList.remove('cart-totals-fixed'); 
        orderTotalsContainer.style.maxWidth = 'auto';
        orderTotalsContainer.style.transform = '';
-    }
+    } 
 }
 
 function setUpResponsiveCheckout() {
@@ -516,11 +625,16 @@ function setUpResponsiveCheckout() {
 
     var respCheckoutDetails = $('.order-details');
     respCheckoutDetails.append('<section><h2>Shipping Information</h2>' + shippingContent + '</section>');
-    respCheckoutDetails.append('<section><h2>Create A Green Farm Parts Account</h2><p class="has-text-center mar-b font-shrink">Create an account today for quicker checkout on future orders, checking order status & tracking, and special offers sent via email</p><div class="form-group"><label for="password">Password</label>' + registrationPassword + '<button class="show-password">Show</button></div><div class="form-group"><label for="password-confirm">Confirm Password</label>' + registrationPasswordConfirm + '<button class="show-password">Show</button></div></section>');
+    if (registrationPassword) {
+        respCheckoutDetails.append('<section><h2>Create A Green Farm Parts Account</h2><p class="has-text-center mar-b font-shrink">Create an account today for quicker checkout on future orders, checking order status & tracking, and special offers sent via email</p><div class="form-group"><label for="password">Password</label>' + registrationPassword + '<button class="show-password">Show</button></div><div class="form-group"><label for="password-confirm">Confirm Password</label>' + registrationPasswordConfirm + '<button class="show-password">Show</button></div></section>');
+    }
+    respCheckoutDetails.append('<section><h2>Payment Information</h2>' + paymentContent + '</section>');
 
     respCheckout.append('<div class="order-totals"><section class="order-totals-container"><h2>Your Order</h2></section></div>');
 
     var respOrderTotalsContainer = $('.order-totals-container');
 
-    respOrderTotalsContainer.append(orderSummaryItems, shippingCostContent, paymentContent, '<table width="100%" class="agreements"><tbody><tr>' + additionalInfoContent + '</tr></tbody></table>', submitOrder);
+    respOrderTotalsContainer.append(orderSummaryItems, shippingCostContent);
+    respOrderTotalsContainer.append('<p style="font-size: 0.85rem;">Order Comments: <em>(optional)</em></p>', orderCommentsElem);
+    respOrderTotalsContainer.append('<table width="100%" class="agreements"><tbody><tr>' + additionalInfoContent + '</tr></tbody></table>', placeOrder);
 }

@@ -1,0 +1,39 @@
+// .account-page #content_area {
+//     position: absolute;
+//     display: none;
+// }
+
+.account-page .hero + section {
+    padding: 3rem 0;
+}
+
+#gfp-account-details {
+    display: flex;
+    flex-wrap: wrap;
+    > * {
+        flex: 1;
+        flex-basis: calc((100%/2));
+        padding-right: 2rem;
+        margin-bottom: 2rem;
+        
+        &:nth-child(2n) {
+            padding-right: 0;
+        }
+
+    }
+
+    @supports (display: grid) {
+        display: grid;
+        grid-gap: 2rem;
+        @include tablet {
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+        }
+
+        > * {
+            padding-right: 0;
+            margin-bottom: 0;
+        }
+
+    }
+
+}
