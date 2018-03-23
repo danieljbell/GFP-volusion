@@ -93,8 +93,10 @@
       max-width: 600px; } }
   @media only screen and (min-width: 992px) {
     .soft_add_wrapper {
+      margin: 0;
       min-width: 400px;
-      top: 15% !important;
+      top: calc(15% - 1.5rem) !important;
+      left: calc(50% - 65px) !important;
       -webkit-transform: translateY(0);
           -ms-transform: translateY(0);
               transform: translateY(0); } }

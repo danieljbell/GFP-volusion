@@ -85,7 +85,7 @@ if (pagePath === '/searchresults.asp') {
     var gfpResponsiveListing = $('#gfp-responsive-listing');
 
     for (var i = 0; i < productsArray.length; i++) {
-        gfpResponsiveListing.append('<div class="card"><a href="' + productsArray[i].productLink + '"><img src="' + productsArray[i].productImage + '" alt="' + productsArray[i].productName + '"><h6>' + productsArray[i].productName + '</h6><p>' + productsArray[i].productPrice + '</p></a></div>');
+        gfpResponsiveListing.append('<a href="' + productsArray[i].productLink + '" class="card"><img src="' + productsArray[i].productImage + '" alt="' + productsArray[i].productName + '"><h6>' + productsArray[i].productName + '</h6><p>' + productsArray[i].productPrice + '</p></a>');
     }
 
 }
@@ -163,8 +163,9 @@ ACCOUNT LINKS PAGE
 if (pagePath === '/myaccount.asp') {
 
     var accountPageContent = $('#content_area td');
-    var accountWelcomeMessage = accountPageContent[0].querySelector('span').innerHTML;
-    var accountWelcomeMessageOpener = accountPageContent[0].querySelector('span b').innerHTML;
+    console.log(accountPageContent[0]);
+    var accountWelcomeMessage = accountPageContent[0].innerHTML;
+    var accountWelcomeMessageOpener = accountPageContent[0].querySelector('b').innerHTML;
     updateHero(heroImg, accountWelcomeMessageOpener);
 
     $('.hero').next().find('.site-width').prepend('<div id="gfp-account-details"></div>');
@@ -179,6 +180,48 @@ if (pagePath === '/myaccount.asp') {
     gfpAccountDetails.parent().append('<div class="has-text-center mar-t--more"><a href="/login.asp?logout=yes" class="btn-outline--brand-two">Logout</a></div>');
 }
 
+
+
+/*
+=========================
+ORDERS PAGE
+=========================
+*/
+if (pagePath === '/orders.asp') {
+    var allOrders = $('#content_area form .colors_lines_light .colors_backgroundneutral');
+    var cleanAllOrders = [];
+    
+    for (var i = 0; i < allOrders.length; i++) {
+        var allItemsInOrder = allOrders[i].querySelectorAll('td:nth-child(2) tr');
+        var itemRows = [];
+
+        for (var c = 1; c < allItemsInOrder.length; c++) {
+            console.log(allItemsInOrder[c].querySelector('a'));
+            // itemRows.push({
+            //     "itemLink": allItemsInOrder[c].querySelector('a').href
+            // });
+        }
+        // console.log(itemRows[i]);
+        
+        cleanAllOrders.push({
+            "orderMetaDetails": allOrders[i].querySelector('td').innerHTML,
+            "orderLink": allOrders[i].querySelector('td:last-child a').href,
+            "orderItems": itemRows[i]
+        });
+    }
+
+    // allOrders.remove();
+
+    // console.log(cleanAllOrders.length);
+
+    $('#content_area form').append('<div class="gfp-order-list"><ul></ul></div>');
+    var gfpOrderList = $('.gfp-order-list ul');
+
+    for (var i = 0; i < cleanAllOrders.length; i++) {
+        gfpOrderList.append('<li class="gfp-order-item"><div class="gfp-order-item--order-meta">' + cleanAllOrders[i].orderMetaDetails + '<br /><a href="' + cleanAllOrders[i].orderLink + '" class="mar-t btn-solid--brand-two">View Details</a></div><div class="gfp-order-item--order-items">' + cleanAllOrders[i].orderItems + '</div></li>');
+    }
+
+}
 
 
 
@@ -229,6 +272,47 @@ CATEGORY LISTING
 =========================
 */
 if ((typeof SearchParams !== 'undefined') && (pagePath != '/searchresults.asp')) {
+    var allSubCatLinks = $('.subcategory_link');
+    cleanSubCatLinks = [];
+
+    for (var i = 0; i < allSubCatLinks.length; i++) {
+        cleanSubCatLinks.push({
+            "modelLink": allSubCatLinks[i].href,
+            "modelNumber": allSubCatLinks[i].innerText.replace('John Deere', '').split(' ')[1]
+        });
+    }
+
+    allSubCatLinks.first().closest('.colors_backgroundneutral').parent().prepend('<td class="gfp-clean-subcategories"><h2>Choose your model to see parts that fit your model</h2></td>');
+    // $('.gfp-clean-subcategories').siblings().remove();
+
+
+    
+    /* SET UP RESPONSIVE SEARCH RESULTS*/
+    var productRows = $('#MainForm .v65-productDisplay .v65-productDisplay > tbody > tr');
+    var productsArray = [];
+    for (var i = 0; i < productRows.length; i += 6) {
+        // console.log();
+        productsArray.push({
+            productLink: productRows[i].querySelector('a').href,
+            productImage: productRows[i].querySelector('img').src,
+            productName: productRows[i].nextElementSibling.querySelector('a').innerText,
+            productPrice: productRows[i].nextElementSibling.nextElementSibling.querySelector('.product_productprice').innerText.split(' ')[1],
+        //     productDescription: productRows[i].nextElementSibling.nextElementSibling.nextElementSibling.innerText
+        });
+    }
+
+    productRows.remove();
+    
+    var firstProductRow = $('#MainForm .v65-productDisplay .v65-productDisplay').find('tbody');
+
+    firstProductRow.prepend('<tr><td id="gfp-responsive-listing"></td></tr>');
+    var gfpResponsiveListing = $('#gfp-responsive-listing');
+
+    for (var i = 0; i < productsArray.length; i++) {
+        gfpResponsiveListing.append('<a href="' + productsArray[i].productLink + '" class="card"><img src="' + productsArray[i].productImage + '" alt="' + productsArray[i].productName + '"><h6>' + productsArray[i].productName + '</h6><p>' + productsArray[i].productPrice + '</p></a>');
+    }
+
+    // DYNAMIC ADMIN LINK
     // http://kyrep.fccmz.servertrust.com/admin/AdminDetails_Generic.asp?table=Categories&Page=1&ID=
     var catID = SearchParams.split('&')[2].substring(4);
     setTimeout(function() {

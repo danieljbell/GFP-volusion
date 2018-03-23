@@ -67,15 +67,9 @@
     display: none;
 }
 
-#MainForm .v65-productDisplay .v65-productDisplay tr {
-    // display: none;
-    // &:first-child {
-    //     display: table-row;
-    // }
-}
-
 #gfp-responsive-listing {
     display: grid;
+    grid-gap: 1.5rem;
     @include tablet {
         grid-template-columns: repeat(3, 1fr);
         grid-gap: 2rem;

@@ -23,44 +23,44 @@
     }
 }
 
-.breadcrumbs .colors_backgroundneutral {
-    background-color: #f0f0f0;
-    border: 1px solid $medium-gray;
-    padding: 1rem;
+// .breadcrumbs .colors_backgroundneutral {
+//     background-color: #f0f0f0;
+//     border: 1px solid $medium-gray;
+//     padding: 1rem;
 
-    font {
-        font-family: 'Open Sans', Helvetica, Arial, sans-serif;
-        font-size: 0.9rem;
-        line-height: 1.5;
-    }
+//     font {
+//         font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+//         font-size: 0.9rem;
+//         line-height: 1.5;
+//     }
 
-    img[src*="/v/vspfiles/templates/gfp-test/images/Bullet_SubCategory.gif"] {
-        display: none;
-    }
+//     img[src*="/v/vspfiles/templates/gfp-test/images/Bullet_SubCategory.gif"] {
+//         display: none;
+//     }
 
-    table:nth-child(2) table tbody {
-        display: flex;
-        flex-wrap: wrap;
+//     table:nth-child(2) table tbody {
+//         display: flex;
+//         flex-wrap: wrap;
         
-        tr {
-            flex-basis: 33%;
-        }
+//         tr {
+//             flex-basis: 33%;
+//         }
 
-        a {
-            text-decoration: none;
-            color: $brand;
-            &:hover {
-                text-decoration: underline;
-            }
-        }
+//         a {
+//             text-decoration: none;
+//             color: $brand;
+//             &:hover {
+//                 text-decoration: underline;
+//             }
+//         }
 
-    }
+//     }
 
-    .colors_backgroundlight {
-        display: none;
-    }
+//     .colors_backgroundlight {
+//         display: none;
+//     }
 
-}
+// }
 
 
 

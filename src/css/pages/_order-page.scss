@@ -1,0 +1,28 @@
+.order-page .hero {
+    position: absolute;
+    padding: 0 !important;
+    opacity: 0;
+    display: none;
+}
+
+.gfp-order-list ul {
+    list-style-type: none;
+}
+
+.gfp-order-list li {
+    border-bottom: 1px solid $medium-gray;
+    padding-top: 1em;
+    padding-bottom: 1em;
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    
+    &:first-child {
+        padding-top: 0;
+    }
+    
+    &:last-child {
+        border-bottom: 0;
+        padding-bottom: 0;
+    }
+
+}
