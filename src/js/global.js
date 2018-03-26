@@ -152,6 +152,21 @@ if (pagePath != '/') {
             $('body').prepend(adminLink);
         }
     }, 3000);
+    $('.current-special-offers-list').owlCarousel({
+        // loop:true,
+        margin: 10,
+        nav: false,
+        dots: true,
+        responsive: {
+            0: {
+                loop: true,
+                items: 1
+            },
+            1000: {
+                items: 3
+            }
+        }
+    });
 }
 
 
@@ -188,38 +203,46 @@ ORDERS PAGE
 =========================
 */
 if (pagePath === '/orders.asp') {
-    var allOrders = $('#content_area form .colors_lines_light .colors_backgroundneutral');
-    var cleanAllOrders = [];
-    
+
+    heroText = 'Your Orders'
+
+    updateHero(heroImg, heroText);
+
+    var allOrders = $('#content_area form .colors_lines_light tbody > .colors_backgroundneutral > td:last-child a');
+
     for (var i = 0; i < allOrders.length; i++) {
-        var allItemsInOrder = allOrders[i].querySelectorAll('td:nth-child(2) tr');
-        var itemRows = [];
+        var elem = allOrders[i];
+        elem.innerHTML = 'View Order';
+        elem.classList.add("btn-solid--brand-two");
+    }
 
-        for (var c = 1; c < allItemsInOrder.length; c++) {
-            console.log(allItemsInOrder[c].querySelector('a'));
-            // itemRows.push({
-            //     "itemLink": allItemsInOrder[c].querySelector('a').href
-            // });
-        }
-        // console.log(itemRows[i]);
+    // var cleanAllOrders = [];
+    
+    // for (var i = 0; i < allOrders.length; i++) {
+    //     var allItemsInOrder = allOrders[i].querySelectorAll('td:nth-child(2) tr');
+    //     var itemRows = [];
+
+    //     for (var c = 1; c < allItemsInOrder.length; c++) {
+    //         console.log(allItemsInOrder[c].querySelector('a'));
+    //         // itemRows.push({
+    //         //     "itemLink": allItemsInOrder[c].querySelector('a').href
+    //         // });
+    //     }
+    //     // console.log(itemRows[i]);
         
-        cleanAllOrders.push({
-            "orderMetaDetails": allOrders[i].querySelector('td').innerHTML,
-            "orderLink": allOrders[i].querySelector('td:last-child a').href,
-            "orderItems": itemRows[i]
-        });
-    }
+    //     cleanAllOrders.push({
+    //         "orderMetaDetails": allOrders[i].querySelector('td').innerHTML,
+    //         "orderLink": allOrders[i].querySelector('td:last-child a').href,
+    //         "orderItems": itemRows[i]
+    //     });
+    // }
 
-    // allOrders.remove();
+    // $('#content_area form').append('<div class="gfp-order-list"><ul></ul></div>');
+    // var gfpOrderList = $('.gfp-order-list ul');
 
-    // console.log(cleanAllOrders.length);
-
-    $('#content_area form').append('<div class="gfp-order-list"><ul></ul></div>');
-    var gfpOrderList = $('.gfp-order-list ul');
-
-    for (var i = 0; i < cleanAllOrders.length; i++) {
-        gfpOrderList.append('<li class="gfp-order-item"><div class="gfp-order-item--order-meta">' + cleanAllOrders[i].orderMetaDetails + '<br /><a href="' + cleanAllOrders[i].orderLink + '" class="mar-t btn-solid--brand-two">View Details</a></div><div class="gfp-order-item--order-items">' + cleanAllOrders[i].orderItems + '</div></li>');
-    }
+    // for (var i = 0; i < cleanAllOrders.length; i++) {
+    //     gfpOrderList.append('<li class="gfp-order-item"><div class="gfp-order-item--order-meta">' + cleanAllOrders[i].orderMetaDetails + '<br /><a href="' + cleanAllOrders[i].orderLink + '" class="mar-t btn-solid--brand-two">View Details</a></div><div class="gfp-order-item--order-items">' + cleanAllOrders[i].orderItems + '</div></li>');
+    // }
 
 }
 

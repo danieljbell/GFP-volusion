@@ -7,46 +7,22 @@
     top: -3rem;
     z-index: 4;
     padding: 2rem 3rem;
-    @include desktop {
-        overflow: scroll;
-    }
-}
-
-.current-special-offers-container ul {
-    list-style-type: none;
-    display: flex;
-    overflow: scroll;
-    position: relative;
-    left: -2rem;
-    width: calc(100% + 4rem);
-    padding: 0 2rem;
-    @include desktop {
-        justify-content: center;
-        left: auto;
-        width: auto;
-        padding: 0;
-        overflow: initial;
-    }
+    overflow: hidden;
+    // @include desktop {
+    //     overflow: scroll;
+    // }
 }
 
 .current-special-offers-item {
-    flex: 1;
     background-color: #fff;
     border: 1px solid $medium-gray;
     border-radius: 5px;
     padding: 1rem;
     position: relative;
     z-index: 1;
-    margin-right: 3rem;
-    min-width: 250px;
-    @include desktop {
-        min-width: 300px;
+    @include tablet {
+        margin: 0 1.75rem;
     }
-
-    &:last-child {
-        margin-right: 0;
-    }
-
 }
 
 .current-special-offers-item--title-container {
@@ -85,6 +61,7 @@
 
 .current-special-offers-item--title-container * {
     font-size: 1.3rem;
+    line-height: 1;
     text-transform: uppercase;
 }
 
@@ -99,11 +76,14 @@
     color: $brand;
     font-weight: bold;
     display: inline-block;
-    padding: 0.1rem 0.35rem;
+    padding: 0.2rem 0.35rem;
     box-shadow: -3px -3px 6px rgba(black,0.15);
     border-top-left-radius: 4px;
     border-top-right-radius: 4px;
-    font-size: 0.9em;
+    font-size: 0.7em;
+    @include tablet {
+        font-size: 0.9em;
+    }
     .current-special-offers-item:nth-child(2) & {
         background-color: $brand;
         color: #fff;
@@ -114,12 +94,14 @@
     background-color: $brand;
     color: #fff;
     display: inline-block;
-    padding: 0.15rem 0.5rem;
+    padding: 0.25rem 0.5rem;
     box-shadow: -3px 3px 6px rgba(black,0.15);
     border-top-right-radius: 4px;
     border-bottom-left-radius: 4px;
-    border-bottom-right-radius: 4px;
-    font-size: 1.3em;
+    border-bottom-right-radius: 4px;;
+    @include tablet {
+        font-size: 1.3em;
+    }
     .current-special-offers-item:nth-child(2) & {
         background-color: #fff;
         color: $brand;
@@ -162,4 +144,48 @@
         }
     }
 
+}
+
+
+// SLIDER STUFF
+.current-special-offers-container .owl-stage {
+    display: flex;
+    
+    .slide {
+        padding: 0 1rem;
+        @include tablet {
+            padding: 0;
+        }
+    }
+
+}
+
+.current-special-offers-container .owl-dots {
+    display: flex;
+    justify-content: center;
+    margin-top: 1.5rem;
+
+    button {
+        width: 15px;
+        height: 15px;
+        background-color: $medium-gray;
+        margin-right: 1rem;
+        border: 0;
+        border-radius: 50%;
+        
+        &:last-child {
+            margin-right: 0;
+        }
+
+        &.active {
+            background-color: $brand;
+        }
+
+    }
+
+}
+
+.owl-nav.disabled,
+.owl-dots.disabled {
+    display: none;
 }

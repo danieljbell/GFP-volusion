@@ -193,3 +193,8 @@ TYPOGRAPHY
 .ui-menu-item {
     max-width: 100% !important;
 }
+
+// make sure autocomplete is always at the top
+.ui-widget-content {
+    z-index: 999 !important;
+}

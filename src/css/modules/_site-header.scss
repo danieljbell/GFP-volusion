@@ -359,8 +359,8 @@
     padding: 2rem 0 1rem;
     @include desktop {
       padding-top: 0;
-      display: inline-block;
-      width: calc((100% / 3) - (1/3rem));
+      // display: inline-block;
+      flex-basis: calc((100% / 3) - (1/3rem));
       text-align: center;
     }
 
@@ -528,9 +528,13 @@ DESKTOP INTERACTIVITY
   .sub-menu--level-two {
     display: none;
     &.accordian-open {
-      display: block;
+      display: flex;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: repeat(auto-fit, 165px);
       overflow: scroll;
       text-align: left;
+      // max-height: 450px;
     }
   }
 
@@ -575,12 +579,12 @@ FIXED STYLES
     position: fixed;
 }
 
-.site-header-fixed .site-header .menu-item--logo-container img {
-  max-width: 125px;
-  @include desktop {
-    max-width: 225px;
-  }
-}
+// .site-header-fixed .site-header .menu-item--logo-container img {
+//   max-width: 125px;
+//   @include desktop {
+//     max-width: 225px;
+//   }
+// }
 
 .site-header-fixed .menu-item--logo-container a {
   padding: 0.75rem 0;
