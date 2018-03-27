@@ -152,21 +152,6 @@ if (pagePath != '/') {
             $('body').prepend(adminLink);
         }
     }, 3000);
-    $('.current-special-offers-list').owlCarousel({
-        // loop:true,
-        margin: 10,
-        nav: false,
-        dots: true,
-        responsive: {
-            0: {
-                loop: true,
-                items: 1
-            },
-            1000: {
-                items: 3
-            }
-        }
-    });
 }
 
 
@@ -175,7 +160,7 @@ if (pagePath != '/') {
 ACCOUNT LINKS PAGE
 =========================
 */
-if (pagePath === '/myaccount.asp') {
+if (pagePath === '/myaccount.asp') { 
 
     var accountPageContent = $('#content_area td');
     console.log(accountPageContent[0]);
@@ -675,18 +660,21 @@ function formatRelatedProducts() {
     var productImg = $('#related_products_content .v65-productPhoto');
 
     for (var i = 0; i < productTitles.length; i++) {
+        var imgPath = productImg[i].querySelector('img').src;
+        imgPath = imgPath.substring(0, imgPath.length - 6) + '-2T' + imgPath.substring(imgPath.length - 4);
+        // console.log(imgPath);
         cleanRelatedProducts.push({
             relatedProductTitle: productTitles[i].innerText,
             relatedProductPrice: productPrice[i].innerText,
-            relatedProductImg: productImg[i].querySelector('img').src,
+            relatedProductImg: imgPath,
             relatedProductLink: productImg[i].querySelector('a').href
         });
     }
 
-    $('#v65-product-related').before('<div class="slider--related-products"><h3 class="has-text-center mar-b">Products related to ' + pageTitle + '</h3><div class="site-width"><div class="slider"></div></div></div>');
+    $('#v65-product-related').before('<div class="slider--related-products"><h3 class="has-text-center mar-b">Products related to ' + pageTitle + '</h3><div class="slider"></div></div>');
     $('#v65-product-related').remove();
 
-    var sliderRelatedProducts = $('.slider--related-products .site-width > div');
+    var sliderRelatedProducts = $('.slider--related-products > div');
 
     for (var i = 0; i < cleanRelatedProducts.length; i++) {
         sliderRelatedProducts.append('<div><a href="' + cleanRelatedProducts[i].relatedProductLink + '"><img src="' + cleanRelatedProducts[i].relatedProductImg + '" />' + cleanRelatedProducts[i].relatedProductTitle + '</a></div>');

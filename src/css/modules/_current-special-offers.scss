@@ -6,7 +6,7 @@
     position: relative;
     top: -3rem;
     z-index: 4;
-    padding: 2rem 3rem;
+    padding: 2rem 2rem 2rem 1rem;
     overflow: hidden;
     // @include desktop {
     //     overflow: scroll;
@@ -148,44 +148,41 @@
 
 
 // SLIDER STUFF
-.current-special-offers-container .owl-stage {
-    display: flex;
-    
-    .slide {
-        padding: 0 1rem;
-        @include tablet {
-            padding: 0;
-        }
+.current-special-offers-container .slide {
+    padding: 0 2rem 1rem;
+    @include tablet {
+        padding: 0;
     }
-
 }
 
-.current-special-offers-container .owl-dots {
+.tns-outer {
+    display: flex;
+    flex-direction: column;
+}
+
+.tns-outer .tns-nav {
     display: flex;
     justify-content: center;
-    margin-top: 1.5rem;
-
-    button {
-        width: 15px;
-        height: 15px;
-        background-color: $medium-gray;
-        margin-right: 1rem;
-        border: 0;
-        border-radius: 50%;
-        
-        &:last-child {
-            margin-right: 0;
-        }
-
-        &.active {
-            background-color: $brand;
-        }
-
-    }
-
+    order: 2;
 }
 
-.owl-nav.disabled,
-.owl-dots.disabled {
+.tns-outer [aria-controls], 
+.tns-outer [data-action] {
+    margin-right: 1rem;
+    width: 15px;
+    height: 15px;
+    border: 0;
+    border-radius: 50%;
+    background-color: $medium-gray;
+    &:last-child {
+        margin-right: 0;
+    }
+    &.tns-nav-active {
+        background-color: $brand;
+    }
+}
+
+.tns-outer [data-action="stop"],
+.tns-outer [data-action="start"] {
     display: none;
 }

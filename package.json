@@ -23,6 +23,7 @@
     "owl.carousel": "^2.3.2",
     "postcss-import": "^11.1.0",
     "pump": "^3.0.0",
-    "slick-carousel": "^1.8.1"
+    "slick-carousel": "^1.8.1",
+    "tiny-slider": "^2.6.0"
   }
 }
