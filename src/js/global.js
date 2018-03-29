@@ -291,6 +291,8 @@ if ((typeof SearchParams !== 'undefined') && (pagePath != '/searchresults.asp'))
     }
 
     allSubCatLinks.first().closest('.colors_backgroundneutral').parent().prepend('<td class="gfp-clean-subcategories"><h2>Choose your model to see parts that fit your model</h2></td>');
+    $('.gfp-clean-subcategories').append(document.querySelector('.breadcrumbs select').outerHTML);
+    // console.log();
     // $('.gfp-clean-subcategories').siblings().remove();
 
 
