@@ -538,3 +538,7 @@ input[name="btncalc_shipping"] {
     display: inline-block;
     max-width: calc(50% - 0.5rem);
 }
+
+#v65-onepage-payment-details-parent-row #span_paymentfields_purchase_order_number .v65-payment-details-label-cell {
+    padding-right: 0.5rem;
+}

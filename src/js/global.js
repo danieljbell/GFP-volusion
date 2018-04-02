@@ -420,6 +420,8 @@ if (checkoutContainer.length > 0) {
     submitOrder.find('button').text('Place Order').addClass('btn-solid--brand-two');
     var placeOrder = submitOrder.html();
     submitOrder.remove();
+
+    $('#v65-onepage-payment-details-parent-row #span_paymentfields_purchase_order_number .v65-payment-details-label-cell').html('John Deere Financial/<br />John Deere CC Number');
     
 
     var orderCommentsElem = $('#v65-onepage-ordercomments-input');
@@ -547,6 +549,13 @@ if (document.body.classList.contains('single-product')) {
             window.addEventListener('scroll', fixProductFeatureImage);
         }
     }
+
+    var productDescription = $('#product_description');
+    if (productDescription.length > 0) {
+        $('.featured-content-container').append('<div class="gfp-product-description">' + productDescription.html() + '</div>');
+    }
+
+    console.log($('#Header_ProductDetail_TechSpecs').parent().parent().parent().parent().parent().parent().parent().remove());
 
 
 
