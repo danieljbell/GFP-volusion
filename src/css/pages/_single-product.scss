@@ -161,7 +161,15 @@
     }
 }
 
-.gfp-product-description {
+.featured-content-container {
     text-align: left;
+}
+
+.gfp-product-description,
+.gfp-product-tech-specs,
+.gfp-product-extinfo {
     margin-top: 2rem;
+    ul {
+        padding-left: 1rem;
+    }
 }

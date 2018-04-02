@@ -66,13 +66,17 @@ if (pagePath === '/searchresults.asp') {
     /* SET UP RESPONSIVE SEARCH RESULTS*/
     var productRows = $('#MainForm .v65-productDisplay .v65-productDisplay tr');
     var productsArray = [];
+
     for (var i = 0; i < productRows.length; i += 5) {
+        if (productRows[i].nextElementSibling.querySelector('div[itemprop="aggregateRating"]')) {
+            var productRating = productRows[i].nextElementSibling.querySelector('div[itemprop="aggregateRating"]').outerHTML;
+        }
         productsArray.push({
             productLink: productRows[i].querySelector('a').href,
             productImage: productRows[i].querySelector('img').src,
             productName: productRows[i].nextElementSibling.querySelector('a span').innerText,
             productPrice: productRows[i].nextElementSibling.querySelector('.product_productprice').innerText.split(' ')[1],
-            // productRating: productRows[i].nextElementSibling.querySelector('.vCSS_img_star_avg_rating').src || '',
+            productRating: productRating,
             productDescription: productRows[i].nextElementSibling.nextElementSibling.nextElementSibling.innerText
         });
     }
@@ -85,7 +89,9 @@ if (pagePath === '/searchresults.asp') {
     var gfpResponsiveListing = $('#gfp-responsive-listing');
 
     for (var i = 0; i < productsArray.length; i++) {
-        gfpResponsiveListing.append('<a href="' + productsArray[i].productLink + '" class="card"><img src="' + productsArray[i].productImage + '" alt="' + productsArray[i].productName + '"><h6>' + productsArray[i].productName + '</h6><p>' + productsArray[i].productPrice + '</p></a>');
+        var rating = productsArray[i].productRating;
+        if (typeof rating === 'undefined') { rating = ''; }
+        gfpResponsiveListing.append('<a href="' + productsArray[i].productLink + '" class="card"><img src="' + productsArray[i].productImage + '" alt="' + productsArray[i].productName + '"><h6>' + productsArray[i].productName + '</h6><p>' + productsArray[i].productPrice + '</p>' + rating + '</a>');
     }
 
 }
@@ -301,13 +307,15 @@ if ((typeof SearchParams !== 'undefined') && (pagePath != '/searchresults.asp'))
     var productRows = $('#MainForm .v65-productDisplay .v65-productDisplay > tbody > tr');
     var productsArray = [];
     for (var i = 0; i < productRows.length; i += 6) {
-        // console.log();
+        if (productRows[i].nextElementSibling.nextElementSibling.querySelector('div[itemprop="aggregateRating"]')) {
+            var productRating = productRows[i].nextElementSibling.nextElementSibling.querySelector('div[itemprop="aggregateRating"]').outerHTML;
+        }
         productsArray.push({
             productLink: productRows[i].querySelector('a').href,
             productImage: productRows[i].querySelector('img').src,
             productName: productRows[i].nextElementSibling.querySelector('a').innerText,
             productPrice: productRows[i].nextElementSibling.nextElementSibling.querySelector('.product_productprice').innerText.split(' ')[1],
-        //     productDescription: productRows[i].nextElementSibling.nextElementSibling.nextElementSibling.innerText
+            productRating: productRating
         });
     }
 
@@ -319,7 +327,9 @@ if ((typeof SearchParams !== 'undefined') && (pagePath != '/searchresults.asp'))
     var gfpResponsiveListing = $('#gfp-responsive-listing');
 
     for (var i = 0; i < productsArray.length; i++) {
-        gfpResponsiveListing.append('<a href="' + productsArray[i].productLink + '" class="card"><img src="' + productsArray[i].productImage + '" alt="' + productsArray[i].productName + '"><h6>' + productsArray[i].productName + '</h6><p>' + productsArray[i].productPrice + '</p></a>');
+        var rating = productsArray[i].productRating;
+        if (typeof rating === 'undefined') { rating = ''; }
+        gfpResponsiveListing.append('<a href="' + productsArray[i].productLink + '" class="card"><img src="' + productsArray[i].productImage + '" alt="' + productsArray[i].productName + '"><h6>' + productsArray[i].productName + '</h6><p>' + productsArray[i].productPrice + '</p>' + rating + '</a>');
     }
 
     // DYNAMIC ADMIN LINK
@@ -555,7 +565,19 @@ if (document.body.classList.contains('single-product')) {
         $('.featured-content-container').append('<div class="gfp-product-description">' + productDescription.html() + '</div>');
     }
 
-    console.log($('#Header_ProductDetail_TechSpecs').parent().parent().parent().parent().parent().parent().parent().remove());
+    var productTechSpecs = $('#ProductDetail_TechSpecs_div');
+    if (productTechSpecs.length > 0) {
+        $('.featured-content-container').append('<div class="gfp-product-tech-specs">' + productTechSpecs.html() + '</div>');
+    }
+
+    var productExtInfo = $('#ProductDetail_ExtInfo_div');
+    if (productExtInfo.length > 0) {
+        $('.featured-content-container').append('<div class="gfp-product-extinfo">' + productExtInfo.html() + '</div>');
+    }
+
+    var volustionTab = $('#ProductDetail_ProductDetails_div').parents('.colors_descriptionbox');
+    volustionTab.prev().remove()
+    volustionTab.remove();
 
 
 
