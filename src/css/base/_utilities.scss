@@ -166,6 +166,12 @@
     }
 }
 
+.mobile-only {
+    @include desktop {
+        display: none;
+    }
+}
+
 /*
 ====================
 TYPOGRAPHY

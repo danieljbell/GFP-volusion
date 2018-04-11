@@ -49,7 +49,7 @@
   position: absolute;
   left: 0;
   right: 0;
-  top: 5.2rem;
+  top: 5.1rem;
   z-index: 2;
   background-color: #fff;
   @include desktop {
@@ -541,6 +541,12 @@ DESKTOP INTERACTIVITY
 }
 
 
+.menu-item--menu-toggle {
+  position: relative;
+  right: -1rem;
+}
+
+
 
 
 /*
@@ -557,13 +563,25 @@ CART CONTAINER
 
   a {
     position: relative;
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  span {
+    font-weight: bold;
+    color: $brand;
   }
   
   strong {
     position: absolute;
-    top: -10px;
-    right: 0px;
     font-size: 1.25rem;
+    top: 0.5rem;
+    right: 1rem;
+    @include desktop {
+      top: -10px;
+    }
   }
 
 }
