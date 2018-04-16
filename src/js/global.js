@@ -296,8 +296,38 @@ if ((typeof SearchParams !== 'undefined') && (pagePath != '/searchresults.asp'))
         });
     }
 
-    allSubCatLinks.first().closest('.colors_backgroundneutral').parent().prepend('<td class="gfp-clean-subcategories"><h2>Choose your model to see parts that fit your model</h2></td>');
-    $('.gfp-clean-subcategories').append(document.querySelector('.breadcrumbs select').outerHTML);
+    allSubCatLinks.first().closest('.colors_backgroundneutral').parent().prev().html('<td class="gfp-clean-subcategories"><h2>Choose your model to see parts that fit your model</h2><select class="gfp-subcategories-select"><option>Choose Your Model</option></select></td>');
+
+    if ($('img[src="/v/vspfiles/templates/gfp-test/images/SearchResults_SubCat_Angle.gif"]').length > 0) {
+
+        $('img[src="/v/vspfiles/templates/gfp-test/images/SearchResults_SubCat_Angle.gif"]').parents('.colors_backgroundlight').addClass('remove-featured-cats-table').siblings().addClass('gfp-init-subcategories');
+
+        var subCatLinks = $('.gfp-init-subcategories a');
+
+        var subCatOptions = [];
+
+        for (var i = 0; i < subCatLinks.length; i++) {
+            subCatOptions.push({
+                subCatID: subCatLinks[i].href.substr(-7, 3),
+                subCatText: subCatLinks[i].innerText
+            });
+        }
+
+        for (var i = 0; i < subCatOptions.length; i++) {
+            $('.gfp-subcategories-select').append('<option value="' + subCatOptions[i].subCatID + '">' + subCatOptions[i].subCatText + '</option>');
+        }
+
+        $('.remove-featured-cats-table').parent().remove();
+
+        var catSelect = document.querySelector('.gfp-subcategories-select');
+        catSelect.addEventListener('change', function(e) {
+            var selectedCat = e.target.value;
+            window.location.href = '/-s/' + selectedCat + '.htm';
+        });
+
+    }
+
+    // $('.gfp-clean-subcategories').append(document.querySelector('.breadcrumbs select').outerHTML);
     // console.log();
     // $('.gfp-clean-subcategories').siblings().remove();
 
