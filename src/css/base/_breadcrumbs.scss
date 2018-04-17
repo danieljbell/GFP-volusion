@@ -1,6 +1,5 @@
 .breadcrumbs {
     margin-bottom: 2rem;
-    display: none;
     @include desktop {
         display: block;
         table,
@@ -21,6 +20,14 @@
             margin-left: -0.75rem;
         }
     }
+    
+    tr:first-child {
+        display: none;
+        @include desktop {
+            display: table-row;
+        }
+    }
+
 }
 
 // .breadcrumbs .colors_backgroundneutral {

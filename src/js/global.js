@@ -1,5 +1,15 @@
 // $('.search-bar-container input').focus();
 
+// $.ajax({
+//     url: window.location.domain + '/John-Deere-Lawn-Tractor-Parts-s/1.htm?searching=Y&sort=5&cat=1&show=15&page=1',
+//     dataType: 'html',
+//     success: function(html) {
+//         console.log(html);
+//         // var div = $('#sourceDiv', $(html)).addClass('done');
+//         // $('#targetDiv').html(div);
+//     }
+// });
+
 var siteHeaderHeight = $('.site-header').height();
 
 if ((typeof $('#content_area').find('.vcb-article')[0] !== 'undefined')) {
@@ -387,40 +397,48 @@ RESPONSIVE SHOPPING CART
 =========================
 */
 if ((pagePath === '/ShoppingCart.asp') || pagePath === '/shoppingcart.asp') {
-    var reCalcButton = $('#btnRecalculate');
-    var cartTotalContainer = $('#v65-cart-total-estimate td:first-child');
-    var cartTotalValue = cartTotalContainer.text().trim();
+    // var reCalcButton = $('#btnRecalculate');
+    // var couponInput = $('#v65-cart-coupon-entry-details-input');
+    // var couponButton = $('#v65-cart-coupon-entry-details-button');
+    // var cartTotalContainer = $('#v65-cart-total-estimate td:first-child');
+    // var cartTotalValue = cartTotalContainer.text().trim();
 
-    $('#v65-cart-shipping-details-wrapper').remove();
-    var shoppingCartForm = $('#v65-cart-table').parent('form');
-    var cartRows = document.querySelectorAll('#v65-cart-table .v65-cart-details-row');
-    var cleanCartRows = [];
+    // $('#v65-cart-shipping-details-wrapper').remove();
+    // var shoppingCartForm = $('#v65-cart-table').parent('form');
+    // var cartRows = document.querySelectorAll('#v65-cart-table .v65-cart-details-row');
+    // if (document.querySelectorAll('#v65-cart-table .v65-cart-giftcert-details-row')) {
+    //     console.log(document.querySelectorAll('#v65-cart-table .v65-cart-giftcert-details-row'));
+    // }
+    // var cleanCartRows = [];
 
-    for (var i = 0; i < cartRows.length; i++) {
-        var removeLink = cartRows[i].querySelector('.v65-cart-item-remove-link');
-        var productImage = cartRows[i].querySelector('.v65-cart-detail-productimage').innerHTML;
-        var productName = cartRows[i].querySelector('.v65-cart-details-text .cart-item-name');
-        var quantityInput = cartRows[i].querySelector('input[name*="Quantity"]');
-        var productPrice = cartRows[i].querySelector('td:nth-child(9) .carttext').innerText;
-        var sumPrice = cartRows[i].querySelector('td:nth-child(11) .carttext').innerText;
-        cleanCartRows.push({
-            removeLink: removeLink,
-            productImage: productImage,
-            productName: productName,
-            quantityInput: quantityInput,
-            productPrice: productPrice,
-            sumPrice: sumPrice
-        });
-    }
+    // console.log();
+    // console.log();
 
-    shoppingCartForm.prepend('<div id="gfp-responsive-cart"><table><thead><tr><th class="gfp-responsive-cart--product-image"></th><th class="gfp-responsive-cart--product-description">Item</th><th class="gfp-responsive-cart--unit-price">Unit Price</th><th class="gfp-responsive-cart--quantity">Quantity</th><th class="gfp-responsive-cart--unit-total">Total</th><th class="gfp-responsive-cart--remove-item"></th></tr></thead><tbody></tbody></table>' + '<p class="cart-subtotal"><strong>Order Subtotal: ' + cartTotalValue + '</strong></p>' + reCalcButton[0].outerHTML + '</div>');
+    // for (var i = 0; i < cartRows.length; i++) {
+    //     var removeLink = cartRows[i].querySelector('.v65-cart-item-remove-link');
+    //     var productImage = cartRows[i].querySelector('.v65-cart-detail-productimage').innerHTML;
+    //     var productName = cartRows[i].querySelector('.v65-cart-details-text .cart-item-name');
+    //     var quantityInput = cartRows[i].querySelector('input[name*="Quantity"]');
+    //     var productPrice = cartRows[i].querySelector('td:nth-child(9) .carttext').innerText;
+    //     var sumPrice = cartRows[i].querySelector('td:nth-child(11) .carttext').innerText;
+    //     cleanCartRows.push({
+    //         removeLink: removeLink,
+    //         productImage: productImage,
+    //         productName: productName,
+    //         quantityInput: quantityInput,
+    //         productPrice: productPrice,
+    //         sumPrice: sumPrice
+    //     });
+    // }
 
-    $('#v65-cart-table').remove();
+    // shoppingCartForm.prepend('<div id="gfp-responsive-cart"><table><thead><tr><th class="gfp-responsive-cart--product-image"></th><th class="gfp-responsive-cart--product-description">Item</th><th class="gfp-responsive-cart--unit-price">Unit Price</th><th class="gfp-responsive-cart--quantity">Quantity</th><th class="gfp-responsive-cart--unit-total">Total</th><th class="gfp-responsive-cart--remove-item"></th></tr></thead><tbody></tbody></table>' + '<p class="cart-subtotal"><strong>Order Subtotal: ' + cartTotalValue + '</strong></p>' + couponInput[0].outerHTML + couponButton[0].outerHTML + reCalcButton[0].outerHTML + '</div>');
 
-    for (var i = 0; i < cleanCartRows.length; i++) {
-        var cartTable = $('#gfp-responsive-cart tbody');
-        cartTable.append('<tr><td class="gfp-responsive-cart--product-image">' + cleanCartRows[i].productImage + '</td><td class="gfp-responsive-cart--product-description">' + cleanCartRows[i].productName.innerText + '</td><td class="gfp-responsive-cart--unit-price">' + cleanCartRows[i].productPrice + '</td><td class="gfp-responsive-cart--quantity">' + cleanCartRows[i].quantityInput.outerHTML + '</td><td class="gfp-responsive-cart--unit-total">' + cleanCartRows[i].sumPrice + '</td><td class="gfp-responsive-cart--remove-item">' + cleanCartRows[i].removeLink.outerHTML + '</td></tr>');
-    }
+    // $('#v65-cart-table').remove();
+
+    // for (var i = 0; i < cleanCartRows.length; i++) {
+    //     var cartTable = $('#gfp-responsive-cart tbody');
+    //     cartTable.append('<tr><td class="gfp-responsive-cart--product-image">' + cleanCartRows[i].productImage + '</td><td class="gfp-responsive-cart--product-description">' + cleanCartRows[i].productName.innerText + '</td><td class="gfp-responsive-cart--unit-price">' + cleanCartRows[i].productPrice + '</td><td class="gfp-responsive-cart--quantity">' + cleanCartRows[i].quantityInput.outerHTML + '</td><td class="gfp-responsive-cart--unit-total">' + cleanCartRows[i].sumPrice + '</td><td class="gfp-responsive-cart--remove-item">' + cleanCartRows[i].removeLink.outerHTML + '</td></tr>');
+    // }
 }
 
 
@@ -445,6 +463,17 @@ if (checkoutContainer.length > 0) {
     var shippingCostContent = $('#v65-onepage-ShippingCost')[0].outerHTML;
     var shippingTotals = $('#v65-onepage-ShippingCostParent').parent().html();
     var orderSummaryItems = $('#v65-onepage-ordersummary-items').parent().html();
+    var paymentContent = $('#v65-onepage-payment-details-parent-table')[0].outerHTML;
+    var paymentOptions = $('#PaymentDIV');
+    var noPaymentOptions = $('#NoPaymentDIV');
+    var showPaymentFields = noPaymentOptions.next();
+    var paymentMethodType = showPaymentFields.next();
+    var savedPaymentsBlock = paymentMethodType.next();
+    console.log(paymentOptions);
+    console.log(noPaymentOptions);
+    console.log(showPaymentFields);
+    console.log(paymentMethodType);
+    console.log(savedPaymentsBlock);
     if ($('#v65-onepage-RegistrationFormFields').length > 0) {
         var registrationPassword = $('#v65-onepage-RegistrationFormFields input[name="password"]').first().attr('id', 'password');
         registrationPassword = $('#v65-onepage-RegistrationFormFields input[name="password"]')[0].outerHTML;
@@ -454,25 +483,27 @@ if (checkoutContainer.length > 0) {
     $('#span_paymentfields_credit_card > table > tbody > tr:nth-child(6) td:first-child').remove();
     $('#span_paymentfields_credit_card > table > tbody > tr:nth-child(6) td:last-child').attr('colspan', '1');
     
-    $('#v65-checkout-payment-header').parent().remove();
+    // $('#v65-checkout-payment-header').parent().remove();
     var submitOrder = $('#divbtnSubmitOrder');
-    submitOrder.find('img').remove();
+    // submitOrder.find('img').remove();
     submitOrder.find('button').text('Place Order').addClass('btn-solid--brand-two');
     var placeOrder = submitOrder.html();
-    submitOrder.remove();
+    // submitOrder.remove();
 
     $('#v65-onepage-payment-details-parent-row #span_paymentfields_purchase_order_number .v65-payment-details-label-cell').html('John Deere Financial/<br />John Deere CC Number');
     
 
-    var orderCommentsElem = $('#v65-onepage-ordercomments-input');
-    orderCommentsElem.remove();
-    $('#v65-onepage-ordercomments-row').parent().parent().remove();
 
-    var paymentContent = $('#v65-onepage-payment-details-parent-table')[0].outerHTML;
+
+    var orderCommentsElem = $('#v65-onepage-ordercomments-input');
+    // orderCommentsElem.remove();
+    // $('#v65-onepage-ordercomments-row').parent().parent().remove();
+
+
     
 
-    checkoutContainer.remove();
-    $('#table_checkout_cart0').remove();
+    // checkoutContainer.remove();
+    // $('#table_checkout_cart0').remove();
 
     $('#FormatListofErrorsDiv').after('<div id="gfp-responsive-checkout"></div>');
 
@@ -483,33 +514,33 @@ if (checkoutContainer.length > 0) {
 
 
     
-    setUpResponsiveCheckout();
+    // setUpResponsiveCheckout();
 
     var termsLink = $('#articleBody_112').siblings('table').find('tr:first-child td:last-child a');
     var termsInput = $('input[name="Orders.Custom_Field_TermsofUse"]');
-    termsInput.parent().remove();
+    // termsInput.parent().remove();
     
     var termsStatement = $('#articleBody_112').siblings('table').find('tr:first-child td:first-child').html(termsInput[0].outerHTML + 'I agree to the <a href="' + termsLink.attr('href') + '" target="_blank" rel="noopener noreferrer">Terms and Conditions</a>');
 
-    termsLink.remove();
+    // termsLink.remove();
 
     var returnsLink = $('#articleBody_112').siblings('table').find('tr:last-child td:last-child a');
     var returnsInput = $('input[name="Orders.Custom_Field_AgreeReturns"]');
-    returnsInput.parent().remove();
+    // returnsInput.parent().remove();
 
     var returnsStatement = $('#articleBody_112').siblings('table').find('tr:last-child td:first-child').html(returnsInput[0].outerHTML + 'I accept the <a href="' + returnsLink.attr('href') + '" target="_blank" rel="noopener noreferrer">Returns and Shipping Policies</a>');
     
-    var orderTotalsContainer = document.querySelector('.order-totals-container');
-    var orderOffsetTop = orderTotalsContainer.offsetTop;
-    var checkoutWrapTop = $('#v65-onepage-ContentTable').offset().top + checkoutWrap.offsetTop;
-    var checkoutContainerWidth = checkoutWrap.querySelector('.order-totals-container').offsetWidth;
+    // var orderTotalsContainer = document.querySelector('.order-totals-container');
+    // var orderOffsetTop = orderTotalsContainer.offsetTop;
+    // var checkoutWrapTop = $('#v65-onepage-ContentTable').offset().top + checkoutWrap.offsetTop;
+    // var checkoutContainerWidth = checkoutWrap.querySelector('.order-totals-container').offsetWidth;
 
-    window.addEventListener('resize', function() {
-        checkoutContainerWidth = checkoutWrap.querySelector('.order-totals-container').offsetWidth;
-        checkoutWrapTop = $('#v65-onepage-ContentTable').offset().top + checkoutWrap.offsetTop;
-    });
+    // window.addEventListener('resize', function() {
+    //     checkoutContainerWidth = checkoutWrap.querySelector('.order-totals-container').offsetWidth;
+    //     checkoutWrapTop = $('#v65-onepage-ContentTable').offset().top + checkoutWrap.offsetTop;
+    // });
     
-    document.addEventListener('scroll', stickyCheckout);
+    // document.addEventListener('scroll', stickyCheckout);
 }
 
 
@@ -608,8 +639,6 @@ if (document.body.classList.contains('single-product')) {
     var volustionTab = $('#ProductDetail_ProductDetails_div').parents('.colors_descriptionbox');
     volustionTab.prev().remove()
     volustionTab.remove();
-
-
 
 }
 
@@ -807,7 +836,8 @@ function setUpResponsiveCheckout() {
     if (registrationPassword) {
         respCheckoutDetails.append('<section><h2>Create A Green Farm Parts Account</h2><p class="has-text-center mar-b font-shrink">Create an account today for quicker checkout on future orders, checking order status & tracking, and special offers sent via email</p><div class="form-group"><label for="password">Password</label>' + registrationPassword + '<button class="show-password">Show</button></div><div class="form-group"><label for="password-confirm">Confirm Password</label>' + registrationPasswordConfirm + '<button class="show-password">Show</button></div></section>');
     }
-    respCheckoutDetails.append('<section><h2>Payment Information</h2>' + paymentContent + '</section>');
+
+    respCheckoutDetails.append('<section><h2>Payment Information</h2>' + paymentOptions.html() + '</section>');
 
     respCheckout.append('<div class="order-totals"><section class="order-totals-container"><h2>Your Order</h2></section></div>');
 

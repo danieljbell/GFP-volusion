@@ -9,7 +9,7 @@
 #v65-cart-coupon-entry-details-div {
     display: flex;
     align-items: center;
-    text-align: left;
+    // text-align: left;
 
     img[src*="/a/i/blank.gif"] {
         display: none;
@@ -31,6 +31,7 @@
     width: 100%;
     max-width: 75px;
     margin-top: 0.5rem;
+    border: 0;
 }
 
 #btnRecalculate {
@@ -73,7 +74,8 @@
 }
 
 .v65-cart-details-row,
-.v65-cart-details-separator {
+.v65-cart-details-separator,
+.v65-cart-giftcert-details-row {
     > td:first-child {
         border-left: 1px solid $medium-gray;
     }
@@ -525,9 +527,9 @@ input[name="btncalc_shipping"] {
     width: 100% !important;
 }
 
-#v65-onepage-ordercomments-row {
-    display: none;
-}
+// #v65-onepage-ordercomments-row {
+//     display: none;
+// }
 
 #v65-onepage-ordercomments-input {
     padding: 0.25rem;

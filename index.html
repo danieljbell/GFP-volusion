@@ -17,21 +17,23 @@
         <!-- End Google Tag Manager -->
     </head>
     <body>
+        
+        <script>
+            if (document.scripts[0].src.match(/product_details/i)) {
+                document.body.classList.add('single-product');
+            }
+            if (window.location.pathname === '/myaccount.asp') {
+                document.body.classList.add('account-page');
+            }
+            if (window.location.pathname === '/orders.asp') {
+                document.body.classList.add('order-page');
+            }
+        </script>
+
         <!-- Google Tag Manager (noscript) -->
         <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NC24WMC"
         height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <!-- End Google Tag Manager (noscript) -->
-        <script>
-        if (document.scripts[0].src.match(/product_details/i)) {
-            document.body.classList.add('single-product');
-        }
-        if (window.location.pathname === '/myaccount.asp') {
-            document.body.classList.add('account-page');
-        }
-        if (window.location.pathname === '/orders.asp') {
-            document.body.classList.add('order-page');
-        }
-        </script>
 
         <!-- EYEBROW -->
         <section class="eyebrow">
@@ -687,7 +689,7 @@
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="/John-Deere-Snow-Blower-Hardware-s/763.htm">
+                                            <a href="/John-Deere-Snow-Blower-Hardware-s/773.htm">
                                                 <img src="/dist/img/product--snow-blower.png" alt="Snow Blower">
                                                 <h6>Snow Blowers</h6>
                                             </a>
@@ -1043,6 +1045,10 @@ host: "https://wchat.freshchat.com"
         });
     </script>
 </div>
+
+<!-- BEGIN VEXTRAS CODE-->
+    <script src="https://app.vextras.com/stores/store_YM8ZBDD5VHY86N2K49P2K7FZJ7/js/vextras.js"></script>
+<!-- END VEXTRAS CODE-->
 
 <!--CRITEO-->
 <script type="text/javascript" src="//static.criteo.net/js/ld/ld.js" async="true"></script>
