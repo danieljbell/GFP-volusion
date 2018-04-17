@@ -156,6 +156,7 @@
     .accordian-toggle--site-header {
       @include desktop {
         position: relative;
+        z-index: 15;
       }
     }
 
@@ -492,6 +493,7 @@ DESKTOP INTERACTIVITY
   
   .sub-menu--level-one {
     min-height: 450px;
+    z-index: 10;
 
     > li button {
       transition: none;

@@ -106,7 +106,7 @@
 #product_photo_zoom_url img {
     max-width: 100%;
     @include desktop {
-        max-width: unset;
+        max-width: 400px;
     }
 }
 

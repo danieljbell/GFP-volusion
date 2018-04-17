@@ -1,4 +1,4 @@
-$('.search-bar-container input').focus();
+// $('.search-bar-container input').focus();
 
 var siteHeaderHeight = $('.site-header').height();
 
@@ -296,7 +296,7 @@ if ((typeof SearchParams !== 'undefined') && (pagePath != '/searchresults.asp'))
         });
     }
 
-    allSubCatLinks.first().closest('.colors_backgroundneutral').parent().prev().html('<td class="gfp-clean-subcategories"><h2>Choose your model to see parts that fit your model</h2><select class="gfp-subcategories-select"><option>Choose Your Model</option></select></td>');
+    allSubCatLinks.first().closest('.colors_backgroundneutral').parent().prev().html('<td><div class="gfp-clean-subcategories"><h2>Choose your model to see parts that fit your model</h2><select class="gfp-subcategories-select"><option>Choose Your Model</option></select></div></td>');
 
     if ($('img[src="/v/vspfiles/templates/gfp-test/images/SearchResults_SubCat_Angle.gif"]').length > 0) {
 
@@ -308,7 +308,7 @@ if ((typeof SearchParams !== 'undefined') && (pagePath != '/searchresults.asp'))
 
         for (var i = 0; i < subCatLinks.length; i++) {
             subCatOptions.push({
-                subCatID: subCatLinks[i].href.substr(-7, 3),
+                subCatID: subCatLinks[i].href.split('/')[4].split('.')[0],
                 subCatText: subCatLinks[i].innerText
             });
         }
