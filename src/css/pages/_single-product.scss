@@ -15,10 +15,10 @@
     max-height: 30px;
 }
 
-#ProductDetail_TechSpecs_div,
-#ProductDetail_ExtInfo_div {
-    display: block !important;
-}
+// #ProductDetail_TechSpecs_div,
+// #ProductDetail_ExtInfo_div {
+//     display: block !important;
+// }
 
 .single-product #v65-productdetail-action-wrapper,
 .single-product #v65-productdetail-action-wrapper ~ td {
@@ -92,7 +92,8 @@
     margin-top: 1rem;
 }
 
-.single-product #Header_ProductDetail_ProductDetails {
+.single-product #Header_ProductDetail_ProductDetails,
+.single-product #Header_ProductDetail_TechSpecs {
     display: none;
 }
 
@@ -115,6 +116,9 @@
     @include tablet {
         display: table-cell;
         padding-top: 1rem;
+        &:first-child {
+            width: 350px;
+        }
     }
 }
 

@@ -1,0 +1,107 @@
+.article--talk-with-a-tech #content_area {
+    max-width: 600px;
+    margin: 0 auto;
+    font-size: 1.25rem;
+}
+
+.article--talk-with-a-tech #content_area .article-section {
+    background-color: $light-gray;
+    border: 1px solid $medium-gray;
+    padding: 1.5rem 2rem;
+    position: relative;
+    left: -2rem;
+    width: calc(100% + 4rem);
+    margin-bottom: 1.5rem;
+
+    *:last-child {
+        margin-bottom: 0;
+    }
+
+}
+
+.article--talk-with-a-tech #content_area .article-section img {
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    @include tablet {
+        float: right;
+        padding-left: 2rem;
+        margin-top: 0.25rem;
+    }
+}
+
+.article--talk-with-a-tech #content_area p {
+    margin-bottom: 1.5rem;
+}
+
+.article--talk-with-a-tech #content_area h3 {
+    border-bottom: 1px solid $medium-gray;
+    margin-bottom: 0.5rem;
+}
+
+.article--talk-with-a-tech #content_area .article-section.article-promo--brand-two {
+    background-color: $brand-two;
+    background-image: linear-gradient(135deg, rgba(black, 0.05), rgba(white, 0.25));
+    color: #fff;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+
+    h3 {
+        border-bottom: 0;
+    }
+
+    span {
+        font-size: 5rem;
+        display: block;
+        line-height: 0.8;
+        position: relative;
+        left: -8px;
+        letter-spacing: -4px;
+    }
+
+    img {
+        float: none;
+        display: block;
+        margin: 0 auto 0.5rem;
+        padding: 0;
+        max-width: 60px;
+        max-height: 60px;
+    }
+
+    .article-promo--headline {
+        display: flex;
+        align-items: center;
+    }
+
+    .article-promo--categories {
+        list-style-type: none;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-gap: 1rem;
+    }
+
+    .article-promo--content {
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .article-promo--category {
+        background-color: #fff;
+        padding: 0.5rem 1rem 1.5rem;
+        text-align: center;
+        color: $brand;
+        font-size: 0.8rem;
+    }
+
+    .article-promo--cta {
+        position: relative;
+        top: -1rem;
+        margin-bottom: -1rem;
+        padding-left: 2rem;
+        padding-right: 2rem;
+    }
+
+}

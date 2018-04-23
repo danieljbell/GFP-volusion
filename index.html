@@ -28,6 +28,9 @@
             if (window.location.pathname === '/orders.asp') {
                 document.body.classList.add('order-page');
             }
+            if (document.querySelector('meta[name="keywords"]').content.match('Talk')) {
+                document.body.classList.add('article--talk-with-a-tech');
+            }
         </script>
 
         <!-- Google Tag Manager (noscript) -->

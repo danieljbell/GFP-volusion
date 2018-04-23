@@ -1,10 +1,22 @@
 .search_results_section table:first-child td {
     width: 100%;
     display: block;
+    text-align: left;
     @include tablet {
         width: auto;
         display: table-cell;
+        text-align: unset;
     }
+    
+    select {
+        display: block;
+        width: 100%;
+        @include tablet {
+            display: inline-block;
+            width: auto;
+        }
+    }
+
 }
 
 .panel-body {

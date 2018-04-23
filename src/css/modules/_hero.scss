@@ -100,13 +100,17 @@
     background-image: linear-gradient(#fff, #fff);
     background-position: center right;
     box-shadow: inset 0 0 100px rgba(0, 0, 0, 0.2);
-    padding: 7rem 0 3rem;
+    padding: 3rem 0 3rem;
     @include tablet {
         padding: 5rem 0 4.5rem;
     }
 
     h1 {
         opacity: 0;
+    }
+
+    &:before {
+        z-index: -1;
     }
 
     &:after {

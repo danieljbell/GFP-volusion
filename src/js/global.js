@@ -1,15 +1,3 @@
-// $('.search-bar-container input').focus();
-
-// $.ajax({
-//     url: window.location.domain + '/John-Deere-Lawn-Tractor-Parts-s/1.htm?searching=Y&sort=5&cat=1&show=15&page=1',
-//     dataType: 'html',
-//     success: function(html) {
-//         console.log(html);
-//         // var div = $('#sourceDiv', $(html)).addClass('done');
-//         // $('#targetDiv').html(div);
-//     }
-// });
-
 var siteHeaderHeight = $('.site-header').height();
 
 if ((typeof $('#content_area').find('.vcb-article')[0] !== 'undefined')) {
@@ -296,6 +284,13 @@ CATEGORY LISTING
 =========================
 */
 if ((typeof SearchParams !== 'undefined') && (pagePath != '/searchresults.asp')) {
+    heroText = document.title;
+
+    updateHero(heroImg, heroText);
+
+
+    $('#content_area > table').first().hide();
+
     var allSubCatLinks = $('.subcategory_link');
     cleanSubCatLinks = [];
 
@@ -306,34 +301,43 @@ if ((typeof SearchParams !== 'undefined') && (pagePath != '/searchresults.asp'))
         });
     }
 
-    allSubCatLinks.first().closest('.colors_backgroundneutral').parent().prev().html('<td><div class="gfp-clean-subcategories"><h2>Choose your model to see parts that fit your model</h2><select class="gfp-subcategories-select"><option>Choose Your Model</option></select></div></td>');
+    var sortByContainer = $('#jmenuhide');
+
+    $('#SortBy')[0].addEventListener('change', function(e) {
+        var sortVal = e.target.value;
+        window.location.href = window.location.pathname + '?searching=Y&sort=' + sortVal + '&cat=2&show=15&page=1';
+    })
+
+    // allSubCatLinks.first().closest('.colors_backgroundneutral').parent().prev().html('<td><div class="gfp-clean-subcategories"><h2>Choose your model to see parts that fit your model</h2><select class="gfp-subcategories-select"><option>Choose Your Model</option></select></div></td>');
 
     if ($('img[src="/v/vspfiles/templates/gfp-test/images/SearchResults_SubCat_Angle.gif"]').length > 0) {
 
-        $('img[src="/v/vspfiles/templates/gfp-test/images/SearchResults_SubCat_Angle.gif"]').parents('.colors_backgroundlight').addClass('remove-featured-cats-table').siblings().addClass('gfp-init-subcategories');
+        $('img[src="/v/vspfiles/templates/gfp-test/images/SearchResults_SubCat_Angle.gif"]').parents('.colors_backgroundlight').addClass('remove-featured-cats-table');
 
-        var subCatLinks = $('.gfp-init-subcategories a');
+        // $('img[src="/v/vspfiles/templates/gfp-test/images/SearchResults_SubCat_Angle.gif"]').parents('.colors_backgroundlight').addClass('remove-featured-cats-table').siblings().addClass('gfp-init-subcategories');
 
-        var subCatOptions = [];
+        // var subCatLinks = $('.gfp-init-subcategories a');
 
-        for (var i = 0; i < subCatLinks.length; i++) {
-            subCatOptions.push({
-                subCatID: subCatLinks[i].href.split('/')[4].split('.')[0],
-                subCatText: subCatLinks[i].innerText
-            });
-        }
+        // var subCatOptions = [];
 
-        for (var i = 0; i < subCatOptions.length; i++) {
-            $('.gfp-subcategories-select').append('<option value="' + subCatOptions[i].subCatID + '">' + subCatOptions[i].subCatText + '</option>');
-        }
+        // for (var i = 0; i < subCatLinks.length; i++) {
+        //     subCatOptions.push({
+        //         subCatID: subCatLinks[i].href.split('/')[4].split('.')[0],
+        //         subCatText: subCatLinks[i].title
+        //     });
+        // }
+
+        // for (var i = 0; i < subCatOptions.length; i++) {
+        //     $('.gfp-subcategories-select').append('<option value="' + subCatOptions[i].subCatID + '">' + subCatOptions[i].subCatText + '</option>');
+        // }
 
         $('.remove-featured-cats-table').parent().remove();
 
-        var catSelect = document.querySelector('.gfp-subcategories-select');
-        catSelect.addEventListener('change', function(e) {
-            var selectedCat = e.target.value;
-            window.location.href = '/-s/' + selectedCat + '.htm';
-        });
+        // var catSelect = document.querySelector('.gfp-subcategories-select');
+        // catSelect.addEventListener('change', function(e) {
+        //     var selectedCat = e.target.value;
+        //     window.location.href = '/-s/' + selectedCat + '.htm';
+        // });
 
     }
 
@@ -346,18 +350,9 @@ if ((typeof SearchParams !== 'undefined') && (pagePath != '/searchresults.asp'))
     /* SET UP RESPONSIVE SEARCH RESULTS*/
     var productRows = $('#MainForm .v65-productDisplay .v65-productDisplay > tbody > tr');
     var productsArray = [];
-    for (var i = 0; i < productRows.length; i += 6) {
-        if (productRows[i].nextElementSibling.nextElementSibling.querySelector('div[itemprop="aggregateRating"]')) {
-            var productRating = productRows[i].nextElementSibling.nextElementSibling.querySelector('div[itemprop="aggregateRating"]').outerHTML;
-        }
-        productsArray.push({
-            productLink: productRows[i].querySelector('a').href,
-            productImage: productRows[i].querySelector('img').src,
-            productName: productRows[i].nextElementSibling.querySelector('a').innerText,
-            productPrice: productRows[i].nextElementSibling.nextElementSibling.querySelector('.product_productprice').innerText.split(' ')[1],
-            productRating: productRating
-        });
-    }
+
+    tileProducts(productRows);
+    
 
     productRows.remove();
     
@@ -371,6 +366,19 @@ if ((typeof SearchParams !== 'undefined') && (pagePath != '/searchresults.asp'))
         if (typeof rating === 'undefined') { rating = ''; }
         gfpResponsiveListing.append('<a href="' + productsArray[i].productLink + '" class="card"><img src="' + productsArray[i].productImage + '" alt="' + productsArray[i].productName + '"><h6>' + productsArray[i].productName + '</h6><p>' + productsArray[i].productPrice + '</p>' + rating + '</a>');
     }
+
+    var catID = window.location.pathname.split('.htm')[0].split('/')[2];
+
+    $.ajax({
+        url: window.location.origin + '/-s/' + catID + '.htm?searching=Y&sort=5&cat=1&show=15&page=2',
+        dataType: 'html',
+        success: function(html) {
+            tileProducts($(html).find('.v65-productDisplay .v65-productDisplay > tbody > tr'));
+        },
+        error: function(err) {
+            console.log(err);
+        }
+    });
 
     // DYNAMIC ADMIN LINK
     // http://kyrep.fccmz.servertrust.com/admin/AdminDetails_Generic.asp?table=Categories&Page=1&ID=
@@ -451,97 +459,97 @@ if ((pagePath === '/ShoppingCart.asp') || pagePath === '/shoppingcart.asp') {
 RESPONSIVE CHECKOUT
 =========================
 */
-var checkoutContainer = $('#v65-onepage-Detail');
-if (checkoutContainer.length > 0) {
-    var billingHeader = $('#billing-header').html();
-    var billingContent = $('#v65-onepage-BillingParent').html();
-    var shippingHeader = $('#shipping-header').html();
-    var shippingContent = $('#v65-onepage-ShippingParent').html();
-    var additionalInfoHeader = $('.v65-onepage-custom-header-row').html();
-    var additionalInfoContent = $('.v65-onepage-custom-details-row').html();
-    var shippingCostHeader = $('#v65-onepage-ShippingCostHeader').html();
-    var shippingCostContent = $('#v65-onepage-ShippingCost')[0].outerHTML;
-    var shippingTotals = $('#v65-onepage-ShippingCostParent').parent().html();
-    var orderSummaryItems = $('#v65-onepage-ordersummary-items').parent().html();
-    var paymentContent = $('#v65-onepage-payment-details-parent-table')[0].outerHTML;
-    var paymentOptions = $('#PaymentDIV');
-    var noPaymentOptions = $('#NoPaymentDIV');
-    var showPaymentFields = noPaymentOptions.next();
-    var paymentMethodType = showPaymentFields.next();
-    var savedPaymentsBlock = paymentMethodType.next();
-    console.log(paymentOptions);
-    console.log(noPaymentOptions);
-    console.log(showPaymentFields);
-    console.log(paymentMethodType);
-    console.log(savedPaymentsBlock);
-    if ($('#v65-onepage-RegistrationFormFields').length > 0) {
-        var registrationPassword = $('#v65-onepage-RegistrationFormFields input[name="password"]').first().attr('id', 'password');
-        registrationPassword = $('#v65-onepage-RegistrationFormFields input[name="password"]')[0].outerHTML;
-        var registrationPasswordConfirm = $('#v65-onepage-RegistrationFormFields input[name="passwordagain"]').first().attr('id', 'password-confirm');
-        registrationPasswordConfirm = $('#v65-onepage-RegistrationFormFields input[name="passwordagain"]')[0].outerHTML;
-    }
-    $('#span_paymentfields_credit_card > table > tbody > tr:nth-child(6) td:first-child').remove();
-    $('#span_paymentfields_credit_card > table > tbody > tr:nth-child(6) td:last-child').attr('colspan', '1');
+// var checkoutContainer = $('#v65-onepage-Detail');
+// if (checkoutContainer.length > 0) {
+//     var billingHeader = $('#billing-header').html();
+//     var billingContent = $('#v65-onepage-BillingParent').html();
+//     var shippingHeader = $('#shipping-header').html();
+//     var shippingContent = $('#v65-onepage-ShippingParent').html();
+//     var additionalInfoHeader = $('.v65-onepage-custom-header-row').html();
+//     var additionalInfoContent = $('.v65-onepage-custom-details-row').html();
+//     var shippingCostHeader = $('#v65-onepage-ShippingCostHeader').html();
+//     var shippingCostContent = $('#v65-onepage-ShippingCost')[0].outerHTML;
+//     var shippingTotals = $('#v65-onepage-ShippingCostParent').parent().html();
+//     var orderSummaryItems = $('#v65-onepage-ordersummary-items').parent().html();
+//     var paymentContent = $('#v65-onepage-payment-details-parent-table')[0].outerHTML;
+//     var paymentOptions = $('#PaymentDIV');
+//     var noPaymentOptions = $('#NoPaymentDIV');
+//     var showPaymentFields = noPaymentOptions.next();
+//     var paymentMethodType = showPaymentFields.next();
+//     var savedPaymentsBlock = paymentMethodType.next();
+//     console.log(paymentOptions);
+//     console.log(noPaymentOptions);
+//     console.log(showPaymentFields);
+//     console.log(paymentMethodType);
+//     console.log(savedPaymentsBlock);
+//     if ($('#v65-onepage-RegistrationFormFields').length > 0) {
+//         var registrationPassword = $('#v65-onepage-RegistrationFormFields input[name="password"]').first().attr('id', 'password');
+//         registrationPassword = $('#v65-onepage-RegistrationFormFields input[name="password"]')[0].outerHTML;
+//         var registrationPasswordConfirm = $('#v65-onepage-RegistrationFormFields input[name="passwordagain"]').first().attr('id', 'password-confirm');
+//         registrationPasswordConfirm = $('#v65-onepage-RegistrationFormFields input[name="passwordagain"]')[0].outerHTML;
+//     }
+//     $('#span_paymentfields_credit_card > table > tbody > tr:nth-child(6) td:first-child').remove();
+//     $('#span_paymentfields_credit_card > table > tbody > tr:nth-child(6) td:last-child').attr('colspan', '1');
     
-    // $('#v65-checkout-payment-header').parent().remove();
-    var submitOrder = $('#divbtnSubmitOrder');
-    // submitOrder.find('img').remove();
-    submitOrder.find('button').text('Place Order').addClass('btn-solid--brand-two');
-    var placeOrder = submitOrder.html();
-    // submitOrder.remove();
+//     // $('#v65-checkout-payment-header').parent().remove();
+//     var submitOrder = $('#divbtnSubmitOrder');
+//     submitOrder.find('img').remove();
+//     submitOrder.find('button').text('Place Order').addClass('btn-solid--brand-two');
+//     var placeOrder = submitOrder.html();
+//     submitOrder.remove();
 
-    $('#v65-onepage-payment-details-parent-row #span_paymentfields_purchase_order_number .v65-payment-details-label-cell').html('John Deere Financial/<br />John Deere CC Number');
-    
-
-
-
-    var orderCommentsElem = $('#v65-onepage-ordercomments-input');
-    // orderCommentsElem.remove();
-    // $('#v65-onepage-ordercomments-row').parent().parent().remove();
-
-
+//     // $('#v65-onepage-payment-details-parent-row #span_paymentfields_purchase_order_number .v65-payment-details-label-cell').html('John Deere Financial/<br />John Deere CC Number');
     
 
-    // checkoutContainer.remove();
-    // $('#table_checkout_cart0').remove();
 
-    $('#FormatListofErrorsDiv').after('<div id="gfp-responsive-checkout"></div>');
+
+//     var orderCommentsElem = $('#v65-onepage-ordercomments-input');
+//     orderCommentsElem.remove();
+//     $('#v65-onepage-ordercomments-row').parent().parent().remove();
 
 
     
-    var respCheckout = $('#gfp-responsive-checkout');
-    var checkoutWrap = document.querySelector('#gfp-responsive-checkout');
+
+//     checkoutContainer.hide();
+//     $('#table_checkout_cart0').remove();
+
+//     $('#FormatListofErrorsDiv').after('<div id="gfp-responsive-checkout"></div>');
 
 
     
-    // setUpResponsiveCheckout();
+//     var respCheckout = $('#gfp-responsive-checkout');
+//     var checkoutWrap = document.querySelector('#gfp-responsive-checkout');
 
-    var termsLink = $('#articleBody_112').siblings('table').find('tr:first-child td:last-child a');
-    var termsInput = $('input[name="Orders.Custom_Field_TermsofUse"]');
-    // termsInput.parent().remove();
+
     
-    var termsStatement = $('#articleBody_112').siblings('table').find('tr:first-child td:first-child').html(termsInput[0].outerHTML + 'I agree to the <a href="' + termsLink.attr('href') + '" target="_blank" rel="noopener noreferrer">Terms and Conditions</a>');
+//     setUpResponsiveCheckout();
 
-    // termsLink.remove();
-
-    var returnsLink = $('#articleBody_112').siblings('table').find('tr:last-child td:last-child a');
-    var returnsInput = $('input[name="Orders.Custom_Field_AgreeReturns"]');
-    // returnsInput.parent().remove();
-
-    var returnsStatement = $('#articleBody_112').siblings('table').find('tr:last-child td:first-child').html(returnsInput[0].outerHTML + 'I accept the <a href="' + returnsLink.attr('href') + '" target="_blank" rel="noopener noreferrer">Returns and Shipping Policies</a>');
+//     var termsLink = $('#articleBody_112').siblings('table').find('tr:first-child td:last-child a');
+//     var termsInput = $('input[name="Orders.Custom_Field_TermsofUse"]');
+//     termsInput.parent().remove();
     
-    // var orderTotalsContainer = document.querySelector('.order-totals-container');
-    // var orderOffsetTop = orderTotalsContainer.offsetTop;
-    // var checkoutWrapTop = $('#v65-onepage-ContentTable').offset().top + checkoutWrap.offsetTop;
-    // var checkoutContainerWidth = checkoutWrap.querySelector('.order-totals-container').offsetWidth;
+//     var termsStatement = $('#articleBody_112').siblings('table').find('tr:first-child td:first-child').html(termsInput[0].outerHTML + 'I agree to the <a href="' + termsLink.attr('href') + '" target="_blank" rel="noopener noreferrer">Terms and Conditions</a>');
 
-    // window.addEventListener('resize', function() {
-    //     checkoutContainerWidth = checkoutWrap.querySelector('.order-totals-container').offsetWidth;
-    //     checkoutWrapTop = $('#v65-onepage-ContentTable').offset().top + checkoutWrap.offsetTop;
-    // });
+//     termsLink.remove();
+
+//     var returnsLink = $('#articleBody_112').siblings('table').find('tr:last-child td:last-child a');
+//     var returnsInput = $('input[name="Orders.Custom_Field_AgreeReturns"]');
+//     returnsInput.parent().remove();
+
+//     var returnsStatement = $('#articleBody_112').siblings('table').find('tr:last-child td:first-child').html(returnsInput[0].outerHTML + 'I accept the <a href="' + returnsLink.attr('href') + '" target="_blank" rel="noopener noreferrer">Returns and Shipping Policies</a>');
     
-    // document.addEventListener('scroll', stickyCheckout);
-}
+//     var orderTotalsContainer = document.querySelector('.order-totals-container');
+//     var orderOffsetTop = orderTotalsContainer.offsetTop;
+//     var checkoutWrapTop = $('#v65-onepage-ContentTable').offset().top + checkoutWrap.offsetTop;
+//     var checkoutContainerWidth = checkoutWrap.querySelector('.order-totals-container').offsetWidth;
+
+//     window.addEventListener('resize', function() {
+//         checkoutContainerWidth = checkoutWrap.querySelector('.order-totals-container').offsetWidth;
+//         checkoutWrapTop = $('#v65-onepage-ContentTable').offset().top + checkoutWrap.offsetTop;
+//     });
+    
+//     document.addEventListener('scroll', stickyCheckout);
+// }
 
 
 
@@ -592,12 +600,14 @@ if (document.body.classList.contains('single-product')) {
 
     // GET THE CONTAINER AND DROP IN NEW CONTAINER BEFORE THE ELEMENT TO BE DELETED
     var relatedProductsContainer = $('#v65-product-parent').next().find('.colors_lines_light').first();
-    if (relatedProductsContainer[0].id !== 'v65-product-related') {
+    if (relatedProductsContainer[0] && relatedProductsContainer[0].id !== 'v65-product-related') {
         getRelatedProducts();
     }
     
 
     $('span[itemprop="description"]').prepend('<p class="h1">' + pageTitle + '</p>');
+
+    $('#v65-product-parent > tbody > tr:nth-child(2) > td:first-child').addClass('featured-image-parent').siblings().addClass('featured-content-container');
 
 
     var fitmentString = $('#ProductDetail_ProductDetails_div2 li');
@@ -615,7 +625,7 @@ if (document.body.classList.contains('single-product')) {
         formatRelatedProducts();
         var productFeatureImage = $('#product_photo_zoom_url').parent('td');
         productFeatureImage.addClass('featured-image-container');
-        $('#v65-product-parent > tbody > tr:nth-child(2) > td:first-child').addClass('featured-image-parent').siblings().addClass('featured-content-container');
+        
         if (productFeatureImage.length > 0) {
             window.addEventListener('scroll', fixProductFeatureImage);
         }
@@ -628,12 +638,38 @@ if (document.body.classList.contains('single-product')) {
 
     var productTechSpecs = $('#ProductDetail_TechSpecs_div');
     if (productTechSpecs.length > 0) {
-        $('.featured-content-container').append('<div class="gfp-product-tech-specs">' + productTechSpecs.html() + '</div>');
+
+        if (productTechSpecs.text().trim() !== "") {
+            var replacedBy = productTechSpecs.text().trim().split('This John Deere Part has been replaced by part number ')[1].split('-->');
+            if (productTechSpecs[0].textContent.trim() !== "") {
+                $('.featured-content-container').append('<div class="gfp-product-tech-specs"><h3>This John Deere Part has been replaced by part(s):</h3><hr><ul></ul></div>');
+                var replacedByList = $('.gfp-product-tech-specs ul');
+                for (var i = 0; i < replacedBy.length; i++) {
+                    replacedByList.append('<li><a href="/-p/' + replacedBy[i] + '.htm">' + replacedBy[i] + '</a></li>');
+                }
+            }
+        }
+
     }
 
     var productExtInfo = $('#ProductDetail_ExtInfo_div');
     if (productExtInfo.length > 0) {
-        $('.featured-content-container').append('<div class="gfp-product-extinfo">' + productExtInfo.html() + '</div>');
+        
+        if (productExtInfo.html().trim() !== "") {
+
+            var partSubs = productExtInfo.html().split('This John Deere Part replaces part number(s) ')[1].split('|');
+            var cleanPartSubs = [];
+            for (var i = 0; i < partSubs.length; i++) {
+                cleanPartSubs.push(partSubs[i].trim());
+            }
+            console.log(cleanPartSubs);
+            $('.featured-content-container').append('<div class="gfp-product-extinfo"><h3>This John Deere Part replaces part number(s):</h3><hr><ul></ul></div>');
+            var partSubsList = $('.gfp-product-extinfo ul');
+            for (var i = 0; i < cleanPartSubs.length; i++) {
+                partSubsList.append('<li>' + cleanPartSubs[i] + '</li>');
+            }
+        }
+
     }
 
     var volustionTab = $('#ProductDetail_ProductDetails_div').parents('.colors_descriptionbox');
@@ -642,6 +678,16 @@ if (document.body.classList.contains('single-product')) {
 
 }
 
+
+
+/*
+==========================
+ARTICLE - TALK WITH A TECH
+==========================
+*/
+if (document.body.classList.contains('article--talk-with-a-tech')) {
+    updateHero('url(/v/vspfiles/templates/gfp-test/img/hero--talk-with-a-tech.jpg)', document.title);
+}
 
 
 
@@ -678,6 +724,9 @@ function toggleChatWindow(e) {
 }
 
 function updateHero(heroImg, heroText) {
+    if (window.location.pathname === "/" || window.location.pathname === "/Default.asp") {
+        return;
+    }
     var heroContainer = document.querySelector('.hero--not-home');
     heroContainer.style.backgroundImage = heroImg;
     var heroHeading = heroContainer.querySelector('h1');
@@ -711,6 +760,7 @@ function getRelatedProducts() {
 
     var relatedProductPrice = relatedProducts.find('tr:nth-child(2) .product_productprice');
 
+
     // CLEAN THE IMAGE PATH TO GET BETTER RES
     var relatedProductImg = relatedProducts.find('tr:last-child .v65-productPhoto');
     for (var i = 0; i < relatedProductImg.length; i++) {
@@ -726,11 +776,15 @@ function getRelatedProducts() {
     // CREATE RELATED PRODUCT ARRAY
     var cleanAlternativeProducts = [];
     for (var i = 0; i < relatedProductTitle.length; i++) {
+        var hasPrice = '';
+        if (relatedProductPrice[i]) {
+            hasPrice = relatedProductPrice[i].innerText.trim();
+        }
         cleanAlternativeProducts.push({
             productTitle: relatedProductTitle[i].querySelector('a').innerHTML.trim(),
             productLink: relatedProductTitle[i].querySelector('a').href,
             productImg: relatedProductImg[i].querySelector('img').outerHTML,
-            productPrice: relatedProductPrice[i].innerText.trim()
+            productPrice: hasPrice
         });
     }
 
@@ -754,10 +808,15 @@ function formatRelatedProducts() {
     for (var i = 0; i < productTitles.length; i++) {
         var imgPath = productImg[i].querySelector('img').src;
         imgPath = imgPath.substring(0, imgPath.length - 6) + '-2T' + imgPath.substring(imgPath.length - 4);
-        // console.log(imgPath);
+        
+        var hasPrice = '';
+        if (productPrice[i]) {
+            var hasPrice = productPrice[i].innerText;
+        }
+
         cleanRelatedProducts.push({
             relatedProductTitle: productTitles[i].innerText,
-            relatedProductPrice: productPrice[i].innerText,
+            relatedProductPrice: hasPrice,
             relatedProductImg: imgPath,
             relatedProductLink: productImg[i].querySelector('a').href
         });
@@ -846,4 +905,25 @@ function setUpResponsiveCheckout() {
     respOrderTotalsContainer.append(orderSummaryItems, shippingCostContent);
     respOrderTotalsContainer.append('<p style="font-size: 0.85rem;">Order Comments: <em>(optional)</em></p>', orderCommentsElem);
     respOrderTotalsContainer.append('<table width="100%" class="agreements"><tbody><tr>' + additionalInfoContent + '</tr></tbody></table>', placeOrder);
+}
+
+function tileProducts(products) {
+    for (var i = 0; i < products.length; i += 6) {
+        if (products[i].nextElementSibling.nextElementSibling.querySelector('div[itemprop="aggregateRating"]')) {
+            var productRating = products[i].nextElementSibling.nextElementSibling.querySelector('div[itemprop="aggregateRating"]').outerHTML;
+        }
+
+        var hasPrice = '';
+        if (products[i].nextElementSibling.nextElementSibling.querySelector('.product_productprice')) {
+            hasPrice = products[i].nextElementSibling.nextElementSibling.querySelector('.product_productprice').innerText.split(' ')[1];
+        }
+
+        productsArray.push({
+            productLink: products[i].querySelector('a').href,
+            productImage: products[i].querySelector('img').src,
+            productName: products[i].nextElementSibling.querySelector('a').innerText,
+            productPrice: hasPrice,
+            productRating: productRating
+        });
+    }
 }
