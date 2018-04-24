@@ -167,7 +167,6 @@ ACCOUNT LINKS PAGE
 if (pagePath === '/myaccount.asp') { 
 
     var accountPageContent = $('#content_area td');
-    console.log(accountPageContent[0]);
     var accountWelcomeMessage = accountPageContent[0].innerHTML;
     var accountWelcomeMessageOpener = accountPageContent[0].querySelector('b').innerHTML;
     updateHero(heroImg, accountWelcomeMessageOpener);
@@ -368,17 +367,49 @@ if ((typeof SearchParams !== 'undefined') && (pagePath != '/searchresults.asp'))
     }
 
     var catID = window.location.pathname.split('.htm')[0].split('/')[2];
+    var offsetProducts = $('.results_per_page_select').val();
+    console.log(offsetProducts);
 
     $.ajax({
-        url: window.location.origin + '/-s/' + catID + '.htm?searching=Y&sort=5&cat=1&show=15&page=2',
+        url: window.location.origin + '/-s/' + catID + '.htm?searching=Y&sort=5&cat=1&show=' + offsetProducts + '&page=2',
         dataType: 'html',
         success: function(html) {
-            tileProducts($(html).find('.v65-productDisplay .v65-productDisplay > tbody > tr'));
+            // console.log(html);
+            // console.log($(html).find('.v65-productDisplay .v65-productDisplay > tbody > tr'));
+            tileProducts($(html).find('#MainForm .v65-productDisplay .v65-productDisplay > tbody > tr'));
         },
         error: function(err) {
             console.log(err);
         }
     });
+
+    gfpResponsiveListing.parent().parent().append('<tr><td><div class="has-text-center mar-t"><button id="loadMoreProducts" class="btn-solid--brand-two">Load More</button></div></td></tr>');
+    var loadMore = document.querySelector('#loadMoreProducts');
+    loadMore.addEventListener('click', loadMorePosts);
+
+    function loadMorePosts(e) {
+        var loadInt = 0;
+        var page = 2;
+        page++;
+        loadInt++;
+        $.ajax({
+            url: window.location.origin + '/-s/' + catID + '.htm?searching=Y&sort=5&cat=1&show=' + offsetProducts + '&page=' + page,
+            dataType: 'html',
+            success: function(html) {
+                tileProducts($(html).find('#MainForm .v65-productDisplay .v65-productDisplay > tbody > tr'));
+            },
+            error: function(err) {
+                console.log(err);
+            }
+        });
+        e.preventDefault();
+        for (var i = (offsetProducts * loadInt); i < productsArray.length; i++) {
+            console.log(i, (offsetProducts * loadInt));
+            var rating = productsArray[i].productRating;
+            if (typeof rating === 'undefined') { rating = ''; }
+            gfpResponsiveListing.append('<a href="' + productsArray[i].productLink + '" class="card"><img src="' + productsArray[i].productImage + '" alt="' + productsArray[i].productName + '"><h6>' + productsArray[i].productName + '</h6><p>' + productsArray[i].productPrice + '</p>' + rating + '</a>');
+        }
+    }
 
     // DYNAMIC ADMIN LINK
     // http://kyrep.fccmz.servertrust.com/admin/AdminDetails_Generic.asp?table=Categories&Page=1&ID=
@@ -662,7 +693,7 @@ if (document.body.classList.contains('single-product')) {
             for (var i = 0; i < partSubs.length; i++) {
                 cleanPartSubs.push(partSubs[i].trim());
             }
-            console.log(cleanPartSubs);
+            // console.log(cleanPartSubs);
             $('.featured-content-container').append('<div class="gfp-product-extinfo"><h3>This John Deere Part replaces part number(s):</h3><hr><ul></ul></div>');
             var partSubsList = $('.gfp-product-extinfo ul');
             for (var i = 0; i < cleanPartSubs.length; i++) {
@@ -840,7 +871,7 @@ function fixProductFeatureImage() {
     // GRABBING ELEMENTS AND DIMENSIONS
     var featuredImageParent = document.querySelector('.featured-image-parent');
     var featuredContentContainer = document.querySelector('.featured-content-container');
-    var elemWidth = featuredImageParent.offsetWidth;
+    var elemWidth = 400;
     var productOffset = productFeatureImage.offset().top;
     var featuredContentHeight = featuredContentContainer.offsetHeight;
     var featuredImageHeight = document.querySelector('.featured-image-container').offsetHeight;
