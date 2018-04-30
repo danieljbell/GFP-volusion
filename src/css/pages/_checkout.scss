@@ -126,7 +126,7 @@
     width: 100%;
 }
 
-#vcb-editable-116 {
+#div_articleid_116 {
     margin-bottom: 3rem;
     padding: 1.5rem;
     border-radius: 5px;
@@ -139,7 +139,7 @@
     }
 }
 
-#vcb-editable-116 ul {
+#div_articleid_116 ul {
     list-style-type: none;
 
     br {
@@ -543,4 +543,60 @@ input[name="btncalc_shipping"] {
 
 #v65-onepage-payment-details-parent-row #span_paymentfields_purchase_order_number .v65-payment-details-label-cell {
     padding-right: 0.5rem;
+}
+
+#loginModal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    max-width: 400px;
+    background-color: #fff;
+    padding: 1rem;
+    box-shadow: 0 0 25px rgba(black, 0.4);
+    z-index: 11;
+
+    .loginTitle {
+        font-weight: bold;
+        font-size: 1.2em;
+        margin-bottom: 0.5em;
+        text-align: center;
+    }
+
+    .loginForgotPassword {
+        text-align: right;
+        font-size: 0.8em;
+        margin: 0.5em 0 0;
+    }
+
+    .loginEmail input,
+    .loginPassword input {
+        width: 100%;
+    }
+
+    .loginButtons {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 1rem 0 0.5rem;
+        
+        a {
+            margin-right: 1rem;
+        }
+
+    }
+
+}
+
+.gfp-modal-open:after {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #000;
+    content: '';
+    opacity: 0.5;
+    z-index: 10;
 }

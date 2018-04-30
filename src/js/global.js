@@ -140,6 +140,21 @@ if (pagePath === '/one-page-checkout.asp') {
         } 
     });
 
+    document.addEventListener('click', function(e) {
+        if (e.target.id === 'headerLoginLink') {
+            var modalHTML = $('#loginTemplate');
+            $('body').toggleClass('gfp-modal-open').append(modalHTML.html());
+            $('#signInButton').addClass('btn-solid--brand');
+        }
+        if (e.target.id === 'cancelLoginButton' || e.target.parentElement.id === 'cancelLoginButton') {
+            $('body').toggleClass('gfp-modal-open');
+            $('#loginModal').remove();
+        }
+        if (e.target.id === 'loginForgotPassword' || e.target.parentElement.id === "loginForgotPassword") {
+            window.location = window.location.origin + '/login_sendpass.asp';
+        }
+    });
+
 }
 
 if (pagePath != '/') {
@@ -871,7 +886,7 @@ function fixProductFeatureImage() {
     // GRABBING ELEMENTS AND DIMENSIONS
     var featuredImageParent = document.querySelector('.featured-image-parent');
     var featuredContentContainer = document.querySelector('.featured-content-container');
-    var elemWidth = 400;
+    var elemWidth = 350;
     var productOffset = productFeatureImage.offset().top;
     var featuredContentHeight = featuredContentContainer.offsetHeight;
     var featuredImageHeight = document.querySelector('.featured-image-container').offsetHeight;
@@ -882,12 +897,12 @@ function fixProductFeatureImage() {
         document.body.classList.add('featured-image-fixed');
         featuredImageParent.style.transform = 'translateY(calc(' + siteHeaderHeight + 'px' + ' - 1rem)';
         featuredImageParent.style.maxWidth = elemWidth + 'px';
-        featuredContentContainer.style.paddingLeft = elemWidth + 'px';
+        featuredContentContainer.style.paddingLeft = 'calc(' + elemWidth + 'px + 1rem)';
     } else if (window.scrollY < siteHeaderHeight) {
         document.body.classList.remove('featured-image-fixed');
         featuredImageParent.style.transform = '';
         featuredImageParent.style.maxWidth = 'auto';
-        featuredContentContainer.style.paddingLeft = 0;
+        featuredContentContainer.style.paddingLeft = '1rem';
     } else if (window.scrollY > (siteHeaderHeight + (featuredContentHeight - featuredImageHeight))) {
         var negScroll = (window.scrollY - (featuredContentHeight - featuredImageHeight) - siteHeaderHeight);
         featuredImageParent.style.transform = 'translateY(calc(-' + negScroll + 'px + ' + siteHeaderHeight + 'px))';
