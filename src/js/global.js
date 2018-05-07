@@ -132,13 +132,13 @@ if (pagePath === '/one-page-checkout.asp') {
         "v65-cart-billemail"
     ];
 
-    document.addEventListener('keyup', function(e) {
-        if (billInputs.includes(e.target.id)) {
-            var self = e.target;
-            var val = self.value;
-            matchCheckoutInput(self, val);
-        } 
-    });
+    // document.addEventListener('keyup', function(e) {
+    //     if (billInputs.includes(e.target.id)) {
+    //         var self = e.target;
+    //         var val = self.value;
+    //         matchCheckoutInput(self, val);
+    //     } 
+    // });
 
     document.addEventListener('click', function(e) {
         if (e.target.id === 'headerLoginLink') {
