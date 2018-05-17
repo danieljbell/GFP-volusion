@@ -71,28 +71,16 @@
         width: 35vw;
     }
     margin: 0 auto;
-    &:before {
-        cursor: pointer;
-        position: absolute;
-        content: url('../img/search-icon.svg');
-        z-index: 1;
-        top: 50%;
-        right: 0;
-        transform: translateY(-50%) translateX(-12.5px);
-        width: 100%;
-        max-width: 25px;
-        max-height: 25px;
-    }
-    &:after {
-        cursor: pointer;
-        content: '';
+    input[type="image"] {
         position: absolute;
         top: 0;
-        bottom: 0;
         right: 0;
+        border: 0;
         background-color: $brand-two;
-        border-radius: 0 6px 6px 0;
-        width: 50px;
+        padding: 0.5rem;
+        max-width: 50px;
+        max-height: 2.5rem;
+        border-radius: 0 5px 5px 0;
     }
 }
 
