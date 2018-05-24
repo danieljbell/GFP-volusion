@@ -385,46 +385,46 @@ if ((typeof SearchParams !== 'undefined') && (pagePath != '/searchresults.asp'))
     var offsetProducts = $('.results_per_page_select').val();
     console.log(offsetProducts);
 
-    $.ajax({
-        url: window.location.origin + '/-s/' + catID + '.htm?searching=Y&sort=5&cat=1&show=' + offsetProducts + '&page=2',
-        dataType: 'html',
-        success: function(html) {
-            // console.log(html);
-            // console.log($(html).find('.v65-productDisplay .v65-productDisplay > tbody > tr'));
-            tileProducts($(html).find('#MainForm .v65-productDisplay .v65-productDisplay > tbody > tr'));
-        },
-        error: function(err) {
-            console.log(err);
-        }
-    });
+    // $.ajax({
+    //     url: window.location.origin + '/-s/' + catID + '.htm?searching=Y&sort=5&cat=1&show=' + offsetProducts + '&page=2',
+    //     dataType: 'html',
+    //     success: function(html) {
+    //         // console.log(html);
+    //         // console.log($(html).find('.v65-productDisplay .v65-productDisplay > tbody > tr'));
+    //         tileProducts($(html).find('#MainForm .v65-productDisplay .v65-productDisplay > tbody > tr'));
+    //     },
+    //     error: function(err) {
+    //         console.log(err);
+    //     }
+    // });
 
-    gfpResponsiveListing.parent().parent().append('<tr><td><div class="has-text-center mar-t"><button id="loadMoreProducts" class="btn-solid--brand-two">Load More</button></div></td></tr>');
-    var loadMore = document.querySelector('#loadMoreProducts');
-    loadMore.addEventListener('click', loadMorePosts);
+    // gfpResponsiveListing.parent().parent().append('<tr><td><div class="has-text-center mar-t"><button id="loadMoreProducts" class="btn-solid--brand-two">Load More</button></div></td></tr>');
+    // var loadMore = document.querySelector('#loadMoreProducts');
+    // loadMore.addEventListener('click', loadMorePosts);
 
-    function loadMorePosts(e) {
-        var loadInt = 0;
-        var page = 2;
-        page++;
-        loadInt++;
-        $.ajax({
-            url: window.location.origin + '/-s/' + catID + '.htm?searching=Y&sort=5&cat=1&show=' + offsetProducts + '&page=' + page,
-            dataType: 'html',
-            success: function(html) {
-                tileProducts($(html).find('#MainForm .v65-productDisplay .v65-productDisplay > tbody > tr'));
-            },
-            error: function(err) {
-                console.log(err);
-            }
-        });
-        e.preventDefault();
-        for (var i = (offsetProducts * loadInt); i < productsArray.length; i++) {
-            console.log(i, (offsetProducts * loadInt));
-            var rating = productsArray[i].productRating;
-            if (typeof rating === 'undefined') { rating = ''; }
-            gfpResponsiveListing.append('<a href="' + productsArray[i].productLink + '" class="card"><img src="' + productsArray[i].productImage + '" alt="' + productsArray[i].productName + '"><h6>' + productsArray[i].productName + '</h6><p>' + productsArray[i].productPrice + '</p>' + rating + '</a>');
-        }
-    }
+    // function loadMorePosts(e) {
+    //     var loadInt = 0;
+    //     var page = 2;
+    //     page++;
+    //     loadInt++;
+    //     $.ajax({
+    //         url: window.location.origin + '/-s/' + catID + '.htm?searching=Y&sort=5&cat=1&show=' + offsetProducts + '&page=' + page,
+    //         dataType: 'html',
+    //         success: function(html) {
+    //             tileProducts($(html).find('#MainForm .v65-productDisplay .v65-productDisplay > tbody > tr'));
+    //         },
+    //         error: function(err) {
+    //             console.log(err);
+    //         }
+    //     });
+    //     e.preventDefault();
+    //     for (var i = (offsetProducts * loadInt); i < productsArray.length; i++) {
+    //         console.log(i, (offsetProducts * loadInt));
+    //         var rating = productsArray[i].productRating;
+    //         if (typeof rating === 'undefined') { rating = ''; }
+    //         gfpResponsiveListing.append('<a href="' + productsArray[i].productLink + '" class="card"><img src="' + productsArray[i].productImage + '" alt="' + productsArray[i].productName + '"><h6>' + productsArray[i].productName + '</h6><p>' + productsArray[i].productPrice + '</p>' + rating + '</a>');
+    //     }
+    // }
 
     // DYNAMIC ADMIN LINK
     // http://kyrep.fccmz.servertrust.com/admin/AdminDetails_Generic.asp?table=Categories&Page=1&ID=
