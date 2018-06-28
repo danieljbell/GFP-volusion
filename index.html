@@ -17,6 +17,23 @@
         <!-- End Google Tag Manager -->
     </head>
     <body>
+
+        <div class="alert alert--is-not-active">
+            <button class="alert--close"><img src="/dist/img/icon-close.svg" alt="Close"></button>
+            <div class="alert--content">
+                <img src="http://greenfarmparts.com/v/vspfiles/photos/uploads/Belts-Blades.jpg" alt="Fathers Day Savings" class="alert--hero">
+                <p>Save now thru the end of the month on all belts & blades.</p>
+                <div class="mar-y" style="display: table; width: 100%;">
+                    <div style="text-align: center; display: table-cell;">
+                        <a href="https://www.greenfarmparts.com/John-Deere-Lawn-Mower-Blades-s/636.htm" class="btn-solid--brand" id="blade-promo" style="font-size: 0.85rem; padding: 0.6em 1em;">Shop 660 Blades</a>
+                    </div>
+                    <div style="text-align: center; display: table-cell;">
+                        <a href="https://www.greenfarmparts.com/John-Deere-Belts-s/645.htm" class="btn-solid--brand" id="belt-promo" style="font-size: 0.85rem; padding: 0.6em 1em;">Shop 3,619 Belts</a>
+                    </div>
+                </div>
+                <p class="timeLeft" style="color: red;">Offer Expires <span id="timeLeftRed">Tuesday 19th</span></p>
+            </div>
+        </div>
         
         <script>
             if (document.scripts[0].src.match(/product_details/i)) {
@@ -43,12 +60,11 @@
             <div class="site-width">
                 <ul class="eyebrow-links">
                     <li><a href="#0">Free Shipping &amp; Lowest prices</a></li>
-                    <li><a href="tel:877-620-6070">877-620-6070</a></li>
                     <li><a href="#chat">Click to Chat</a></li>
+                    <li><a href="/John-Deere-Parts-Coupons-s/453.htm">Quick Order</a></li>
                     <li><a href="/John-Deere-Parts-Coupons-s/453.htm">Coupons</a></li>
                     <li><a href="#0">Clearance</a></li>
                     <li><a href="/orders.asp">Order Status</a></li>
-                    <li><a class="utility-link text-uppercase" href="/myaccount.asp">Account</a></li>
                 </ul>
             </div>
         </section>
@@ -852,17 +868,17 @@
         <main>
             <!-- HERO BANNER -->
             <div id="if_homepage">
-                <section class="hero" style="background-image: url(/dist/img/hero--homepage.jpg);">
+                <!-- <section class="hero" style="background-image: url(/dist/img/hero--homepage.jpg);">
                     <div class="site-width">
                         <h1>Let Us Help You Find What You Are Looking For</h1>
                         <!-- SEARCH BAR -->
-                        <form action="/searchresults.asp" method="get" name="SearchBoxForm">
+                        <!-- <form action="/searchresults.asp" method="get" name="SearchBoxForm">
                             <input placeholder="Search by Keyword, Part or Model" type="search" name="Search">
                             <input type="image" alt="Search" src="/dist/img/search-icon.svg">
                         </form>
                     </div>
-                </section>
-                <section class="current-special-offers">
+                </section> -->
+                <!-- <section class="current-special-offers">
                     <div class="site-width">
                         <div class="current-special-offers-container">
                             <h2 class="has-text-center mar-b">Current Special Offers</h2>
@@ -918,9 +934,9 @@
                             </div>
                         </div>
                     </div>
-                </section>
+                </section> -->
             </div>
-            <div id="if_not_homepage">
+            <!-- <div id="if_not_homepage">
                 <section class="hero hero--not-home">
                     <div class="site-width">
                         <h1>Green Farm Parts</h1>
@@ -934,7 +950,96 @@
                         
                     </div>
                 </div>
+            </section> -->
+            
+
+
+            <section class="hero hero--not-home" style="background-image: url(//source.unsplash.com/1440x300)">
+                <div class="site-width">
+                    <h1 style="opacity: 1;">Quick Parts Order</h1>
+                    <h2 style="text-shadow: 1px 1px 4px rgba(0,0,0,0.5); max-width: 700px; margin-left: auto; margin-right: auto;">Already know the parts you need and need to get more than one? You're in the right place.</h2>
+                </div>
             </section>
+
+            <section class="pad-y--most">
+                <div class="site-width">
+                    <h2 class="has-text-center" style="font-weight: normal; font-size: 1rem;">Fill out the form below to populate your cart with all the parts and quantities you need.</h2>
+                    <form action="/shoppingcart.asp" method="GET" id="queryBuilder">
+                        <div class="products pad-y">
+                            <div class="form-group" style="text-align: center;">
+                                <label>Product Code</label>
+                                <input type="text" name="productcode">
+                                <label style="margin-left: 0.5rem;">Product Quantity</label>
+                                <input type="number" name="QTY" value="1" min="1" class="has-text-center" style="width: 3rem;">
+                                <button class="addProduct btn-solid--brand-two" style="margin-left: 0.5rem;">Add Product</button>
+                            </div>
+                        </div>
+                        <div class="has-text-center" style="padding: 2rem 1rem; border: 1px solid #ccc; background-color: #f0f0f0;">
+                            <h2>Products Added</h2>
+                            <p class="empty-state">No Products Currently Added</p>
+                            <div class="products--added pad-y"></div>
+                            <input type="submit" value="Checkout" class="btn-solid--brand">
+                        </div>
+                    </form>
+                    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+                    <script>
+                        var queryBuildForm = $('#queryBuilder');
+                        var queryBuildFormGroup = $('.addProduct');
+                        var queryBuildFormTemplate = document.querySelector('.products .form-group').outerHTML;
+                        var queryBuildAddedProduct = $('.products--added');
+
+                        queryBuildForm.on('click', 'button', function(e) {
+                            e.preventDefault();
+                            if (!e.target.classList.contains('addProduct')) {
+                                e.target.parentElement.remove();
+                                return;
+                            }
+                            var queryInput = $(this).parent('.form-group').html();
+                            var product = $(this).siblings('input[name=productcode]').val();
+                            var quantity = $(this).siblings('input[name=QTY]').val();
+                            queryBuildAddedProduct.append('<div class="form-group" style="display: inline-block; width: 100%; padding-bottom: 0.5rem;"><label style="margin-right: 0.25rem;">Product Code</label><input type="text" name="productcode" value="' + product + '"><label style="margin-left: 0.5rem; margin-right: 0.5rem;">Product Quantity</label><input type="number" name="QTY" value="' + quantity + '" min="1" class="has-text-center" style="width: 3rem;"><button class="removeProduct" style="padding: 0.25rem 0.5rem; font-family: inherit; font-size: 1rem; color: green; background-color: transparent; border: 1px solid green; border-radius: 4px; margin-left: 0.5rem;">Remove Product</button><span class="itemPrice" style="padding-left: 0.5rem;"></span></div>');
+                            $.ajax({
+                                url: '/-p/' + product + '.htm',
+                                dataType: 'text',
+                                beforeSend: function() {
+                                    $('#queryBuilder .products--added .form-group .itemPrice').last().html('<img src="/v/vspfiles/templates/gfp-test/images/preparing_pleasewait.gif" style="vertical-align: middle; display: inline-block; height: 30px;">');
+                                },
+                                success: function(data) {
+                                    var prodPrice = $($.parseHTML(data)).find('[itemprop="price"]').attr('content');
+                                    $('#queryBuilder .products--added .form-group .itemPrice').last().html('Unit Price: $' + prodPrice);
+                                },
+                                error: function() {
+                                    console.log('error');
+                                }
+                            });
+                            $(this).siblings('input[name=productcode]').val('');
+                            $(this).siblings('input[name=QTY]').val('1');
+                            $('.empty-state').remove();
+                        });
+                        queryBuildForm.on('submit', function(e) {
+                            e.preventDefault();
+                            var product = document.querySelectorAll('.products--added input[name=productcode]');
+                            var quantity = document.querySelectorAll('.products--added input[name=QTY]');
+                            var queryBuildString = '?';
+                            for (var i = 0; i < product.length; i++) {
+                                if (queryBuildString === '?') {
+                                    queryBuildString = queryBuildString + 'productcode=' + product[i].value + '&QTY.' + product[i].value + '=' + quantity[i].value;
+                                } else {
+                                    queryBuildString = queryBuildString + '&productcode=' + product[i].value + '&QTY.' + product[i].value + '=' + quantity[i].value;
+                                }
+                            }
+                            window.location = window.origin + '/shoppingcart.asp' + queryBuildString;
+                        });
+                    </script>
+                </div>
+            </section>
+
+
+
+
+
+
+
         </main>
         <footer class="site-footer">
             <div class="site-width">
@@ -1017,10 +1122,11 @@
 </footer>
 
 <!--THEME JAVASCRIPT-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.1/moment.min.js"></script>
 <script src="/dist/js/global.js" id="gfp-script"></script>
 
 <!--MAILCHIMP INTEGRATION-->
-<script id="mcjs">!function(c,h,i,m,p){m=c.createElement(h),p=c.getElementsByTagName(h)[0],m.async=1,m.src=i,p.parentNode.insertBefore(m,p)}(document,"script","https://chimpstatic.com/mcjs-connected/js/users/c80372a35929a7b281b76c090/2af119c88cb756bcfcb2096bf.js");</script>
+<!-- <script id="mcjs">!function(c,h,i,m,p){m=c.createElement(h),p=c.getElementsByTagName(h)[0],m.async=1,m.src=i,p.parentNode.insertBefore(m,p)}(document,"script","https://chimpstatic.com/mcjs-connected/js/users/c80372a35929a7b281b76c090/2af119c88cb756bcfcb2096bf.js");</script> -->
 
 <!--FRESHCHAT-->
 <script src="https://wchat.freshchat.com/js/widget.js"></script>

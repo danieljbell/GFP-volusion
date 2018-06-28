@@ -32,8 +32,23 @@ if (breadcrumbs) {
 }
 
 
+if (pagePath.match(/articles/i) && window.location.search.includes('ID=305')) {
+    // heroImg = 'url(/v/vspfiles/templates/gfp-test/img/hero--filters.jpg)';
+    heroText = 'Quick Parts Order Form<span style="display: block; font-size: 1.2rem;">Already know the parts you need and need to get more than one?<br/>You\'re in the right place.</span>';
+}
+
+if (pagePath.match(/articles/i) && window.location.search.includes('ID=287')) {
+    // heroImg = 'url(/v/vspfiles/templates/gfp-test/img/hero--filters.jpg)';
+    heroText = 'Parts Diagram Explorer';
+}
+
 if (pagePath.match(/Filters/i)) {
     heroImg = 'url(/v/vspfiles/templates/gfp-test/img/hero--filters.jpg)';
+    // heroText = 'Oil Filters';
+}
+
+if (pagePath.match(/Clearance/i)) {
+    heroImg = 'url(/v/vspfiles/templates/gfp-test/img/hero--clearance.jpg)';
     // heroText = 'Oil Filters';
 }
 
@@ -45,6 +60,10 @@ if (pagePath.match(/Maintenance-Kits/i)) {
 if (pagePath.match(/Toys/i)) {
     heroImg = 'url(/v/vspfiles/templates/gfp-test/img/hero--toys.jpg)';
     // heroText = 'Toys';
+}
+
+if (pagePath === '/Articles.asp' && window.location.search === '?ID=305') {
+    heroText = 'Quick Parts Order';
 }
 
 if (pagePath === '/searchresults.asp') {
@@ -119,18 +138,22 @@ if (pagePath === '/terms.asp') {
 if (pagePath === '/one-page-checkout.asp') {
     heroText = 'Checkout';
 
-    var billInputs = [
-        "v65-onepage-billfirstname",
-        "v65-onepage-billlastname",
-        "v65-onepage-billcompanyname",
-        "v65-onepage-billaddr1",
-        "v65-onepage-billaddr2",
-        "v65-onepage-billcity",
-        "v65-onepage-billpostalcode",
-        "v65-onepage-billphone",
-        "v65-onepage-billfax",
-        "v65-cart-billemail"
-    ];
+    if (getCookie('Session%5FToken4Checkout')) {
+        $('#div_articleid_116').remove();
+    }
+
+    // var billInputs = [
+    //     "v65-onepage-billfirstname",
+    //     "v65-onepage-billlastname",
+    //     "v65-onepage-billcompanyname",
+    //     "v65-onepage-billaddr1",
+    //     "v65-onepage-billaddr2",
+    //     "v65-onepage-billcity",
+    //     "v65-onepage-billpostalcode",
+    //     "v65-onepage-billphone",
+    //     "v65-onepage-billfax",
+    //     "v65-cart-billemail"
+    // ];
 
     // document.addEventListener('keyup', function(e) {
     //     if (billInputs.includes(e.target.id)) {
@@ -140,20 +163,20 @@ if (pagePath === '/one-page-checkout.asp') {
     //     } 
     // });
 
-    document.addEventListener('click', function(e) {
-        if (e.target.id === 'headerLoginLink') {
-            var modalHTML = $('#loginTemplate');
-            $('body').toggleClass('gfp-modal-open').append(modalHTML.html());
-            $('#signInButton').addClass('btn-solid--brand');
-        }
-        if (e.target.id === 'cancelLoginButton' || e.target.parentElement.id === 'cancelLoginButton') {
-            $('body').toggleClass('gfp-modal-open');
-            $('#loginModal').remove();
-        }
-        if (e.target.id === 'loginForgotPassword' || e.target.parentElement.id === "loginForgotPassword") {
-            window.location = window.location.origin + '/login_sendpass.asp';
-        }
-    });
+    // document.addEventListener('click', function(e) {
+    //     if (e.target.id === 'headerLoginLink') {
+    //         var modalHTML = $('#loginTemplate');
+    //         $('body').toggleClass('gfp-modal-open').append(modalHTML.html());
+    //         $('#signInButton').addClass('btn-solid--brand');
+    //     }
+    //     if (e.target.id === 'cancelLoginButton' || e.target.parentElement.id === 'cancelLoginButton') {
+    //         $('body').toggleClass('gfp-modal-open');
+    //         $('#loginModal').remove();
+    //     }
+    //     if (e.target.id === 'loginForgotPassword' || e.target.parentElement.id === "loginForgotPassword") {
+    //         window.location = window.location.origin + '/login_sendpass.asp';
+    //     }
+    // });
 
 }
 
@@ -375,15 +398,22 @@ if ((typeof SearchParams !== 'undefined') && (pagePath != '/searchresults.asp'))
     firstProductRow.prepend('<tr><td id="gfp-responsive-listing"></td></tr>');
     var gfpResponsiveListing = $('#gfp-responsive-listing');
 
+    var catID = window.location.pathname.split('.htm')[0].split('/')[2];
+    
     for (var i = 0; i < productsArray.length; i++) {
         var rating = productsArray[i].productRating;
         if (typeof rating === 'undefined') { rating = ''; }
-        gfpResponsiveListing.append('<a href="' + productsArray[i].productLink + '" class="card"><img src="' + productsArray[i].productImage + '" alt="' + productsArray[i].productName + '"><h6>' + productsArray[i].productName + '</h6><p>' + productsArray[i].productPrice + '</p>' + rating + '</a>');
+
+        // if clearance category
+        if (catID === '2436') {
+            gfpResponsiveListing.append('<a href="' + productsArray[i].productLink + '" class="card"><img src="' + productsArray[i].productImage + '" alt="' + productsArray[i].productName + '"><h6>' + productsArray[i].productName + '</h6><del style="font-size: 0.9em;">' + productsArray[i].productPrice + '</del><p style="color: red; font-weight: bold;">See Price in Cart</p>' + rating + '</a>');
+        } else {
+            gfpResponsiveListing.append('<a href="' + productsArray[i].productLink + '" class="card"><img src="' + productsArray[i].productImage + '" alt="' + productsArray[i].productName + '"><h6>' + productsArray[i].productName + '</h6><p>' + productsArray[i].productPrice + '</p>' + rating + '</a>');
+        }
+
     }
 
-    var catID = window.location.pathname.split('.htm')[0].split('/')[2];
     var offsetProducts = $('.results_per_page_select').val();
-    console.log(offsetProducts);
 
     // $.ajax({
     //     url: window.location.origin + '/-s/' + catID + '.htm?searching=Y&sort=5&cat=1&show=' + offsetProducts + '&page=2',
@@ -773,11 +803,26 @@ function updateHero(heroImg, heroText) {
     if (window.location.pathname === "/" || window.location.pathname === "/Default.asp") {
         return;
     }
+    
     var heroContainer = document.querySelector('.hero--not-home');
     heroContainer.style.backgroundImage = heroImg;
-    var heroHeading = heroContainer.querySelector('h1');
-    heroHeading.innerHTML = heroText;
-    heroHeading.style.opacity = 1;
+    
+    if (!pagePath.match(/Clearance/i)) {
+        var heroHeading = heroContainer.querySelector('h1');
+        heroHeading.style.opacity = 1;
+        heroHeading.innerHTML = heroText;
+        return;
+    }
+
+    heroContainer.style.textAlign = 'left';
+    heroContainer.querySelector('.site-width').innerHTML = '<div class="current-special-offers-item--tag"><p>25% - 50% Off</p></div><div class="current-special-offers-item--title"><h4>Clearance Savings</h4><p class="mar-t--more" style="font-size: 1.3rem; max-width: 390px; text-shadow: 3px 3px 5px rgba(0,0,0,0.7);">Everything is priced too low to show! Add to your cart to see your savings.</p></div>';
+    heroContainer.querySelector('.current-special-offers-item--tag').style.position = 'static';
+    heroContainer.querySelector('.current-special-offers-item--title').style.position = 'static';
+    heroContainer.querySelector('.current-special-offers-item--tag p').style.fontSize = '2em';
+    heroContainer.querySelector('.current-special-offers-item--tag p').style.textTransform = 'uppercase';
+    heroContainer.querySelector('.current-special-offers-item--title h4').style.fontSize = '2.5em';
+    heroContainer.querySelector('.current-special-offers-item--title h4').style.textTransform = 'uppercase';
+
 }
 
 function fixHeader() {
@@ -972,4 +1017,48 @@ function tileProducts(products) {
             productRating: productRating
         });
     }
+}
+
+function getCookie(name) {
+  var dc = document.cookie;
+  var prefix = name + "=";
+  var begin = dc.indexOf("; " + prefix);
+  if (begin == -1) {
+      begin = dc.indexOf(prefix);
+      if (begin != 0) return null;
+  } else {
+      begin += 2;
+      var end = document.cookie.indexOf(";", begin);
+      if (end == -1) {
+          end = dc.length;
+      }
+  }
+  // because unescape has been deprecated, replaced with decodeURI
+  //return unescape(dc.substring(begin + prefix.length, end));
+  return decodeURI(dc.substring(begin + prefix.length, end));
+}
+
+
+var alertBox = document.querySelector('.alert');
+
+if (alertBox) {
+    setTimeout( function() {
+        if (!document.cookie.split(';').filter(function(item) {
+            return item.indexOf('alert=dismissed') >= 0
+        }).length) {
+            var timeLeft = alertBox.querySelector('#timeLeftRed');
+            timeLeft.innerHTML = moment('Sat Jun 30 2018 23:59:00 GMT-0400 (EDT)').endOf().fromNow();
+            alertBox.classList.remove('alert--is-not-active');
+        }
+    }, 2000);
+    var closeAlertBox = alertBox.querySelector('.alert--close');
+    closeAlertBox.addEventListener('click', function(e) {
+        e.preventDefault();
+        var date = new Date();
+        var expires = 'expires=';
+        date.setDate(date.getDate() + 1);
+        expires += date.toGMTString();
+        document.cookie = "alert=dismissed;" + expires;
+        alertBox.classList.add('alert--is-not-active');
+    });
 }

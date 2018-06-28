@@ -1,0 +1,75 @@
+.alert {
+    position: fixed;
+    left: 1rem;
+    right: 1rem;
+    bottom: 2rem;
+    z-index: 300;
+    background-color: #fff;
+    width: 100%;
+    max-width: 350px;
+    box-shadow: 3px 3px 20px -4px rgba(black, 0.5);
+    padding: 1rem;
+    transition: all .5s cubic-bezier(0.42, 0, 0.29, 1.43);
+    @include tablet {
+        left: 2rem;
+    }
+
+    &.alert--is-not-active {
+        transform: translateX(calc(-100% - 2.5rem));
+    }
+
+}
+
+.alert--close {
+    position: absolute;
+    z-index: 2;
+    right: 1rem;
+    border: 0;
+    line-height: 1;
+    background-color: rgba(black, 0.6);
+    padding: 0.3rem;
+    border-radius: 50%;
+}
+
+.alert--content {
+    // padding-top: 2rem;
+}
+
+.alert--hero {
+    position: relative;
+    left: -1rem;
+    top: -1rem;
+    width: calc(100% + 2rem);
+    max-width: unset;
+}
+
+.alert--CTA {
+    position: relative;
+    z-index: 1;
+    top: -2.7rem;
+    margin-bottom: -1.5rem;
+    text-align: center;
+    
+    &:after {
+        content: '';
+        border-top: 5px solid $brand-two;
+        position: absolute;
+        z-index: -1;
+        left: -1rem;
+        width: calc(100% + 2rem);
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    a {
+        font-weight: bold;
+        color: #fff;
+    }
+
+}
+
+.alert .timeLeft {
+    font-weight: bold;
+    margin-top: 1rem;
+    text-align: center;
+}
