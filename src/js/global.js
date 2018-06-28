@@ -66,7 +66,7 @@ if (pagePath === '/Articles.asp' && window.location.search === '?ID=305') {
     heroText = 'Quick Parts Order';
 }
 
-if (pagePath === '/searchresults.asp') {
+if (pagePath === '/searchresults.asp' || pagePath === '/SearchResults.asp') {
     searchString = window.location.search;
     searchStringArray = searchString.split('&');
     
