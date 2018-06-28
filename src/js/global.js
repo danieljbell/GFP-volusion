@@ -1009,13 +1009,19 @@ function tileProducts(products) {
             hasPrice = products[i].nextElementSibling.nextElementSibling.querySelector('.product_productprice').innerText.split(' ')[1];
         }
 
+        var prodLink = products[i].querySelector('a').href;
+        var prodCode = prodLink.split('/');
+        var productCode = prodCode[4].split('.')[0];
+
         productsArray.push({
+            productCode: productCode,
             productLink: products[i].querySelector('a').href,
             productImage: products[i].querySelector('img').src,
             productName: products[i].nextElementSibling.querySelector('a').innerText,
             productPrice: hasPrice,
             productRating: productRating
         });
+        console.log(productsArray);
     }
 }
 
