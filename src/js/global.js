@@ -66,6 +66,13 @@ if (pagePath === '/Articles.asp' && window.location.search === '?ID=305') {
     heroText = 'Quick Parts Order';
 }
 
+if (pagePath === '/articles.asp' && window.location.search === '?ID=306') {
+    $('.hero').hide();
+    var pageContent = $('#content_area').html();
+    $('#content_area').parents('section').html(pageContent);
+    $('#content_area').hide();
+}
+
 if (pagePath === '/searchresults.asp' || pagePath === '/SearchResults.asp') {
     searchString = window.location.search;
     searchStringArray = searchString.split('&');
