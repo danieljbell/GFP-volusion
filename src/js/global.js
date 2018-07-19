@@ -66,7 +66,7 @@ if (pagePath === '/Articles.asp' && window.location.search === '?ID=305') {
     heroText = 'Quick Parts Order';
 }
 
-if (pagePath === '/articles.asp' && window.location.search === '?ID=306') {
+if ((pagePath === '/articles.asp' && window.location.search === '?ID=306') || pagePath === '/Articles.asp' && window.location.search === '?ID=306') {
     $('.hero').hide();
     var pageContent = $('#content_area').html();
     $('#content_area').parents('section').html(pageContent);
@@ -1059,9 +1059,13 @@ if (alertBox) {
         if (!document.cookie.split(';').filter(function(item) {
             return item.indexOf('alert=dismissed') >= 0
         }).length) {
-            var timeLeft = alertBox.querySelector('#timeLeftRed');
-            timeLeft.innerHTML = moment('Sat Jun 30 2018 23:59:00 GMT-0400 (EDT)').endOf().fromNow();
-            alertBox.classList.remove('alert--is-not-active');
+            if ((pagePath === '/articles.asp' && window.location.search === '?ID=306') || pagePath === '/Articles.asp' && window.location.search === '?ID=306') {
+
+            } else {
+                var timeLeft = alertBox.querySelector('#timeLeftRed');
+                timeLeft.innerHTML = moment('Tue Jul 31 2018 23:59:00 GMT-0400 (EDT)').endOf().fromNow();
+                alertBox.classList.remove('alert--is-not-active');
+            }
         }
     }, 2000);
     var closeAlertBox = alertBox.querySelector('.alert--close');
@@ -1074,4 +1078,15 @@ if (alertBox) {
         document.cookie = "alert=dismissed;" + expires;
         alertBox.classList.add('alert--is-not-active');
     });
+}
+
+
+/*
+=======================================
+CHANGE ERROR CODE FOR GREASEGUN PROMO
+=======================================
+*/
+var cartErrorMessage = $('.v65-error-list-container li');
+if (cartErrorMessage.text() === 'Coupon code "GREASEGUN" is not valid.') {
+    cartErrorMessage.text('Your cart total is less than the required $199 for the coupon code.');
 }
