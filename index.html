@@ -6,8 +6,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="google-site-verification" content="m7Uw7PW2faunmBZrZ_nEbWCHfBYLSjWkYPRxORzl8kk" />
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,400i,700" rel="stylesheet">
-        <link rel="stylesheet" href="/dist/css/style.css?ver=0.0.2">
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+        <link rel="stylesheet" href="/dist/css/style.css?ver=1.0.17">
+        <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
         <!-- Google Tag Manager -->
             <script>  (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
             new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -18,19 +18,22 @@
     </head>
     <body>
 
-        <div class="alert alert--is-not-active">
-            <button class="alert--close"><img src="/dist/img/icon-close.svg" alt="Close"></button>
-            <img src="https://www.greenfarmparts.com/v/vspfiles/assets/images/grease-gun.jpg" alt="Grease Gun Savings" class="alert--hero">
-            <div class="alert--content">
-                <p style="margin-bottom: 1rem;">Limited time only, get a free grease gun with purchases over $199. Good while supplies last.</p>
-                <p class="has-text-center"><button class="btn-solid--brand" id="july-eighteen-grease-gun">Add to Cart</button></p>
-                <p class="timeLeft" style="color: red;">Offer Expires <span id="timeLeftRed">Tuesday 19th</span></p>
-            </div>
+      <!-- <div class="alert alert--is-not-active">
+        <button class="alert--close"><img src="/dist/img/icon-close.svg" alt="Close"></button>
+        <img src="https://www.greenfarmparts.com/v/vspfiles/assets/images/grease-gun.jpg" alt="Grease Gun Savings" class="alert--hero">
+        <div class="alert--content">
+            <p style="margin-bottom: 1rem;">Limited time only, get a free grease gun with purchases over $199. Good while supplies last.</p>
+            <p class="has-text-center"><button class="btn-solid--brand" id="july-eighteen-grease-gun">Add to Cart</button></p>
+            <p class="timeLeft" style="color: red;">Offer Expires <span id="timeLeftRed">Tuesday 19th</span></p>
         </div>
-        
+      </div> -->
+                
         <script>
-            if (document.scripts[0].src.match(/product_details/i)) {
-                document.body.classList.add('single-product');
+            var allDocScripts = document.scripts;
+            for (var i = 0; i < allDocScripts.length; i++) {
+                if (allDocScripts[i].src.match(/product_details/i)) {
+                    document.body.classList.add('single-product');
+                }
             }
             if (window.location.pathname === '/myaccount.asp') {
                 document.body.classList.add('account-page');
@@ -38,8 +41,8 @@
             if (window.location.pathname === '/orders.asp') {
                 document.body.classList.add('order-page');
             }
-            if (document.querySelector('meta[name="keywords"]').content.match('Talk')) {
-                document.body.classList.add('article--talk-with-a-tech');
+            if ((window.location.pathname === '/OrderFinished.asp') || (window.location.pathname === '/orderfinished.asp')) {
+                document.body.classList.add('order-complete-page');
             }
         </script>
 
@@ -48,16 +51,23 @@
         height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <!-- End Google Tag Manager (noscript) -->
 
+        <div class="alert--bottom-up alert--is-not-active">
+            <div class="site-width">
+                <button class="alert-bottom-up--close"><img src="/dist/img/icon-close.svg" alt=""></button>
+                <p class="alert-bottom-up--message"><img src="/dist/img/shipping--white.svg" alt="shipping icon" style="max-width: 35px; max-height: 35px; display: inline-block; margin-right: 1rem; vertical-align: middle;"><strong>Now offering free no-rush shipping sitewide on all non-oversized products.</strong></p>
+            </div>
+        </div>
+
         <!-- EYEBROW -->
         <section class="eyebrow">
             <div class="site-width">
                 <ul class="eyebrow-links">
                     <li><a href="#0">Free Shipping &amp; Lowest prices</a></li>
                     <li><a href="#chat">Click to Chat</a></li>
-                    <li><a href="/John-Deere-Parts-Coupons-s/453.htm">Quick Order</a></li>
+                    <li><a href="/articles.asp?ID=305">Quick Order</a></li>
                     <li><a href="/John-Deere-Parts-Coupons-s/453.htm">Coupons</a></li>
-                    <li><a href="#0">Clearance</a></li>
-                    <li><a href="/orders.asp">Order Status</a></li>
+                    <li><a href="/Clearance-Items-s/2436.htm">Clearance</a></li>
+                    <li><a href="/login.asp">Login</a></li>
                 </ul>
             </div>
         </section>
@@ -69,7 +79,7 @@
                 </div>
                 <nav class="site-navigation--header">
                     <!-- SEARCH BAR -->
-                    <form action="/searchresults.asp" method="get" name="SearchBoxForm" class="mobile-search">
+                    <form action="/searchresults.asp" method="get" name="SearchBoxForm" class="mobile-search" id="mobileSearchBar">
                         <input placeholder="Search..." type="search" name="Search">
                     </form>
                     <ul class="site-header-list">
@@ -80,31 +90,31 @@
                                     <button class="accordian-toggle--site-header">Accessories</button>
                                     <ul class="sub-menu--level-two">
                                         <li>
-                                            <a href="#0" title="Fenders">
+                                            <a href="/category-s/1681.htm" title="Fenders">
                                                 <img src="/dist/img/product--fender.jpg" alt="Fenders">
                                                 <h6>Fenders</h6>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="/John-Deere-John-Deere-Hoods-s/640.htm" title="Hoods">
+                                            <a href="/category-s/640.htm" title="Hoods">
                                                 <img src="/dist/img/product--hood.jpg" alt="Hoods">
                                                 <h6>Hoods</h6>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="/John-Deere-John-Deere-Paint-s/632.htm" title="Paint">
+                                            <a href="/category-s/1696.htm" title="Paint">
                                                 <img src="/dist/img/product--paint.jpg" alt="Paint">
                                                 <h6>Paint</h6>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="/John-Deere-John-Deere-Seats-Seat-Covers-s/639.htm" title="Seats">
+                                            <a href="/category-s/1685.htm" title="Seats">
                                                 <img src="/dist/img/product--seat.jpg" alt="Seats">
                                                 <h6>Seats</h6>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="/John-Deere-Tires-s/442.htm" title="Tires &amp; Wheels">
+                                            <a href="/category-s/1680.htm" title="Tires &amp; Wheels">
                                                 <img src="/dist/img/product--tires.jpg" alt="Tires & Wheels">
                                                 <h6>Tires &amp; Wheels</h6>
                                             </a>
@@ -115,67 +125,67 @@
                                     <button class="accordian-toggle--site-header">Attachments</button>
                                     <ul class="sub-menu--level-two">
                                         <li>
-                                            <a href="/John-Deere-John-Deere-Baggers-and-Bagging-Systems-s/643.htm">
+                                            <a href="/category-s/1746.htm">
                                                 <img src="/dist/img/product--baggers.jpg" alt="Baggers">
                                                 <h6>Bagger</h6>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="#0">
+                                            <a href="/category-s/1726.htm">
                                                 <img src="/dist/img/product--blowers.jpg" alt="Blowers">
                                                 <h6>Blower</h6>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="#0">
+                                            <a href="/category-s/1725.htm">
                                                 <img src="/dist/img/product--canopy.jpg" alt="Canopy">
                                                 <h6>Canopy</h6>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="#0">
+                                            <a href="/category-s/1723.htm">
                                                 <img src="/dist/img/product--chutes.jpg" alt="Chutes">
                                                 <h6>Chutes</h6>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="#0">
+                                            <a href="/category-s/1719.htm">
                                                 <img src="/dist/img/product--door.jpg" alt="Door">
                                                 <h6>Door/Panel</h6>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="#0">
+                                            <a href="/category-s/1716.htm">
                                                 <img src="/dist/img/product--lights.jpg" alt="Lights">
                                                 <h6>Light</h6>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="#0">
+                                            <a href="/category-s/1717.htm">
                                                 <img src="/dist/img/product--materialCollection.jpg" alt="Material Collection">
                                                 <h6>Material Collection</h6>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="#0">
+                                            <a href="/category-s/1737.htm">
                                                 <img src="/dist/img/product--mulching.jpg" alt="Mulching">
                                                 <h6>Mulching</h6>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="#0">
+                                            <a href="/category-s/1752.htm">
                                                 <img src="/dist/img/product--other.jpg" alt="Other">
                                                 <h6>Other</h6>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="#0">
+                                            <a href="/category-s/1728.htm">
                                                 <img src="/dist/img/product--weights.jpg" alt="Weights">
                                                 <h6>Weights</h6>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="#0">
+                                            <a href="/category-s/1751.htm">
                                                 <img src="/dist/img/product--winching.jpg" alt="Winching">
                                                 <h6>Winching</h6>
                                             </a>
@@ -186,31 +196,31 @@
                                     <button class="accordian-toggle--site-header">Belts</button>
                                     <ul class="sub-menu--level-two">
                                         <li>
-                                            <a href="#0">
+                                            <a href="/category-s/1764.htm">
                                                 <img src="/dist/img/product--drive-belt.jpg" alt="Drive Belt">
                                                 <h6>Drive Belt</h6>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="#0">
+                                            <a href="/category-s/1761.htm">
                                                 <img src="/dist/img/product--flat-belt.jpg" alt="Flat Belt">
                                                 <h6>Flat Belt</h6>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="#0">
+                                            <a href="/category-s/1759.htm">
                                                 <img src="/dist/img/product--round-belt.jpg" alt="Round Belt">
-                                                <h6>Round Belt</h6>
+                                                <h6>Ag Belts</h6>
                                             </a>
                                         </li>
-                                        <li>
+                                        <!-- <li>
                                             <a href="#0">
                                                 <img src="/dist/img/product--synchronous-belt.jpg" alt="Synchronous Belt">
                                                 <h6>Synchronous Belt</h6>
                                             </a>
-                                        </li>
+                                        </li> -->
                                         <li>
-                                            <a href="#0">
+                                            <a href="/category-s/1760.htm">
                                                 <img src="/dist/img/product--v-belt.jpg" alt="V-Belt">
                                                 <h6>V-Belt</h6>
                                             </a>
@@ -274,37 +284,37 @@
                                     <button class="accordian-toggle--site-header">Clothing</button>
                                     <ul class="sub-menu--level-two">
                                         <li>
-                                            <a href="/John-Deere-John-Deere-Kid-s-Clothing-s/626.htm">
+                                            <a href="/category-s/1702.htm">
                                                 <img src="/dist/img/product--kids.jpg" alt="Kids Clothing">
                                                 <h6>Kids</h6>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="/John-Deere-John-Deere-Ladies-s-Clothing-s/617.htm">
+                                            <a href="/category-s/1699.htm">
                                                 <img src="/dist/img/product--ladies.jpg" alt="Ladies Clothing">
                                                 <h6>Ladies</h6>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="/John-Deere-John-Deere-Men-s-Clothing-s/616.htm">
+                                            <a href="/category-s/1701.htm">
                                                 <img src="/dist/img/product--mens.jpg" alt="Mens Clothing">
                                                 <h6>Mens</h6>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="#0">
+                                            <a href="/category-s/1704.htm">
                                                 <img src="/dist/img/product--wallet.jpg" alt="Belts & Wallets">
                                                 <h6>Belts &amp; Wallets</h6>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="#0">
+                                            <a href="/category-s/1707.htm">
                                                 <img src="/dist/img/product--gloves.jpg" alt="Gloves">
                                                 <h6>Gloves</h6>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="#0">
+                                            <a href="/category-s/1700.htm">
                                                 <img src="/dist/img/product--hat.jpg" alt="Hats & Caps">
                                                 <h6>Hats &amp; Caps</h6>
                                             </a>
@@ -315,25 +325,25 @@
                                     <button class="accordian-toggle--site-header">Electrical</button>
                                     <ul class="sub-menu--level-two">
                                         <li>
-                                            <a href="#0">
+                                            <a href="/category-s/2294.htm">
                                                 <img src="/dist/img/product--ac-compressor.jpg" alt="AC Compressor">
                                                 <h6>AC Compressor</h6>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="#0">
+                                            <a href="/category-s/1855.htm">
                                                 <img src="/dist/img/product--connectors.jpg" alt="Connectors">
                                                 <h6>Connectors</h6>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="#0">
+                                            <a href="/category-s/1856.htm">
                                                 <img src="/dist/img/product--lights.jpg" alt="Lights">
                                                 <h6>Lights, Replacement Bulbs &amp; Parts</h6>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="#0">
+                                            <a href="/category-s/1853.htm">
                                                 <img src="/dist/img/product--other.jpg" alt="Other">
                                                 <h6>Other</h6>
                                             </a>
@@ -341,34 +351,34 @@
                                     </ul>
                                 </li>
                                 <li class="menu-item-has-children">
-                                    <button class="accordian-toggle--site-header">Engine &amp; Related</button>
+                                    <button class="accordian-toggle--site-header">Internal Components</button>
                                     <ul class="sub-menu--level-two">
                                         <li>
-                                            <a href="#0">
+                                            <a href="/category-s/2057.htm">
                                                 <img src="/dist/img/product--clutch.jpg" alt="Clutches, Chains, Sprockets">
                                                 <h6>Clutches, Chains, Sprockets</h6>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="#0">
+                                            <a href="/category-s/2067.htm">
                                                 <img src="/dist/img/product--drivetrain.jpg" alt="Drivetrain">
                                                 <h6>Drivetrain</h6>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="#0">
+                                            <a href="/category-s/2025.htm">
                                                 <img src="/dist/img/product--engine-components.jpg" alt="Engine Components">
                                                 <h6>Engine Components</h6>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="#0">
+                                            <a href="/category-s/2026.htm">
                                                 <img src="/dist/img/product--hydraulic-pump.png" alt="Hydraulics">
                                                 <h6>Hydraulics</h6>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="#0">
+                                            <a href="/category-s/2086.htm">
                                                 <img src="/dist/img/product--reman.jpg" alt="Reman">
                                                 <h6>Reman</h6>
                                             </a>
@@ -379,21 +389,27 @@
                                     <button class="accordian-toggle--site-header">Filters</button>
                                     <ul class="sub-menu--level-two">
                                         <li>
-                                            <a href="#0">
+                                            <a href="/category-s/1864.htm">
                                                 <img src="/dist/img/product--air-filter.jpg" alt="Air Filter">
                                                 <h6>Air</h6>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="#0">
+                                            <a href="/category-s/1862.htm">
                                                 <img src="/dist/img/product--fuel-filter.jpg" alt="Fuel Filter">
                                                 <h6>Fuel</h6>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="#0">
+                                            <a href="/category-s/1863.htm">
                                                 <img src="/dist/img/product--oil-filter.jpg" alt="Oil Filter">
                                                 <h6>Oil</h6>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="/category-s/1867.htm">
+                                                <img src="/dist/img/product--other.jpg" alt="Other">
+                                                <h6>Other</h6>
                                             </a>
                                         </li>
                                     </ul>
@@ -402,21 +418,27 @@
                                     <button class="accordian-toggle--site-header">Fluids</button>
                                     <ul class="sub-menu--level-two">
                                         <li>
-                                            <a href="#0">
+                                            <a href="/category-s/1871.htm">
                                                 <img src="/dist/img/product--engine-fuel.jpg" alt="Engine Fuel">
-                                                <h6>Engine Fuel</h6>
+                                                <h6>Anti-freeze</h6>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="/John-Deere-John-Deere-Grease-and-Grease-Guns-s/637.htm">
+                                            <a href="/category-s/1870.htm">
                                                 <img src="/dist/img/product--grease.jpg" alt="Grease">
                                                 <h6>Grease</h6>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="/John-Deere-Oil-and-Lube-s/10.htm">
+                                            <a href="/category-s/1868.htm">
                                                 <img src="/dist/img/product--oil.jpg" alt="Oil">
                                                 <h6>Oil</h6>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="/category-s/1869.htm">
+                                                <img src="/dist/img/product--other.jpg" alt="Other">
+                                                <h6>Other</h6>
                                             </a>
                                         </li>
                                     </ul>
@@ -425,50 +447,50 @@
                                     <button class="accordian-toggle--site-header">Hardware</button>
                                     <ul class="sub-menu--level-two">
                                         <li>
-                                            <a href="#0">
+                                            <a href="/category-s/1894.htm">
                                                 <img src="/dist/img/product--bolts.jpg" alt="Bolts">
                                                 <h6>Bolts &amp; Cap Screws</h6>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="#0">
+                                            <a href="/category-s/1910.htm">
                                                 <img src="/dist/img/product--keys.jpg" alt="Keys">
                                                 <h6>Keys</h6>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="#0">
+                                            <a href="/category-s/1898.htm">
                                                 <img src="/dist/img/product--other.jpg" alt="Other">
                                                 <h6>Miscellaneous</h6>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="#0">
+                                            <a href="/category-s/1895.htm">
                                                 <img src="/dist/img/product--nuts.jpg" alt="Nuts & Washers">
                                                 <h6>Nuts &amp; Washers</h6>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="#0">
+                                            <a href="/category-s/1896.htm">
                                                 <img src="/dist/img/product--pins.jpg" alt="Pins">
                                                 <h6>Pins</h6>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="#0">
+                                            <a href="/category-s/1912.htm">
                                                 <img src="/dist/img/product--pipe-fittings.jpg" alt="Pipe Fittings">
                                                 <h6>Pipe Fittings</h6>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="#0">
+                                            <a href="/category-s/1899.htm">
                                                 <img src="/dist/img/product--rivets.jpg" alt="Rivets">
                                                 <h6>Rivets</h6>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="#0">
-                                                <img src="/dist/img/product--saw-chains.jpg" alt="Saw Chains">
+                                            <a href="/category-s/1931.htm">
+                                                <img src="/dist/img/product--other.jpg" alt="Saw Chains">
                                                 <h6>Saw Chains</h6>
                                             </a>
                                         </li>
@@ -478,79 +500,79 @@
                                     <button class="accordian-toggle--site-header">Home &amp; Workshop</button>
                                     <ul class="sub-menu--level-two">
                                         <li>
-                                            <a href="#0">
+                                            <a href="/category-s/1995.htm">
                                                 <img src="/dist/img/product--chests.jpg" alt="Chests">
                                                 <h6>Chests, tool, &amp; Accessories</h6>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="#0">
+                                            <a href="/category-s/1999.htm">
                                                 <img src="/dist/img/product--saftey.jpg" alt="Safety Products">
                                                 <h6>Fire Extinguishers &amp; Safety Products</h6>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="#0">
+                                            <a href="/category-s/1994.htm">
                                                 <img src="/dist/img/product--flashlights.jpg" alt="Flashlights">
                                                 <h6>Flashlights</h6>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="/John-Deere-Hand-Tools-s/822.htm">
+                                            <a href="/category-s/2006.htm">
                                                 <img src="/dist/img/product--hand-tools.jpg" alt="Hand Tools">
                                                 <h6>Hand Tools</h6>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="#0">
+                                            <a href="/category-s/2002.htm">
                                                 <img src="/dist/img/product--padlocks.jpg" alt="Padlocks">
                                                 <h6>Padlocks</h6>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="#0">
+                                            <a href="/category-s/1998.htm">
                                                 <img src="/dist/img/product--pressure-washer.jpg" alt="Pressure Washers">
                                                 <h6>Pressure Washers</h6>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="#0">
+                                            <a href="/category-s/2003.htm">
                                                 <img src="/dist/img/product--seat-covers.jpg" alt="Seat Covers">
                                                 <h6>Seat Covers &amp; Floor Mats</h6>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="#0">
+                                            <a href="/category-s/1996.htm">
                                                 <img src="/dist/img/product--space-heaters.jpg" alt="Space Heaters">
                                                 <h6>Space Heaters</h6>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="#0">
+                                            <a href="/category-s/1993.htm">
                                                 <img src="/dist/img/product--straps.jpg" alt="Straps">
                                                 <h6>Straps &amp; Tie-Downs</h6>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="#0">
+                                            <a href="/category-s/2010.htm">
                                                 <img src="/dist/img/product--tape.jpg" alt="Tape">
                                                 <h6>Tape</h6>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="#0">
+                                            <a href="/category-s/2011.htm">
                                                 <img src="/dist/img/product--towel.jpg" alt="Towels">
                                                 <h6>Towels</h6>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="#0">
+                                            <a href="/category-s/2007.htm">
                                                 <img src="/dist/img/product--absorbents.jpg" alt="Absorbents">
                                                 <h6>Towels &amp; Absorbents (Buy Sell)</h6>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="#0">
+                                            <a href="/category-s/2009.htm">
                                                 <img src="/dist/img/product--towing.jpg" alt="Towing">
                                                 <h6>Towing Accessories</h6>
                                             </a>
@@ -637,37 +659,37 @@
                                     <button class="accordian-toggle--site-header">Toys</button>
                                     <ul class="sub-menu--level-two">
                                         <li>
-                                            <a href="#0">
+                                            <a href="/category-s/2370.htm">
                                                 <img src="/dist/img/product--consumer-toys.jpg" alt="Consumer Toys">
                                                 <h6>Consumer Toys</h6>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="#0">
+                                            <a href="/category-s/2371.htm">
                                                 <img src="/dist/img/product--preschool-toys.jpg" alt="Preschool Toys">
                                                 <h6>Preschool/Infant Toys</h6>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="#0">
+                                            <a href="/category-s/2372.htm">
                                                 <img src="/dist/img/product--collector-toys.jpg" alt="Collector Toys">
                                                 <h6>Collector Toys</h6>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="#0">
+                                            <a href="/category-s/2373.htm">
                                                 <img src="/dist/img/product--ride-on-toys.jpg" alt="Ride-On/Wheeled Toys">
                                                 <h6>Ride-On/Wheeled</h6>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="#0">
+                                            <a href="/category-s/2369.htm">
                                                 <img src="/dist/img/product--replica-play-toys.jpg" alt="Replica Play Toys">
                                                 <h6>Replica Play Toys</h6>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="#0">
+                                            <a href="/category-s/2374.htm">
                                                 <img src="/dist/img/product--other.jpg" alt="Other">
                                                 <h6>Other Toys</h6>
                                             </a>
@@ -770,12 +792,12 @@
                                                 <h6>Commercial Mowers</h6>
                                             </a>
                                         </li>
-                                        <li>
+                                        <!-- <li>
                                             <a href="#0">
                                                 <img src="/dist/img/product--excavator.png" alt="Mini Excavator">
                                                 <h6>Mini Excavator</h6>
                                             </a>
-                                        </li>
+                                        </li> -->
                                         <li>
                                             <a href="/John-Deere-Skid-Steer-Parts-s/454.htm">
                                                 <img src="/dist/img/product--skid-steer.png" alt="Skid Steer">
@@ -793,12 +815,12 @@
                                                 <h6>Aerators</h6>
                                             </a>
                                         </li>
-                                        <li>
+                                        <!-- <li>
                                             <a href="/John-Deere-Bunker-Rake-Parts-s/851.htm">
                                                 <img src="/dist/img/product--bunker-rake.png" alt="Bunker Rakes">
                                                 <h6>Bunker Rakes</h6>
                                             </a>
-                                        </li>
+                                        </li> -->
                                         <li>
                                             <a href="/John-Deere-Greens-Mower-Parts-s/852.htm">
                                                 <img src="/dist/img/product--greens-mower.png" alt="Greens Mowers">
@@ -816,14 +838,14 @@
                                 <li class="menu-item-has-children">
                                     <button class="accordian-toggle--site-header">Construction</button>
                                     <ul class="sub-menu--level-two">
-                                        <li>
+                                        <!-- <li>
                                             <a href="#0">
                                                 <img src="/dist/img/product--hydraulic-pump.png" alt="Hydraulic Pump">
                                                 <h6>Hydraulics Pumps</h6>
                                             </a>
-                                        </li>
+                                        </li> -->
                                         <li>
-                                            <a href="#0">
+                                            <a href="/category-s/1650.htm">
                                                 <img src="/dist/img/product--undercarriage.jpg" alt="Undercarraige">
                                                 <h6>Undercarraige</h6>
                                             </a>
@@ -851,7 +873,7 @@
                 </div>
             </div>
             <div class="search-bar-container">
-                <form action="/searchresults.asp" method="get" name="SearchBoxForm" class="search--with-button">
+                <form action="/searchresults.asp" method="get" name="SearchBoxForm" class="search--with-button" id="globalHeaderSearchBar">
                     <input autofocus placeholder="Search by Keyword, Part or Model" type="search" name="Search">
                     <input type="image" alt="Search" src="/dist/img/search-icon.svg">
                 </form>
@@ -865,7 +887,7 @@
                     <div class="site-width">
                         <h1>Let Us Help You Find What You Are Looking For</h1>
                         <!-- SEARCH BAR -->
-                        <form action="/searchresults.asp" method="get" name="SearchBoxForm">
+                        <form action="/searchresults.asp" method="get" name="SearchBoxForm" id="homepageHeroSearchBar">
                             <input placeholder="Search by Keyword, Part or Model" type="search" name="Search">
                             <input type="image" alt="Search" src="/dist/img/search-icon.svg">
                         </form>
@@ -878,33 +900,33 @@
                             <div class="current-special-offers-list">
                                 <div class="slide">
                                     <div class="current-special-offers-item">
-                                        <div class="current-special-offers-item--title-container" style="background-image: url(https://greenfarmparts.com/v/vspfiles/assets/images/blades.jpg);">
+                                        <div class="current-special-offers-item--title-container" style="background-image: url(https://greenfarmparts.com/v/vspfiles/assets/images/maintenance-kits.jpg);">
                                             <div class="current-special-offers-item--tag">
-                                                <p>15% Off All</p>
+                                                <p>Save 15% off</p>
                                             </div>
                                             <div class="current-special-offers-item--title">
-                                                <h4>Mower Blades</h4>
+                                                <h4>Maintenance Kits</h4>
                                             </div>
                                         </div>
                                         <div class="current-special-offers-item--content">
-                                            <a href="/John-Deere-Lawn-Mower-Blades-s/636.htm" class="btn-solid--brand-two" style="font-size: 1.1em;">Shop All Mower Blades</a>
-                                            <p style="font-size: 1.1em;">Clean up your mowers cut with a new blade today!</p>
+                                            <a id="fall-18-maintenance-kit" href="/-s/1628.htm" class="btn-solid--brand-two" style="font-size: 1.1em;">Shop Maintenance Kits</a>
+                                            <p style="font-size: 1.1em;">Tune up your machine today with a new maintenance kit!</p>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="slide">
                                     <div class="current-special-offers-item">
-                                        <div class="current-special-offers-item--title-container" style="background-image: url(https://greenfarmparts.com/v/vspfiles/assets/images/belts.jpg);">
+                                        <div class="current-special-offers-item--title-container" style="background-image: url(https://www.greenfarmparts.com/v/vspfiles/assets/images/filter-pack.jpg);">
                                             <div class="current-special-offers-item--tag">
-                                                <p style="border-radius: 4px;">15% Off All</p>
+                                                <p>10% Off</p>
                                             </div>
                                             <div class="current-special-offers-item--title">
-                                                <h4>Belts</h4>
+                                                <h4>Filter Paks</h4>
                                             </div>
                                         </div>
                                         <div class="current-special-offers-item--content">
-                                            <a href="/John-Deere-Belts-s/645.htm" class="btn-solid--brand-two" style="font-size: 1.1em;">Shop All Belts</a>
-                                            <p style="font-size: 1.1em;">Keep things running in time with a new belt!</p>
+                                            <a id="fall-18-filter-pak" href="/-s/2440.htm" class="btn-solid--brand-two" style="font-size: 1.1em;">Shop Filter Paks</a>
+                                            <p style="font-size: 1.1em;">Keep your compact utility tractor clean with new filters.</p>
                                         </div>
                                     </div>
                                 </div>
@@ -913,7 +935,7 @@
                     </div>
                 </section>
             </div>
-            <!-- <div id="if_not_homepage">
+            <div id="if_not_homepage">
                 <section class="hero hero--not-home">
                     <div class="site-width">
                         <h1>Green Farm Parts</h1>
@@ -927,22 +949,7 @@
                         
                     </div>
                 </div>
-            </section> -->
-            
-
-
-
-
-
-            
-
-
-
-
-
-
-
-
+            </section>
         </main>
         <footer class="site-footer">
             <div class="site-width">
@@ -1026,10 +1033,11 @@
 
 <!--THEME JAVASCRIPT-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.1/moment.min.js"></script>
-<script src="/dist/js/global.js" id="gfp-script"></script>
+<script src="/dist/js/global.js?ver=1.0.18" id="gfp-script"></script>
 
 <!--MAILCHIMP INTEGRATION-->
-<!-- <script id="mcjs">!function(c,h,i,m,p){m=c.createElement(h),p=c.getElementsByTagName(h)[0],m.async=1,m.src=i,p.parentNode.insertBefore(m,p)}(document,"script","https://chimpstatic.com/mcjs-connected/js/users/c80372a35929a7b281b76c090/2af119c88cb756bcfcb2096bf.js");</script> -->
+<script id="mcjs">!function(c,h,i,m,p){m=c.createElement(h),p=c.getElementsByTagName(h)[0],m.async=1,m.src=i,p.parentNode.insertBefore(m,p)}(document,"script","https://chimpstatic.com/mcjs-connected/js/users/c80372a35929a7b281b76c090/2af119c88cb756bcfcb2096bf.js");</script>
+<script id="mcjs">!function(c,h,i,m,p){m=c.createElement(h),p=c.getElementsByTagName(h)[0],m.async=1,m.src=i,p.parentNode.insertBefore(m,p)}(document,"script","https://chimpstatic.com/mcjs-connected/js/users/c80372a35929a7b281b76c090/2af119c88cb756bcfcb2096bf.js");</script>
 
 <!--FRESHCHAT-->
 <script src="https://wchat.freshchat.com/js/widget.js"></script>
@@ -1061,36 +1069,111 @@ host: "https://wchat.freshchat.com"
 </div>
 
 <!-- BEGIN VEXTRAS CODE-->
-    <script src="https://app.vextras.com/stores/store_YM8ZBDD5VHY86N2K49P2K7FZJ7/js/vextras.js"></script>
+<script src="https://app.vextras.com/stores/store_YM8ZBDD5VHY86N2K49P2K7FZJ7/js/vextras.js"></script>
 <!-- END VEXTRAS CODE-->
 
 <!--CRITEO-->
 <script type="text/javascript" src="//static.criteo.net/js/ld/ld.js" async="true"></script>
 <script type="text/javascript">
-
-  if (document.querySelector('#july-eighteen-grease-gun')) {
-    var button = document.querySelector('#july-eighteen-grease-gun');
-    button.addEventListener('click', function(e) {
-        $.ajax({
-            type: "POST",
-            url: "/shoppingcart.asp?productcode=TY26517&CouponCode=GREASEGUN",
-            success: function() {
-              var cartCount = parseInt($('[data-v-observable="cart-count"]').text());
-              cartCount++;
-              $('[data-v-observable="cart-count"]').text(cartCount);
-              $('.alert--content').html('<p class="has-text-center" style="font-size: 1.7em;"><strong>Great!</strong></p><p style="margin: 0 0 1rem;">We\'ve added it to your cart for you. Make sure you use coupon code <span style="display: inline-block; background: #29652d; padding: 2px 5px; color: #fff; font-weight: bold;">GREASEGUN</span> when checking out to get it free!</p><p class="has-text-center"><a href="/John-Deere-Grease-and-Grease-Guns-s/637.htm" class="btn-solid--brand-two" id="july-eighteen-grease">Need Grease?</a></p>');
-              var date = new Date();
-              var expires = 'expires=';
-              date.setDate(date.getDate() + 1);
-              expires += date.toGMTString();
-              document.cookie = "alert=dismissed;" + expires;
-            },
-            error: function() {
-                $('.alert--content p:nth-child(2)').prepend('<span style="display: block; margin-bottom: 0.5rem; border: 1px solid red; padding: 0.5em;">Sorry, that didn\'t work. Please refresh the page and try again.</span>');
-            }
-        });
-    });
+  var homepageDomain = 'http://www.greenfarmparts.com';
+  var deviceType = /iPad/.test(navigator.userAgent) ? "t" : /Mobile|iP(hone|od)|Android|BlackBerry|IEMobile|Silk/.test(navigator.userAgent) ? "m" : "d";
+  window.criteo_q = window.criteo_q || [];
+  window.criteo_q.push(
+    { event: "manualFlush" },
+    { event: "setAccount", account: 41336 },
+    { event: "setSiteType", type: deviceType }
+  );
+  switch (PageName()) {
+    case '':
+      if (document.location.href.replace(/^https?\:\/\//i, "").split(/[?#]/)[0].split("/")[0] == homepageDomain.replace(/^https?\:\/\//i, "").split(/[?#]/)[0].split("/")[0]) {
+        window.criteo_q.push(
+          { event: "viewHome" },
+          { event: "flushEvents" }
+        );
+      }
+      break;
+    case 'productdetails.asp':
+      var product_ID = global_Current_ProductCode;
+      window.criteo_q.push(
+        { event: "viewItem", item: product_ID },
+        { event: "flushEvents" }
+      );
+      break;
+    case 'searchresults.asp':
+      var itemList = [];
+      $('.productnamecolor').each(function() {
+        var item = ($(this).attr("href").split("/")[4].split(".")[0]);
+        itemList.push(item);
+      });
+      var product_IDList = itemList.slice(0, 3);
+        window.criteo_q.push(
+          { event: "viewList", item: product_IDList },
+          { event: "flushEvents" }
+        );
+      break;
+    case 'shoppingcart.asp':
+      var BasketList = [];
+      $.getJSON('/ajaxcart.asp?cachebust=' + Date.now(), function(data) {
+        for (i = 0; i < data.Products.length; i++)
+          BasketList.push({
+            id: data.Products[i].ProductCode,
+            price: (data.Products[i].ProductPrice.split('$')[1].replace(" Inc GST", "")) / (data.Products[i].Quantity),
+            quantity: data.Products[i].Quantity
+          });
+        window.criteo_q.push(
+          { event: "viewBasket", item: BasketList },
+          { event: "flushEvents" }
+        );
+      });
+      break;
+    case 'orderfinished.asp':
+      var productArray = [];
+      var arrayLength = OrderDetails.length - 1;
+      for (var i = 0; i <= arrayLength; i++) {
+        var productId = OrderDetails[i][2];
+        var itemPrice = OrderDetails[i][5];
+        var itemQty = OrderDetails[i][6];
+        var item = {
+          id: productId,
+          price: itemPrice,
+          quantity: itemQty
+        };
+        productArray.push(item);
+      }
+      window.criteo_q.push(
+        { event: "trackTransaction", id: Order[0], item: productArray },
+        { event: "setEmail", email: Order[9] },
+        { event: "flushEvents" }
+      );
+      break;
   }
+
+  
+
+  // if (document.querySelector('#july-eighteen-grease-gun')) {
+  //   var button = document.querySelector('#july-eighteen-grease-gun');
+  //   button.addEventListener('click', function(e) {
+  //     $.ajax({
+  //       type: "POST",
+  //       url: "/shoppingcart.asp?productcode=TY26517&CouponCode=GREASEGUN",
+  //       success: function() {
+  //         var cartCount = parseInt($('[data-v-observable="cart-count"]').text());
+  //         cartCount++;
+  //         $('[data-v-observable="cart-count"]').text(cartCount);
+  //         $('.alert--content').html('<p class="has-text-center" style="font-size: 1.7em;"><strong>Great!</strong></p><p style="margin: 0 0 1rem;">We\'ve added it to your cart for you. Make sure you use coupon code <span style="display: inline-block; background: #29652d; padding: 2px 5px; color: #fff; font-weight: bold;">GREASEGUN</span> when checking out to get it free!</p><p class="has-text-center"><a href="/John-Deere-Grease-and-Grease-Guns-s/637.htm" class="btn-solid--brand-two" id="july-eighteen-grease">Need Grease?</a></p>');
+  //         var date = new Date();
+  //         var expires = 'expires=';
+  //         date.setDate(date.getDate() + 1);
+  //         expires += date.toGMTString();
+  //         document.cookie = "alert=dismissed;" + expires;
+  //       },
+  //       error: function() {
+  //           $('.alert--content p:nth-child(2)').prepend('<span style="display: block; margin-bottom: 0.5rem; border: 1px solid red; padding: 0.5em;">Sorry, that didn\'t work. Please refresh the page and try again.</span>');
+  //       }
+  //     });
+  //   });
+  // }
+
 </script>
 </body>
 </html>

@@ -142,11 +142,15 @@ if (pagePath === '/terms.asp') {
     heroText = 'Terms and Conditions';
 }
 
+if (getCookie('Session%5FToken')) {
+    $('.eyebrow-links li:last-child').html('<a href="/orders.asp">Order Status</a>');
+}
+
 if (pagePath === '/one-page-checkout.asp') {
     heroText = 'Checkout';
 
     if (getCookie('Session%5FToken4Checkout')) {
-        $('#div_articleid_116').remove();
+        $('#div_articleid_116').html('<h2>You are logged in!</h2><p>You can choose from your stored addresses below.</p>');
     }
 
     // var billInputs = [
@@ -1077,6 +1081,31 @@ if (alertBox) {
         expires += date.toGMTString();
         document.cookie = "alert=dismissed;" + expires;
         alertBox.classList.add('alert--is-not-active');
+    });
+}
+
+var alertBottomUp = document.querySelector('.alert--bottom-up');
+
+if (alertBottomUp) {
+    setTimeout( function() {
+        if (!document.cookie.split(';').filter(function(item) {
+            return item.indexOf('shippingAlert=dismissed') >= 0
+        }).length) {
+            alertBottomUp.classList.remove('alert--is-not-active');
+        }
+    }, 2000);
+
+    var closeAlert = alertBottomUp.querySelector('.alert-bottom-up--close');
+    closeAlert.addEventListener('click', function(e) {
+        e.preventDefault();
+        if ((e.target.classList.contains('alert-bottom-up--close')) || (e.target.parentElement.classList.contains('alert-bottom-up--close'))) {
+            var date = new Date();
+            var expires = 'expires=';
+            date.setDate(date.getDate() + 14);
+            expires += date.toGMTString();
+            document.cookie = "shippingAlert=dismissed;" + expires;
+            alertBottomUp.classList.add('alert--is-not-active');
+        }
     });
 }
 

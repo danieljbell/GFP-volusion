@@ -109,23 +109,23 @@
 .menu-item--logo-container {
   position: relative;
   z-index: 1;
-  &:after {
-      content: "";
-      background-image: url(https://greenfarmparts.com/v/vspfiles/assets/images/flag.png);
-      position: absolute;
-      background-size: 100%;
-      background-repeat: no-repeat;
-      top: 8px;
-      right: -15px;
-      width: 20px;
-      height: 15px;
-    @include tablet {
-      top: -1px;
-      right: -35px;
-      width: 30px;
-      height: 25px;
-    } 
-  }
+  // &:after {
+  //     content: "";
+  //     background-image: url(https://greenfarmparts.com/v/vspfiles/assets/images/flag.png);
+  //     position: absolute;
+  //     background-size: 100%;
+  //     background-repeat: no-repeat;
+  //     top: 8px;
+  //     right: -15px;
+  //     width: 20px;
+  //     height: 15px;
+  //   @include tablet {
+  //     top: -1px;
+  //     right: -35px;
+  //     width: 30px;
+  //     height: 25px;
+  //   } 
+  // }
 }
 
 .menu-item--logo-container a {
