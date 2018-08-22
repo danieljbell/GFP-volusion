@@ -763,6 +763,32 @@ if (document.body.classList.contains('single-product')) {
     volustionTab.prev().remove()
     volustionTab.remove();
 
+    var freeShipping = document.querySelector('.vCSS_img_icon_free_shipping');
+    if (freeShipping) {
+        var newShippingParent = freeShipping.parentElement.parentElement.querySelector('.product_productprice');
+        newShippingParent.parentElement.parentElement.parentElement.parentElement.parentElement.style.width = '100%';
+
+        freeShipping.parentElement.remove();
+        
+        // create element container
+        var freeShippingContainer = document.createElement('div');
+        freeShippingContainer.classList.add('single-product--free-shipping-container');
+
+        // create shipping img
+        var freeShippingImage = document.createElement('img');
+        freeShippingImage.src = 'https://www.greenfarmparts.com/v/vspfiles/templates/gfp-test/img/shipping.svg';
+
+        // create shipping text
+        var freeShippingContent = document.createElement('p');
+        freeShippingContent.textContent = 'This product is eligible for free no-rush shipping!'
+
+        // add elements to the page
+        freeShippingContainer.appendChild(freeShippingImage);
+        freeShippingContainer.appendChild(freeShippingContent);
+
+        newShippingParent.parentElement.parentElement.appendChild(freeShippingContainer);
+    }
+
 }
 
 

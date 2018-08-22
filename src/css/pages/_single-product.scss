@@ -186,3 +186,18 @@
 #v65-productdetail-action-wrapper > table {
    text-align: left !important;
 }
+
+.single-product--free-shipping-container {
+    border: 1px solid red;
+    border-radius: 5px;
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    background-color: rgba(255,0,0,0.05);
+    margin-top: 1.5rem;
+}
+
+.single-product--free-shipping-container img {
+    max-width: 45px;
+    margin-right: 1rem;
+}
