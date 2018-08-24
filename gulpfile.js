@@ -30,9 +30,9 @@ gulp.task('css', () => {
 
 gulp.task('js', () => {
   gulp.src('./src/js/global.js')
-    .pipe(sourcemaps.init())
+    // .pipe(sourcemaps.init())
     .pipe(uglify())
-    .pipe(sourcemaps.write())
+    // .pipe(sourcemaps.write())
     .pipe(gulp.dest('./dist/js'))
     .pipe(browserSync.stream());
 });

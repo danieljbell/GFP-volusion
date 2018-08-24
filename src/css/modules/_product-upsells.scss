@@ -1,0 +1,44 @@
+.product-upsells {
+  margin-top: 3rem;
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.product-upsells h2 {
+  margin-bottom: 1rem;
+}
+
+ul.product-upsell-list {
+    list-style-type: none;
+    display: flex;
+}
+
+li.product-upsell-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  font-size: 0.9em;
+  border: 1px solid $medium-gray;
+  border-radius: 5px;
+  box-shadow: 5px 5px 17px rgba(black,.1), 2px 2px 2px rgba(black,0.05);
+  margin-right: 1rem;
+  padding: 1rem;
+  &:last-child {
+    margin-right: 0;
+  }
+}
+
+li.product-upsell-item img {
+    max-width: 100px;
+    max-height: 100px;
+    order: -1;
+    margin-bottom: 10px;
+}
+
+li.product-upsell-item button {
+  font-size: 0.8em;
+  padding: 5px 10px;
+  margin-top: 10px;
+}

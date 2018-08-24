@@ -789,6 +789,81 @@ if (document.body.classList.contains('single-product')) {
         newShippingParent.parentElement.parentElement.appendChild(freeShippingContainer);
     }
 
+    var upsellPartNumbers = [
+        "TY6350",
+        "TY25684",
+        "TY26517",
+        "TY26352",
+        "TY26694",
+        "TY26019",
+        "TY26558",
+        "TY26557",
+        "TY16403",
+        "CXTY24419",
+        "TY24534",
+        "TY26564",
+        "TY26108",
+        "TY26020",
+        "TY26218",
+        "TY25866",
+        "TY26214",
+        "TY26021",
+        "DRC4221"
+    ];
+
+    function getRandomInt(max) {
+      return Math.floor(Math.random() * Math.floor(max));
+    }
+
+    var upsellPartCount = 3;
+
+    var selectedUpsellParts = [];
+    for (var i = 0; i < upsellPartCount; i++) {
+        var int = getRandomInt(upsellPartNumbers.length);
+        selectedUpsellParts.push(upsellPartNumbers[int]);
+    }
+
+    var productUpsells = document.createElement('div');
+    productUpsells.classList.add('product-upsells');
+    productUpsells.innerHTML = '<h2>You May Also Need</h2><ul class="product-upsell-list"></ul>';
+
+    // var productUpsellsParent = $('[itemprop="offers"]');
+    $('.featured-content-container').append(productUpsells);
+
+
+    for (var i = 0; i < selectedUpsellParts.length; i++) {
+        $.ajax({
+            url: window.location.origin + '/-p/' + selectedUpsellParts[i] + '.htm',
+            dataType: 'html',
+            success: function(html) {
+                var productCode = $(html).find('input[name="ProductCode"]').val();
+                var productImgSrc = $(html).find('#product_photo').attr('src');
+                var productPrice = $(html).find('[itemprop="price"]').text();
+                var productName = $(html).find('[itemprop="name"]').text();
+                productName = productName.replace('John Deere ', '');
+
+
+                var singleProductUpsell = document.createElement('li');
+                singleProductUpsell.classList.add('product-upsell-item');
+                singleProductUpsell.innerHTML = '<p><strong>' + productName + '</strong><br>$' + productPrice + '</p><img src="' + productImgSrc + '"><button data-code="' + productCode + '" class="upsell-add-to-cart btn-solid--brand-two">Add to Cart</button>';
+
+                document.querySelector('.product-upsell-list').appendChild(singleProductUpsell);
+            },
+            error: function(err) {
+                console.log(err);
+            }
+        });
+    }
+
+
+    document.addEventListener('click', function(e) {
+        if (!e.target.classList.contains('upsell-add-to-cart')) return;
+        e.preventDefault();
+        var productCode = e.target.dataset.code;
+        SoftAddSingleItem(productCode, 1);
+    });
+
+
 }
 
 
