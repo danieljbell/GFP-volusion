@@ -215,6 +215,11 @@ if (pagePath === '/one-page-checkout.asp') {
     );
   }
 
+  var termsCheckbox = document.querySelector('input[name="Orders.Custom_Field_TermsofUse"]');
+  if (termsCheckbox) {
+    termsCheckbox.checked = true;
+  }
+
   // var billInputs = [
   //     "v65-onepage-billfirstname",
   //     "v65-onepage-billlastname",
@@ -1485,13 +1490,12 @@ if (alertBox) {
       }).length
     ) {
       if (
-        (pagePath === '/articles.asp' &&
-          window.location.search === '?ID=306') ||
-        (pagePath === '/Articles.asp' && window.location.search === '?ID=306')
+        (pagePath === '/articles.asp' && window.location.search === '?ID=307') ||
+        (pagePath === '/Articles.asp' && window.location.search === '?ID=307')
       ) {
       } else {
         var timeLeft = alertBox.querySelector('#timeLeftRed');
-        timeLeft.innerHTML = moment('Tue Jul 31 2018 23:59:00 GMT-0400 (EDT)')
+        timeLeft.innerHTML = moment('Tue Sept 4 2018 23:59:00 GMT-0400 (EDT)')
           .endOf()
           .fromNow();
         alertBox.classList.remove('alert--is-not-active');
